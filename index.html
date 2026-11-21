@@ -60,10 +60,10 @@ g.k.on{opacity:1}
 .sc{position:absolute;width:1600px;height:900px;box-sizing:border-box;padding:84px 96px 70px;direction:rtl;text-align:right;display:flex;flex-direction:column;gap:30px;background:linear-gradient(160deg,var(--navy) 0%,#0A1633 100%);border:1px solid var(--line);border-radius:4px;box-shadow:0 60px 140px rgba(0,0,0,.55)}
 .sc>*{flex:none}
 .sc.bare{background:none;border:0;box-shadow:none}
-.sc::before{content:attr(data-no);position:absolute;top:34px;left:44px;font:600 22px var(--body);letter-spacing:.18em;color:var(--mute);direction:ltr}
+.sc::before{content:none;position:absolute;top:34px;left:44px;font:600 22px var(--body);letter-spacing:.18em;color:var(--mute);direction:ltr}
 .eb{font:600 24px var(--body);color:var(--gold);letter-spacing:.02em}
 .eb span{color:var(--mute);font-weight:400;margin-inline-start:14px;direction:ltr;display:inline-block}
-h2{margin:0;font:800 56px/1.3 var(--display);color:var(--ink);text-wrap:balance}
+h2{margin:0;font:800 48px/1.3 var(--display);color:var(--ink);text-wrap:balance}
 h2 em{font-style:normal;color:var(--gold)}
 p{margin:0}
 .lead{font-size:28px;line-height:1.6;color:var(--mute);max-width:1250px}
@@ -119,6 +119,13 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
 #prog{flex:1;height:3px;background:rgba(42,60,102,.6);position:relative}
 #prog i{position:absolute;inset:0 0 0 auto;width:0;background:var(--gold);transition:width .6s}
 #cnt{font:500 14px var(--body);color:var(--mute);min-width:64px;text-align:center;font-variant-numeric:tabular-nums;direction:ltr}
+#intro{position:fixed;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,rgba(7,18,43,.92) 0%,rgba(4,10,26,.97) 70%);transition:opacity .5s ease;direction:rtl}
+#intro.show{opacity:1}
+#intro .no{font:700 30px var(--body);color:var(--gold);letter-spacing:.3em;direction:ltr;opacity:0;transform:translateY(14px);transition:all .6s ease .1s}
+#intro .tt{font:800 clamp(40px,7vw,104px)/1.2 var(--display);color:var(--ink);text-align:center;padding-inline:24px;clip-path:inset(0 0 0 100%);transition:clip-path 1s cubic-bezier(.7,0,.2,1) .2s}
+#intro .ln{width:0;height:3px;background:var(--gold);transition:width 1s cubic-bezier(.7,0,.2,1) .35s}
+#intro.show .no{opacity:1;transform:none} #intro.show .tt{clip-path:inset(0 0 0 0)} #intro.show .ln{width:min(360px,50vw)}
+body:not(.ov) .sc:not(.cur){opacity:.08}
 #chap{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:max(22px,env(safe-area-inset-right,0px));font:600 15px var(--body);color:var(--mute);letter-spacing:.04em;z-index:5;direction:rtl;pointer-events:none;transition:opacity .5s}
 #chap b{color:var(--gold);font-weight:700;margin-inline-end:10px}
 #hint{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:max(22px,env(safe-area-inset-left,0px));font:400 14px var(--body);color:#6F7C98;z-index:5;pointer-events:none;transition:opacity .8s}
@@ -198,8 +205,8 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
 
     <!-- A TRADE -->
     <section class="sc" id="A" data-no="01" style="left:4700px;top:450px;transform:translate(-50%,-50%);gap:22px">
-      <div class="eb">التبادل التجاري <span>Trade Exchange</span></div>
-      <h2><em>46</em> دولة: شريك صغير في الحجم، لكنه مورّد غذائي فعلي</h2>
+      <div class="eb">التبادل التجاري مع 46 دولة أفريقية غير عربية <span>Trade Exchange</span></div>
+      <h2>مصدر رئيسي لواردات الكويت من <em>اللحوم والفواكه</em></h2>
       <div class="row">
         <div class="kpi" data-k="A1"><span class="l">الواردات منها 2025</span><span class="n">108.38</span><span class="c">مليون د.ك · ⁦0.8%⁩ من واردات الكويت</span></div>
         <div class="kpi t" data-k="A2"><span class="l">الصادرات غير النفطية إليها</span><span class="n">18.49</span><span class="c">مليون د.ك</span></div>
@@ -213,7 +220,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- B MIX -->
     <section class="sc" id="B" data-no="02" style="left:4700px;top:1550px;transform:translate(-50%,-50%) rotate(2deg)">
       <div class="eb">تركيبة الواردات 2025 <span>Import Mix</span></div>
-      <h2><em>⁦60.4%⁩</em> من وارداتنا منها غذاء، واللحوم والفواكه وحدهما ⁦53.5%⁩</h2>
+      <h2>تشكّل السلع الغذائية <em>⁦60.4%⁩</em> من واردات الكويت من هذه الدول، منها ⁦53.5%⁩ لحوم وفواكه</h2>
       <div class="row" style="align-items:center;gap:80px">
         <svg data-k="B1" id="donut" viewBox="0 0 300 300" width="390" height="390" aria-label="تركيبة الواردات: لحوم 27.8%، فواكه 25.7%، بن وشاي 3.6%، أغذية أخرى 3.3%، نحاس 16.3%، فحم 8.7%، أخرى 14.6%"></svg>
         <div id="leg" data-k="B1" style="flex:1;display:flex;flex-direction:column;gap:14px"></div>
@@ -225,7 +232,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- C SUPPLIERS -->
     <section class="sc" id="C" data-no="03" style="left:4700px;top:2600px;transform:translate(-50%,-50%)">
       <div class="eb">أهم المورّدين <span>Main Suppliers</span></div>
-      <h2>أربع دول تورّد <em>⁦73.7%⁩</em>، وجنوب أفريقيا وحدها ⁦55.1%⁩</h2>
+      <h2>تستحوذ أربع دول على <em>⁦73.7%⁩</em> من الواردات، وتبلغ حصة جنوب أفريقيا ⁦55.1%⁩</h2>
       <table data-k="C1">
         <tr><th>الدولة</th><th>واردات 2025 (مليون د.ك)</th><th>الحصة</th><th style="width:220px"></th><th>حصة الغذاء</th><th>أهم السلع</th></tr>
         <tr><td class="b">جنوب أفريقيا</td><td class="g">59.75</td><td>⁦55.1%⁩</td><td><div class="bar" style="width:100%"></div></td><td class="t">⁦75.2%⁩</td><td class="m">لحوم أغنام وأبقار، حمضيات، تفاح، عنب</td></tr>
@@ -242,7 +249,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- D DEPEND -->
     <section class="sc" id="D" data-no="04" style="left:4700px;top:3650px;transform:translate(-50%,-50%) rotate(-2deg)">
       <div class="eb">أين نعتمد عليها <span>Where Kuwait Depends</span></div>
-      <h2>ثلث اللحوم الحمراء والحمضيات، ولا شيء تقريباً من <em>الحبوب</em></h2>
+      <h2>تسهم هذه الدول في نحو ثلث واردات الكويت من اللحوم الحمراء والحمضيات، ولا تسهم في <em>الحبوب</em></h2>
       <div class="row" data-k="D1">
         <div class="card g"><h3>لحوم الأغنام والماعز</h3><span class="big">⁦32.7%⁩</span><p>جنوب أفريقيا وكينيا وتنزانيا وإثيوبيا</p></div>
         <div class="card g"><h3>الحمضيات</h3><span class="big">⁦30.5%⁩</span><p>جنوب أفريقيا</p></div>
@@ -256,7 +263,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- E SHEEP -->
     <section class="sc" id="E" data-no="05" style="left:2600px;top:-1050px;transform:translate(-50%,-50%)">
       <div class="eb" style="color:var(--red)">الأولوية القصوى <span>Top Priority · Live Sheep</span></div>
-      <h2><em style="color:var(--red)">⁦76.1%⁩</em> من الأغنام الحية تأتي من مصدرين معرّضين للخطر</h2>
+      <h2>يأتي <em style="color:var(--red)">⁦76.1%⁩</em> من واردات الأغنام الحية من مصدرين يواجهان مخاطر في الإمداد</h2>
       <div class="row">
         <div class="kpi" data-k="E1"><span class="l">واردات الأغنام الحية 2025</span><span class="n">41.30</span><span class="c">مليون د.ك</span></div>
         <div class="kpi r" data-k="E2"><span class="l">إيران</span><span class="n">⁦65.4%⁩</span><span class="c">سوق غير مستقر، عقوبات اقتصادية، ومسار يمر بمضيق هرمز</span></div>
@@ -269,7 +276,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- F ALTERNATIVES -->
     <section class="sc" id="F" data-no="06" style="left:4700px;top:-1050px;transform:translate(-50%,-50%) rotate(-2deg)">
       <div class="eb">البدائل <span>Alternatives</span></div>
-      <h2>المسار الأفريقي قائم: السعودية تستورد منه <em>8.3 مليون</em> رأس سنوياً</h2>
+      <h2>مسار توريد أفريقي قائم تستورد منه المملكة العربية السعودية <em>8.3 مليون</em> رأس سنوياً</h2>
       <table data-k="F1">
         <tr><th>البديل</th><th>الدليل</th><th>المدى</th><th>ملاحظة</th></tr>
         <tr><td class="b">إثيوبيا عبر جيبوتي</td><td>السعودية: 1.4 مليون رأس (2025)</td><td><span class="tag" style="color:var(--mint)">قريب</span></td><td class="m">من أكبر الثروات الحيوانية؛ اتفاقية تعاون قائمة</td></tr>
@@ -285,7 +292,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- G CAPACITY -->
     <section class="sc" id="G" data-no="07" style="left:6700px;top:450px;transform:translate(-50%,-50%)">
       <div class="eb">القدرة التوريدية المتوقعة <span>Export Potential to Kuwait · 2031</span></div>
-      <h2>ثلاث دول بقدرة <em>عالية</em>، وأربع مرشحة كمورّدين جدد</h2>
+      <h2>ثلاث دول ذات قدرة توريدية <em>عالية</em> وأربع دول مرشحة</h2>
       <table data-k="G1" style="font-size:24px">
         <tr><th>الدولة</th><th>القدرة المتوقعة</th><th>غير المستغل</th><th style="width:250px">نسبة التحقق</th><th>المستوى</th><th>أهم الفرص</th></tr>
         <tr><td class="b">إثيوبيا</td><td>9.77</td><td class="g">6.73</td><td><div class="bar" style="width:31%;background:var(--teal)"></div><span class="num" style="font-size:19px;color:var(--mute)">⁦31%⁩</span></td><td class="t">عالية</td><td class="m">بن، خضروات، لحوم حمراء، بقوليات</td></tr>
@@ -302,7 +309,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- H URGENT -->
     <section class="sc" id="H" data-no="08" style="left:6700px;top:1550px;transform:translate(-50%,-50%) rotate(2deg)">
       <div class="eb">الفرص العاجلة <span>Urgent Opportunities</span></div>
-      <h2>ثلاث فرص مرتبة حسب الأولوية</h2>
+      <h2>الفرص ذات الأولوية</h2>
       <div class="row" style="flex:1">
         <div class="card r" data-k="H1"><span class="tag" style="color:var(--red);align-self:flex-start">1 · الأولوية القصوى</span><h3>الأغنام الحية</h3><span class="big">⁦76.1%⁩</span><p>من إيران وأستراليا. إثيوبيا عبر جيبوتي قريباً؛ جنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية.</p></div>
         <div class="card g" data-k="H2"><span class="tag" style="color:var(--gold);align-self:flex-start">2 · أولوية فورية</span><h3>إثيوبيا</h3><span class="big">6.73</span><p>مليون د.ك غير مستغلة · تحقق ⁦31%⁩. بن 3.83 · خضروات 1.84 · لحوم حمراء 0.39</p></div>
@@ -314,10 +321,10 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- I MARKET -->
     <section class="sc" id="I" data-no="09" style="left:6700px;top:2600px;transform:translate(-50%,-50%)">
       <div class="eb">متطلبات فتح السوق للقطاع الخاص <span>Opening the Market</span></div>
-      <h2>ثلاث طبقات: <em>الحكومة</em> أولاً، ثم التاجر، ثم الحوافز</h2>
+      <h2>متطلبات فتح السوق على ثلاثة مستويات: الإجراءات <em>الحكومية</em>، والقطاع الخاص، والحوافز</h2>
       <div class="row" style="flex:1">
         <div class="card g" data-k="I1"><h3>الإجراءات الحكومية</h3><p>بروتوكول بيطري ثنائي · شهادة صحية بيطرية موحّدة · زيارة فنية لاعتماد المسالخ ومحاجر التصدير · اعتماد جهات شهادات الحلال · طاقة استيعابية في المحاجر والموانئ</p></div>
-        <div class="card" data-k="I2"><h3>ما يحتاجه التاجر</h3><p>إذن استيراد لكل شحنة قبل الشحن بأسبوعين · شهادة صحية من الدولة المصدّرة · حجر صحي عند الوصول · سفن مجهزة أو شحن جوي للحوم المبردة · شريك موثوق لتجميع المواشي</p></div>
+        <div class="card" data-k="I2"><h3>متطلبات القطاع الخاص</h3><p>إذن استيراد لكل شحنة قبل الشحن بأسبوعين · شهادة صحية من الدولة المصدّرة · حجر صحي عند الوصول · سفن مجهزة أو شحن جوي للحوم المبردة · شريك موثوق لتجميع المواشي</p></div>
         <div class="card t" data-k="I3"><h3>دور وزارة التجارة والصناعة</h3><p>شحنات تجريبية بدعم حكومي · لقاءات أعمال مع المصدّرين · إدراج المصادر الجديدة في منظومة الدعم · تنسيق خليجي وشحن مشترك</p></div>
       </div>
       <div class="callout" data-k="I3">التسلسل: البروتوكول البيطري والزيارة الفنية ← شحنات تجريبية ← فتح الاستيراد للتجار قبل 1 مايو 2028</div>
@@ -326,7 +333,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- J AGREEMENTS -->
     <section class="sc" id="J" data-no="10" style="left:6700px;top:3650px;transform:translate(-50%,-50%) rotate(-2deg)">
       <div class="eb">الإطار التعاقدي <span>Trade Agreements</span></div>
-      <h2>ثلاث دول فقط من 12 لديها اتفاقية <em>تجارية أو اقتصادية</em> مع الكويت</h2>
+      <h2>ثلاث دول من أصل 12 دولة ترتبط مع دولة الكويت باتفاقية <em>تجارية أو اقتصادية</em></h2>
       <svg data-k="J1" viewBox="0 0 1408 230" width="1408" height="230" aria-label="خط زمني للاتفاقيات: إثيوبيا 1996، زيمبابوي 1997، جنوب أفريقيا 2005">
         <line x1="60" y1="110" x2="1348" y2="110" stroke="var(--line)" stroke-width="4"/>
         <g font-family="Almarai, Tahoma, sans-serif" text-anchor="middle">
@@ -361,7 +368,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- L GRAINS -->
     <section class="sc" id="L" data-no="12" style="left:500px;top:4150px;transform:translate(-50%,-50%) rotate(2deg)">
       <div class="eb">فجوة الحبوب <span>Grains Gap</span></div>
-      <h2>كل سلعة حبوب تعتمد على <em>مورّد واحد</em> تقريباً</h2>
+      <h2>تتركّز واردات كل سلعة من الحبوب في <em>مورّد رئيسي واحد</em></h2>
       <div class="row" data-k="L1">
         <div class="card r"><h3>الأرز</h3><span class="big">⁦92.2%⁩</span><p>الهند · 89.12 مليون د.ك</p></div>
         <div class="card r"><h3>القمح</h3><span class="big">⁦85.9%⁩</span><p>أستراليا · 51.68 مليون د.ك</p></div>
@@ -375,7 +382,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- Z1 SOUTH AFRICA -->
     <section class="sc" id="Z1" data-no="13" style="left:640px;top:2330px;transform:translate(-50%,-50%) scale(.5)">
       <div class="eb">تركيز: جنوب أفريقيا <span>South Africa</span></div>
-      <h2>أكبر شريك غذائي أفريقي، وقدرة لم تُستغل بعد</h2>
+      <h2>جنوب أفريقيا أكبر مورّد غذائي أفريقي لدولة الكويت، مع قدرة توريدية غير مستغلة</h2>
       <div class="row">
         <div class="kpi" data-k="Z1a"><span class="l">الواردات منها 2025</span><span class="n">59.75</span><span class="c">مليون د.ك · ⁦55.1%⁩ من المجموعة</span></div>
         <div class="kpi r" data-k="Z1a"><span class="l">الواردات · النصف الأول 2026</span><span class="n num" style="font-size:58px">17,831,504</span><span class="c">د.ك · تراجع ⁦36.2%⁩</span></div>
@@ -388,7 +395,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- Z2 SOUTH AFRICA -->
     <section class="sc" id="Z2" data-no="14" style="left:640px;top:2820px;transform:translate(-50%,-50%) scale(.5)">
       <div class="eb">جنوب أفريقيا: الأغنام والأعلاف والفرص المتبادلة <span>South Africa</span></div>
-      <h2>الأعلاف فرصة <em>الآن</em>، والأغنام الحية على المدى المتوسط</h2>
+      <h2>الأعلاف فرصة <em>قريبة المدى</em>، والأغنام الحية على المدى المتوسط</h2>
       <div class="row" style="flex:1">
         <div class="card r" data-k="Z2a"><h3>الأغنام الحية</h3><p>مدى متوسط بسبب الحمى القلاعية: يتطلب استعادة الخلو وبروتوكولاً بيطرياً ثنائياً.</p></div>
         <div class="card t" data-k="Z2a"><h3>الأعلاف</h3><span class="big">9.44</span><p>مليون د.ك واردات الكويت من الأعلاف (HS 1214)، حصة جنوب أفريقيا ⁦2.6%⁩ فقط؛ وإنتاجها من الذرة الصفراء 7,910,000 طن في 2026.</p></div>
@@ -400,7 +407,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
     <!-- N RECS -->
     <section class="sc" id="N" data-no="15" style="left:-1700px;top:3300px;transform:translate(-50%,-50%) scale(1.05)">
       <div class="eb">التوصيات <span>Recommendations</span></div>
-      <h2>من التحليل إلى <em>التنفيذ</em></h2>
+      <h2>التوصيات <em>المقترحة</em></h2>
       <div class="row">
         <div class="card r" data-k="N1"><h3>1 · الأغنام الحية</h3><p>إثيوبيا والقرن الأفريقي قريباً، وجنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية، قبل 1 مايو 2028</p></div>
         <div class="card g" data-k="N2"><h3>2 · المتطلبات الفنية</h3><p>بروتوكول بيطري، واعتماد المسالخ والمحاجر وشهادات الحلال</p></div>
@@ -423,6 +430,7 @@ td.b{font-weight:700;color:var(--ink)} td.g{color:var(--gold2);font-weight:700} 
   <div class="grain" aria-hidden="true"></div>
 </div>
 
+<div id="intro" aria-hidden="true"><span class="no" id="inN"></span><span class="tt" id="inT"></span><span class="ln"></span></div>
 <div id="chap"><b id="chapN">00</b><span id="chapT"></span></div>
 <div id="hint">انقر أو اضغط مسطرة المسافة للمتابعة · الأسهم للتنقل · O للنظرة الشاملة</div>
 <div id="hud">
@@ -510,7 +518,7 @@ let chap='';STEPS.forEach(s=>{if(s[2])chap=s[2];s[3]=chap});
 const chapNo={};let n=0;STEPS.forEach(s=>{if(s[2]){chapNo[s[2]]=String(n).padStart(2,'0');n++}});
 
 const world=document.getElementById('world'), stage=document.getElementById('stage');
-let cur=0, overview=false;
+let cur=0, overview=false, dir=1;
 function camFor(key){return CAM[key]||S(key)}
 function apply(rect){
   const W=innerWidth,H=innerHeight,[cx,cy,w,h,r]=rect;
@@ -521,7 +529,12 @@ function render(){
   const MAPK=['routes','bubbles','iran','aus','horn','zaring'];
   const on=new Set();for(let i=0;i<=cur;i++)STEPS[i][1].forEach(k=>{if(!MAPK.includes(k)||i===cur)on.add(k)});
   document.body.classList.toggle('onmap',STEPS[cur][0]==='map'&&!overview);
-  const fresh=STEPS[cur][1];let i=0;const base=STEPS[cur][0]===(STEPS[cur-1]||[])[0]?0.15:1.1;
+  const isChap=!!STEPS[cur][2]&&cur>0&&!overview&&dir>0;
+  const fresh=STEPS[cur][1];let i=0;const base=isChap?2.3:(STEPS[cur][0]===(STEPS[cur-1]||[])[0]?0.15:1.1);
+  document.querySelectorAll('.sc').forEach(sc=>sc.classList.toggle('cur',sc.id===STEPS[cur][0]));
+  document.body.classList.toggle('ov',overview);
+  const intro=document.getElementById('intro');clearTimeout(window.__it);
+  if(isChap){document.getElementById('inN').textContent=chapNo[STEPS[cur][2]];document.getElementById('inT').textContent=STEPS[cur][2];intro.classList.add('show');window.__it=setTimeout(()=>intro.classList.remove('show'),1900)}else intro.classList.remove('show');
   document.querySelectorAll('[data-k]').forEach(e=>{const f=fresh.includes(e.dataset.k);e.style.transitionDelay=f?(base+(i++)*0.22).toFixed(2)+'s':'0s';e.classList.toggle('on',on.has(e.dataset.k))});
   const fo=STEPS[cur][4]||[];
   document.querySelectorAll('.sc').forEach(sc=>sc.classList.toggle('spot',sc.id===STEPS[cur][0]&&fo.length>0));
@@ -533,19 +546,19 @@ function render(){
   document.getElementById('chapN').textContent=chapNo[STEPS[cur][3]];
   try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}
 }
-function go(i){overview=false;cur=Math.max(0,Math.min(STEPS.length-1,i));render();if(cur>0)document.getElementById('hint').style.opacity=0}
+function go(i){dir=i>cur?1:-1;overview=false;cur=Math.max(0,Math.min(STEPS.length-1,i));render();if(cur>0)document.getElementById('hint').style.opacity=0}
 const next=()=>go(cur+1), prev=()=>go(cur-1);
 stage.addEventListener('click',()=>next());
 document.getElementById('bNext').onclick=e=>{e.stopPropagation();next()};
 document.getElementById('bPrev').onclick=e=>{e.stopPropagation();prev()};
 document.getElementById('bHome').onclick=e=>{e.stopPropagation();go(0)};
-document.getElementById('bOver').onclick=e=>{e.stopPropagation();overview=!overview;if(overview)apply(CAM.world);else render()};
+document.getElementById('bOver').onclick=e=>{e.stopPropagation();overview=!overview;dir=0;render()};
 document.getElementById('bFs').onclick=e=>{e.stopPropagation();const d=document.documentElement;try{if(!document.fullscreenElement){const p=d.requestFullscreen&&d.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}else document.exitFullscreen()}catch(x){}};
 addEventListener('keydown',e=>{
   if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next()}
   else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev()}
   else if(e.key==='Home')go(0); else if(e.key==='End')go(STEPS.length-1);
-  else if(e.key==='o'||e.key==='O'){overview=!overview;overview?apply(CAM.world):render()}
+  else if(e.key==='o'||e.key==='O'){overview=!overview;dir=0;render()}
 });
 let tx=null;stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
 stage.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx>0?next():prev()}tx=null},{passive:true});
