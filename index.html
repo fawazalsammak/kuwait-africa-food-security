@@ -124,6 +124,16 @@ body.onmap .sc{opacity:.1}
 #N .card h3{font-size:40px}
 #N .card p{font-size:27px}
 .solo{position:absolute;inset:210px 96px 80px;pointer-events:none}
+.sl.gen{align-items:flex-start}
+.sl.gen .big{font:800 120px/1 var(--body);color:var(--gold);font-variant-numeric:tabular-nums}
+.sl.gen.r .big{color:var(--red)} .sl.gen.t .big{color:var(--mint)}
+.sl.gen .tag{font-size:26px;padding:6px 18px}
+.sl.gen .ic{width:84px;height:84px;vertical-align:-20px}
+.sl.gen.r .ic{color:var(--red);fill:var(--red)} .sl.gen.t .ic{color:var(--mint);fill:var(--mint)}
+.sl.gen .rgw{width:260px;height:260px;align-self:flex-start}
+.sl.gen .rgw .ring{width:260px;height:260px}
+.sl.gen .rgw .big{font-size:64px!important}
+.sl.gen p{text-align:right!important}
 .solo .sl{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:40px 70px;background:var(--navy2);border-top:8px solid var(--gold);transform:scale(.92) translateY(30px)}
 .solo .sl.on{transform:none}
 .solo .sl.r{border-top-color:var(--red)} .solo .sl.t{border-top-color:var(--teal)}
@@ -658,6 +668,11 @@ document.getElementById('donut').innerHTML=d; document.getElementById('leg').inn
 // --- cameras: [cx,cy,w,h,rot]
 const S=id=>{const e=document.getElementById(id), st=e.style, m=st.transform, s=+((m.match(/scale\(([\d.]+)\)/)||[0,1])[1]), r=+((m.match(/rotate\((-?[\d.]+)deg\)/)||[0,0])[1]);return[parseFloat(st.left),parseFloat(st.top),1600*s,900*s,r]};
 const CAM={kw:[2719,345,900,506,0],map:[1800,1440,4150,3300,0],sea:[2000,1950,2300,1300,0],gulf:[2820,520,1700,956,0],horn:[2380,1080,1700,956,-3],za:[1500,2560,1900,1070,0],world:[2220,740,10800,7900,0]};
+// build one-at-a-time overlays from each board's cards
+['D','H','I','L','Z2'].forEach(id=>{const b=document.getElementById(id);const h=b.querySelector('h2');
+  const so=document.createElement('div');so.className='solo';so.style.top=(h.offsetTop+h.offsetHeight+34)+'px';
+  [...b.querySelectorAll('.card')].forEach((c,i)=>{const d=document.createElement('div');d.className='sl gen '+[...c.classList].filter(x=>['r','g','t'].includes(x)).join(' ');d.dataset.k=id+'s'+(i+1);d.innerHTML=c.innerHTML;so.appendChild(d)});
+  b.appendChild(so)});
 const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
  ['START',['start'],'البداية'],
  ['T',['t1','t2']],
@@ -665,16 +680,16 @@ const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
  ['A',['A1','A2','A3','A4'],'التبادل التجاري'],['A',['A5'],'',0,['A5']],
  ['B',['B1','B2'],'تركيبة الواردات'],
  ['map',['bubbles'],'أهم المورّدين'],['C',['C1']],['C',['C2'],'',0,['C2']],
- ['D',['D1','D2'],'الاعتماد'],
+ ['D',['Ds1'],'الاعتماد'],['D',['Ds2']],['D',['Ds3']],['D',['Ds4']],['D',['D1','D2']],
  ['map',['iran'],'الأغنام الحية'],['map',['aus']],['E',['E1','E2']],['E',['E3'],'',0,['E3']],
  ['map',['horn'],'البدائل'],['F',['F1','F2']],
  ['G',['G1','G2'],'القدرة التوريدية'],
- ['H',['H1','H2','H3'],'الفرص العاجلة'],
- ['I',['I1','I2','I3'],'فتح السوق'],
+ ['H',['Hs1'],'الفرص العاجلة'],['H',['Hs2']],['H',['Hs3']],['H',['H1','H2','H3']],
+ ['I',['Is1'],'فتح السوق'],['I',['Is2']],['I',['Is3']],['I',['I1','I2','I3']],
  ['J',['J1'],'الاتفاقيات'],['J',['J2'],'',0,['J2']],
  ['K',['K1','K2'],'المقارنة الخليجية'],
- ['L',['L1','L2'],'الحبوب'],
- ['Z1',['zaring','Z1a'],'جنوب أفريقيا'],['Z1',['Z1b'],'',0,['Z1b']],['Z2',['Z2a','Z2b']],
+ ['L',['Ls1'],'الحبوب'],['L',['Ls2']],['L',['Ls3']],['L',['Ls4']],['L',['L1','L2']],
+ ['Z1',['zaring','Z1a'],'جنوب أفريقيا'],['Z1',['Z1b'],'',0,['Z1b']],['Z2',['Z2s1']],['Z2',['Z2s2']],['Z2',['Z2s3']],['Z2',['Z2a','Z2b']],
  ['N',['S1'],'التوصيات'],['N',['S2']],['N',['S3']],['N',['S4']],['N',['S5']],['N',['S6']],
  ['N',['N1','N2','N3','N4','N5','N6']],
  ['END2',['end'],'الختام']
@@ -692,7 +707,7 @@ function showCard(n){const d=CD[n];if(!d)return;const row=(l,v,c)=>v?`<div class
   +`<div class="sep"></div>`+row('الاتفاقيات',d.agr,/لا توجد/.test(d.agr)?'r':'')+`<div class="x">انقر للإغلاق</div>`;
   cc.classList.add('show')}
 function countUp(el,delay){
-  el.querySelectorAll('.kpi .n, .card .big').forEach(n=>{
+  el.querySelectorAll('.kpi .n, .card .big, .sl .big').forEach(n=>{
     if(!n.dataset.orig)n.dataset.orig=n.textContent;const o=n.dataset.orig;const m=o.match(/([\d,]+(?:\.\d+)?)/);if(!m)return;
     const raw=m[1],dec=(raw.split('.')[1]||'').length,val=parseFloat(raw.replace(/,/g,'')),com=raw.includes(',');
     const pre=o.slice(0,m.index),suf=o.slice(m.index+raw.length);const fmt=v=>{let t=v.toFixed(dec);if(com){const p=t.split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');t=p.join('.')}return t};
@@ -710,7 +725,7 @@ function apply(rect){
 }
 function render(){
   const MAPK=['routes','bubbles','iran','aus','horn','zaring'];
-  const SOLO=['S1','S2','S3','S4','S5','S6'];
+  const SOLO=[...document.querySelectorAll('.solo [data-k]')].map(e=>e.dataset.k);
   let ms=cur;while(ms>0&&STEPS[cur][0]==='map'&&STEPS[ms-1][0]==='map'&&!STEPS[ms][2])ms--;
   const on=new Set();for(let i=0;i<=cur;i++)STEPS[i][1].forEach(k=>{if(SOLO.includes(k)){if(i===cur)on.add(k)}else if(!MAPK.includes(k)||(STEPS[cur][0]==='map'&&i>=ms))on.add(k)});
   document.body.classList.toggle('onmap',STEPS[cur][0]==='map'&&!overview);
