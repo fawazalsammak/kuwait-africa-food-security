@@ -119,6 +119,18 @@ body.onmap .sc{opacity:.1}
 @keyframes fsweep{to{background-position:0 0}}
 @keyframes fline{to{width:420px}}
 @keyframes fen{to{opacity:1;transform:none}}
+#N>.row{flex:1}
+#N .card{justify-content:center}
+#N .card h3{font-size:40px}
+#N .card p{font-size:27px}
+.solo{position:absolute;inset:210px 96px 80px;pointer-events:none}
+.solo .sl{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:40px 70px;background:var(--navy2);border-top:8px solid var(--gold);transform:scale(.92) translateY(30px)}
+.solo .sl.on{transform:none}
+.solo .sl.r{border-top-color:var(--red)} .solo .sl.t{border-top-color:var(--teal)}
+.solo .sn{font:800 120px/1 var(--display);color:var(--gold)}
+.solo .sl.r .sn{color:var(--red)} .solo .sl.t .sn{color:var(--mint)}
+.solo h3{margin:0;font:800 64px/1.2 var(--display);color:var(--ink)}
+.solo p{font-size:36px;line-height:1.6;color:var(--mute);max-width:1200px}
 .callout{padding:24px 32px;background:rgba(212,184,90,.12);border-inline-start:6px solid var(--gold);font:600 29px/1.55 var(--body);color:var(--ink)}
 .callout.r{background:rgba(224,122,107,.12);border-color:var(--red)}
 .callout.t{background:rgba(95,168,154,.14);border-color:var(--teal)}
@@ -470,6 +482,7 @@ body.nologo #mlogo{opacity:0}
         <div class="card" data-k="N5"><h3>5 · الإطار التجاري</h3><p>ترحب الوزارة ببحث اتفاقيات تجارية مع كينيا وتنزانيا والدول ذات الأولوية</p></div>
         <div class="card t" data-k="N6"><h3>6 · التنسيق الخليجي</h3><p>الاستفادة من سلاسل الإمداد السعودية والإماراتية والشحن المشترك</p></div>
       </div>
+      <div class="solo"><div class="sl r" data-k="S1"><span class="sn">1</span><h3>الأغنام الحية</h3><p>إثيوبيا والقرن الأفريقي قريباً، وجنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية، قبل 1 مايو 2028</p></div><div class="sl g" data-k="S2"><span class="sn">2</span><h3>المتطلبات الفنية</h3><p>بروتوكول بيطري، واعتماد المسالخ والمحاجر وشهادات الحلال</p></div><div class="sl g" data-k="S3"><span class="sn">3</span><h3>السلع المستهدفة</h3><p>بن وشاي وخضروات وبقوليات وأعلاف، مع الحفاظ على اللحوم الحمراء والحمضيات</p></div><div class="sl " data-k="S4"><span class="sn">4</span><h3>سلاسل الإمداد</h3><p>مسارات شحن بحري وجوي بديلة لا تعتمد على مضيق هرمز</p></div><div class="sl " data-k="S5"><span class="sn">5</span><h3>الإطار التجاري</h3><p>ترحب الوزارة ببحث اتفاقيات تجارية مع كينيا وتنزانيا والدول ذات الأولوية</p></div><div class="sl t" data-k="S6"><span class="sn">6</span><h3>التنسيق الخليجي</h3><p>الاستفادة من سلاسل الإمداد السعودية والإماراتية والشحن المشترك</p></div></div>
     </section>
 
     <!-- END -->
@@ -580,7 +593,8 @@ const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
  ['K',['K1','K2'],'المقارنة الخليجية'],
  ['L',['L1','L2'],'الحبوب'],
  ['Z1',['zaring','Z1a'],'جنوب أفريقيا'],['Z1',['Z1b'],'',0,['Z1b']],['Z2',['Z2a','Z2b']],
- ['N',['N1','N2','N3','N4','N5','N6'],'التوصيات'],
+ ['N',['S1'],'التوصيات'],['N',['S2']],['N',['S3']],['N',['S4']],['N',['S5']],['N',['S6']],
+ ['N',['N1','N2','N3','N4','N5','N6']],
  ['END2',['end'],'الختام']
 ];
 // chapter labels carry forward
@@ -611,8 +625,9 @@ function apply(rect){
 }
 function render(){
   const MAPK=['routes','bubbles','iran','aus','horn','zaring'];
+  const SOLO=['S1','S2','S3','S4','S5','S6'];
   let ms=cur;while(ms>0&&STEPS[cur][0]==='map'&&STEPS[ms-1][0]==='map'&&!STEPS[ms][2])ms--;
-  const on=new Set();for(let i=0;i<=cur;i++)STEPS[i][1].forEach(k=>{if(!MAPK.includes(k)||(STEPS[cur][0]==='map'&&i>=ms))on.add(k)});
+  const on=new Set();for(let i=0;i<=cur;i++)STEPS[i][1].forEach(k=>{if(SOLO.includes(k)){if(i===cur)on.add(k)}else if(!MAPK.includes(k)||(STEPS[cur][0]==='map'&&i>=ms))on.add(k)});
   document.body.classList.toggle('onmap',STEPS[cur][0]==='map'&&!overview);
   const isChap=!!STEPS[cur][2]&&cur>0&&!overview&&dir>0&&STEPS[cur][0]!=='END2';
   const fresh=STEPS[cur][1];let i=0;const base=isChap?2.3:(STEPS[cur][0]===(STEPS[cur-1]||[])[0]?0.15:1.1);
