@@ -255,6 +255,7 @@ body.onmap .sc{opacity:.1}
 .fin.on .fthx{animation:fen 1s ease 5.2s forwards} .fin.on .fq{animation:fen 1s ease 6s forwards}
 .route.longr{stroke-dasharray:5200;stroke-dashoffset:5200;transition:stroke-dashoffset 3.2s ease .4s}
 .on .route.longr{stroke-dashoffset:0}
+.landr{opacity:0;transition:opacity .8s ease 3.4s} .on .landr{opacity:1}
 .callout{padding:24px 32px;background:rgba(212,184,90,.12);border-inline-start:6px solid var(--gold);font:600 29px/1.55 var(--body);color:var(--ink)}
 .callout.r{background:rgba(224,122,107,.12);border-color:var(--red)}
 .callout.t{background:rgba(95,168,154,.14);border-color:var(--teal)}
@@ -333,11 +334,21 @@ body.nologo #mlogo{opacity:0}
     <svg id="map" width="3280" height="2960" viewBox="0 0 3280 2960" aria-label="خريطة نقطية لأفريقيا وشبه الجزيرة العربية تبيّن مسار التبادل بين جنوب أفريقيا والكويت">
       <g id="dots"></g>
       <g data-k="zaroute" class="k">
-        <path id="r1" class="route longr" d="M2040,2716 C2300,2700 2420,2560 2380,2300 C2340,2050 2470,1750 2640,1500 C2800,1270 2980,1080 3120,860 C3200,720 3140,560 3052,470 C2960,400 2850,370 2745,352" style="stroke-width:12"/>
+        <path id="r1" class="route longr" style="stroke:var(--red);stroke-width:12" d="M2040,2716 C2300,2700 2420,2560 2380,2300 C2340,2050 2470,1750 2640,1500 C2800,1270 2980,1080 3120,860 C3200,720 3140,560 3052,470 C2960,400 2850,370 2745,352" />
         <g class="ships"><use href="#i-dhow" width="100" height="83" x="-50" y="-74"><animateMotion dur="14s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></use><use href="#i-dhow" width="100" height="83" x="-50" y="-74"><animateMotion dur="14s" begin="-7s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></use></g>
+        <path id="r2" class="route longr" style="stroke:var(--mint);stroke-width:12" d="M2040,2716 C2300,2700 2420,2560 2380,2300 C2340,2050 2470,1750 2600,1450 C2660,1300 2620,1120 2540,1012 C2480,900 2420,760 2368,660"/>
+        <path class="landr" d="M2368,660 C2480,560 2610,450 2712,352" fill="none" stroke="var(--mint)" stroke-width="10" stroke-dasharray="24 16"/>
+        <g class="ships"><use href="#i-dhow" width="100" height="83" x="-50" y="-74" style="fill:var(--mint)"><animateMotion dur="12s" begin="-3s" repeatCount="indefinite"><mpath href="#r2"/></animateMotion></use></g>
+        <circle cx="2540" cy="1012" r="18" fill="var(--mint)"/><text direction="rtl" class="mlab t" x="2580" y="1000" text-anchor="end">باب المندب</text>
+        <circle cx="2368" cy="660" r="20" fill="var(--mint)"/><text direction="rtl" class="mlab t" x="2330" y="650" text-anchor="start">جدة</text>
+        <text direction="rtl" class="mlab t" x="2470" y="470" text-anchor="start">نقل بري عبر السعودية</text>
+        <circle cx="3052" cy="456" r="30" fill="none" stroke="var(--red)" stroke-width="6"/>
+        <g transform="translate(380,2080)"><rect x="0" y="0" width="1500" height="250" rx="16" fill="rgba(7,18,43,.86)" stroke="var(--line)" stroke-width="4"/>
+          <line x1="1420" y1="80" x2="1340" y2="80" stroke="var(--red)" stroke-width="14"/><text direction="rtl" x="1310" y="100" text-anchor="start" style="font:700 60px var(--body);fill:var(--ink)">المسار الحالي عبر مضيق هرمز</text>
+          <line x1="1420" y1="180" x2="1340" y2="180" stroke="var(--mint)" stroke-width="14"/><text direction="rtl" x="1310" y="200" text-anchor="start" style="font:700 60px var(--body);fill:var(--ink)">مسار بديل مقترح عبر البحر الأحمر</text></g>
         <circle cx="2040" cy="2716" r="26" fill="var(--mint)"/><text direction="rtl" class="mlab t" x="2085" y="2790" text-anchor="end">ميناء ديربان</text>
         <circle cx="2745" cy="352" r="26" fill="var(--gold2)"/><text direction="rtl" class="mlab g" x="2660" y="290" text-anchor="start">موانئ الكويت</text>
-        <text direction="rtl" class="mlab s" x="3200" y="560" text-anchor="end">مضيق هرمز</text>
+        <text direction="rtl" class="mlab r" x="3230" y="580" text-anchor="end">مضيق هرمز</text>
         <rect x="330" y="980" width="1960" height="960" rx="22" fill="rgba(7,18,43,.86)" stroke="var(--gold)" stroke-width="5"/>
         <text direction="rtl" x="2200" y="1130" text-anchor="start" style="font:700 84px var(--body);fill:var(--mute)">واردات الكويت من جنوب أفريقيا 2025</text>
         <text direction="rtl" x="2200" y="1380" text-anchor="start" style="font:800 230px var(--body);fill:var(--gold2)"><tspan class="cu">59,754,510</tspan><tspan style="font-size:96px;fill:var(--mute)"> د.ك</tspan></text>
