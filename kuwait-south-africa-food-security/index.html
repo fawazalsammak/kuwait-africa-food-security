@@ -518,7 +518,7 @@ const NODES=[["kw","الكويت",47.98,29.37,"s"],["","جنوب أفريقيا"
 let nh='';
 NODES.forEach(([c,n,lon,lat,side])=>{const[x,y]=P(lon,lat);
   const tx=side==='e'?x+38:side==='w'?x-38:x, ty=side==='s'?y+78:y+16, an=side==='e'?'end':side==='w'?'start':'middle';
-  nh+=`<g class="node ${c}"${c?'':` data-n="${n}"`}><circle class="pulse" cx="${x}" cy="${y}" r="${c?22:14}"/><circle class="c" cx="${x}" cy="${y}" r="${c?22:14}"/><title>Kuwait–South Africa Food Security</title><text direction="rtl" x="${tx}" y="${ty}" text-anchor="${an}">${n}</text></g>`});
+  nh+=`<g class="node ${c}"${c?'':` data-n="${n}"`}><circle class="pulse" cx="${x}" cy="${y}" r="${c?22:14}"/><circle class="c" cx="${x}" cy="${y}" r="${c?22:14}"/><title>${n}</title><text direction="rtl" x="${tx}" y="${ty}" text-anchor="${an}">${n}</text></g>`});
 document.getElementById('nodes').innerHTML=nh;
 
 // --- trend chart (imports, thousand KD) 2015-2025 + H1 2026
