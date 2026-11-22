@@ -206,8 +206,6 @@ body.onmap .sc{opacity:.1}
 .hz{fill:none;stroke:var(--red);stroke-width:6;transform-box:fill-box;transform-origin:center;animation:pl 2s ease-out infinite}
 .ships use{fill:var(--gold2)}
 #cc .h .fl{width:42px;height:31px}
-#C .card,.sl.gen .rgw{align-items:stretch} #C .card p{text-align:center} #C .card{gap:14px}
-#C .rgw{width:170px;height:170px;align-self:center} #C .rgw .ring{width:170px;height:170px} #C .rgw .big{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px!important}
 #F .card .big{font-size:56px}
 .gr.dv b{font-size:26px;color:var(--red)} .gr.dv small{color:var(--mute)}
 #H .gr{font-size:21px} #H .gr .gt{height:24px} #H .gr b{font-size:23px}
@@ -218,6 +216,22 @@ body.onmap .sc{opacity:.1}
 .qq{display:flex;gap:28px;align-items:flex-start;background:var(--navy2);padding:26px 32px;border-inline-start:6px solid var(--gold)}
 .qq .qn{font:800 64px/1 var(--display);color:var(--gold);flex:none}
 .qq p{font-size:32px;line-height:1.55;color:var(--ink)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card.crow{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:26px;padding:22px 28px}
+.card.crow .rgw{width:150px;height:150px;position:relative;align-self:center} .card.crow .rgw .ring{width:150px;height:150px}
+.card.crow .rgw .big{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:36px!important}
+.card.crow .cm{display:flex;flex-direction:column;gap:8px;min-width:0} .card.crow .cm h3{font-size:30px} .card.crow .cm p{font-size:22px;text-align:right!important}
+.cc{display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding-inline-start:22px;border-inline-start:1px solid var(--line)}
+.cf{display:flex;align-items:center;font:700 22px var(--body);color:var(--ink);white-space:nowrap}
+.cf .fl{width:40px;height:30px}
+.sl.gen .crow{display:none}
+.sl.gen.crowsl{display:grid;grid-template-columns:300px 1fr auto;align-items:center;gap:50px;padding:40px 70px}
+.sl.gen.crowsl .rgw{width:300px;height:300px} .sl.gen.crowsl .rgw .ring{width:300px;height:300px} .sl.gen.crowsl .rgw .big{font-size:72px!important}
+.sl.gen.crowsl .cm h3{font-size:60px} .sl.gen.crowsl .cm p{font-size:32px}
+.sl.gen.crowsl .cf{font-size:40px} .sl.gen.crowsl .cf .fl{width:72px;height:54px} .sl.gen.crowsl .cc{gap:18px;padding-inline-start:40px}
+@keyframes flash{0%,100%{opacity:1;box-shadow:none}25%,75%{opacity:.25}50%{opacity:1;box-shadow:0 0 0 3px var(--mint),0 0 28px rgba(158,217,201,.7)}}
+#E:has([data-k="Ef"].on) td.imp{animation:flash 1.1s ease 3;background:rgba(95,168,154,.18)}
+#C .card.crow{padding:14px 26px;grid-template-columns:130px 1fr auto} #C .card.crow .rgw,#C .card.crow .rgw .ring{width:130px;height:130px}
 .callout{padding:24px 32px;background:rgba(212,184,90,.12);border-inline-start:6px solid var(--gold);font:600 29px/1.55 var(--body);color:var(--ink)}
 .callout.r{background:rgba(224,122,107,.12);border-color:var(--red)}
 .callout.t{background:rgba(95,168,154,.14);border-color:var(--teal)}
@@ -332,7 +346,7 @@ body.nologo #mlogo{opacity:0}
       </div>
       <svg data-k="A4" id="trend" viewBox="0 -36 1408 246" width="1408" height="182" aria-label="واردات الكويت من جنوب أفريقيا وصادراتها إليها 2015-2025 والنصف الأول 2026"></svg>
       <div class="callout r" data-k="A5">النصف الأول 2026: الواردات <b class="num">17,831,504</b> د.ك بتراجع <b>⁦36.2%⁩</b>، والصادرات غير النفطية <b class="num">1,577,690</b> د.ك بارتفاع <b>⁦154.2%⁩</b>. وتستورد جنوب أفريقيا من الكويت منتجات نفطية بقيمة <b class="num">288,621,772</b> د.ك (2025، وفق بياناتها).</div>
-      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية · بيانات 2025 و2026 أولية · الصادرات لا تشمل النفط ومشتقاته</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="B" style="left:4700px;top:1550px;transform:translate(-50%,-50%) rotate(2deg)">
@@ -342,15 +356,15 @@ body.nologo #mlogo{opacity:0}
         <div data-k="B1" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:18px"><div style="font:700 26px var(--body);color:var(--gold)">الواردات من جنوب أفريقيا</div><div style="display:flex;gap:30px;align-items:center"><svg id="dIm" viewBox="0 0 300 300" width="250" height="250"></svg><div id="lIm" style="flex:1;display:flex;flex-direction:column;gap:10px"></div></div></div>
         <div data-k="B2" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:18px"><div style="font:700 26px var(--body);color:var(--mint)">الصادرات غير النفطية إلى جنوب أفريقيا</div><div style="display:flex;gap:30px;align-items:center"><svg id="dEx" viewBox="0 0 300 300" width="250" height="250"></svg><div id="lEx" style="flex:1;display:flex;flex-direction:column;gap:10px"></div></div></div>
       </div>
-      <p class="src">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (2025) · النسبة من إجمالي واردات الكويت من جنوب أفريقيا وصادراتها إليها</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="C" style="left:4700px;top:2600px;transform:translate(-50%,-50%)">
       <div class="eb">الاعتماد على جنوب أفريقيا <span>Kuwait's Reliance</span></div>
       <h2>جنوب أفريقيا تورّد نحو خُمس إلى ثلث واردات الكويت من الحمضيات والتفاح واللحوم الحمراء</h2>
-      <div class="row" data-k="C1"><div class="card g"><h3><svg class="ic"><use href="#i-citrus"/></svg>الحمضيات</h3><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:30.5"/></svg><span class="big">⁦30.5%⁩</span></div><p>11,744,407 د.ك</p></div><div class="card g"><h3>التفاح والكمثرى</h3><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:26.0"/></svg><span class="big">⁦26.0%⁩</span></div><p>3,384,350 د.ك</p></div><div class="card g"><h3><svg class="ic"><use href="#i-sheep"/></svg>لحوم الأغنام والماعز</h3><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:19.6"/></svg><span class="big">⁦19.6%⁩</span></div><p>13,235,115 د.ك</p></div><div class="card g"><h3>لحوم الأبقار</h3><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:19.4"/></svg><span class="big">⁦19.4%⁩</span></div><p>7,260,070 د.ك</p></div></div>
+      <div class="cgrid" data-k="C1"><div class="card crow g"><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:30.5"/></svg><span class="big">⁦30.5%⁩</span></div><div class="cm"><h3><svg class="ic"><use href="#i-citrus"/></svg>الحمضيات</h3><p>11,744,407 د.ك</p></div><div class="cc"><span class="cf"><i class="fl fl-za"></i>جنوب أفريقيا</span></div></div><div class="card crow g"><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:26.0"/></svg><span class="big">⁦26.0%⁩</span></div><div class="cm"><h3>التفاح والكمثرى</h3><p>3,384,350 د.ك</p></div><div class="cc"><span class="cf"><i class="fl fl-za"></i>جنوب أفريقيا</span></div></div><div class="card crow g"><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:19.6"/></svg><span class="big">⁦19.6%⁩</span></div><div class="cm"><h3><svg class="ic"><use href="#i-sheep"/></svg>لحوم الأغنام والماعز</h3><p>13,235,115 د.ك</p></div><div class="cc"><span class="cf"><i class="fl fl-za"></i>جنوب أفريقيا</span></div></div><div class="card crow g"><div class="rgw"><svg class="ring g" viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:19.4"/></svg><span class="big">⁦19.4%⁩</span></div><div class="cm"><h3>لحوم الأبقار</h3><p>7,260,070 د.ك</p></div><div class="cc"><span class="cf"><i class="fl fl-za"></i>جنوب أفريقيا</span></div></div></div>
       <div class="callout t" data-k="C2">في المقابل، حصتها من واردات الكويت من الأعلاف والبرسيم <b>⁦2.6%⁩</b> فقط، ومن الذرة <b>أقل من ⁦0.1%⁩</b>، رغم أنها من كبار منتجي الذرة.</div>
-      <p class="src">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (واردات الكويت 2025) · الحصة من إجمالي واردات الكويت من كل سلعة</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="D" style="left:4700px;top:3650px;transform:translate(-50%,-50%) rotate(-2deg)">
@@ -358,7 +372,7 @@ body.nologo #mlogo{opacity:0}
       <h2>تراجع صادرات جنوب أفريقيا الغذائية إلى الكويت في <em>الربع الأول 2026</em></h2>
       <div class="gbars" data-k="D1" style="gap:12px"><div class="gr dv"><span class="gn">لحوم أبقار</span><span class="gt"><i style="--w:63.9%;--o:0.00s;background:var(--red)"></i></span><b>⁦63.9%⁩<small>2,064,195 ← 744,248</small></b></div><div class="gr dv"><span class="gn">لحوم أغنام وماعز</span><span class="gt"><i style="--w:64.4%;--o:0.12s;background:var(--red)"></i></span><b>⁦64.4%⁩<small>2,044,837 ← 728,045</small></b></div><div class="gr dv"><span class="gn">فحم حجري</span><span class="gt"><i style="--w:16.0%;--o:0.24s;background:var(--red)"></i></span><b>⁦16.0%⁩<small>1,077,363 ← 905,462</small></b></div><div class="gr dv"><span class="gn">عنب</span><span class="gt"><i style="--w:25.5%;--o:0.36s;background:var(--red)"></i></span><b>⁦25.5%⁩<small>415,591 ← 309,771</small></b></div><div class="gr dv"><span class="gn">فواكه طازجة أخرى</span><span class="gt"><i style="--w:39.9%;--o:0.48s;background:var(--red)"></i></span><b>⁦39.9%⁩<small>372,210 ← 223,550</small></b></div><div class="gr dv"><span class="gn">حمضيات</span><span class="gt"><i style="--w:38.1%;--o:0.60s;background:var(--red)"></i></span><b>⁦38.1%⁩<small>273,903 ← 169,558</small></b></div><div class="gr dv"><span class="gn">تفاح وكمثرى</span><span class="gt"><i style="--w:65.5%;--o:0.72s;background:var(--red)"></i></span><b>⁦65.5%⁩<small>267,650 ← 92,285</small></b></div><div class="sleg" style="font-size:17px">نسبة التراجع · الربع الأول 2025 ← الربع الأول 2026 (د.ك)</div></div>
       <div class="callout r" data-k="D2">وفق الإدارة المركزية للإحصاء: واردات الربع الثاني 2026 بلغت <b class="num">9,547,000</b> د.ك بتراجع <b>⁦19.9%⁩</b>، وواردات النصف الأول <b class="num">17,831,504</b> د.ك بتراجع <b>⁦36.2%⁩</b>.</div>
-      <p class="src">المصدر: قاعدة بيانات الأمم المتحدة (بيانات جنوب أفريقيا، قيمة التصدير)؛ الإدارة المركزية للإحصاء · بيانات الشريك للربع الثاني 2026 لم تكتمل بعد</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="E" style="left:6700px;top:450px;transform:translate(-50%,-50%)">
@@ -366,14 +380,14 @@ body.nologo #mlogo{opacity:0}
       <h2>الأغنام الحية من جنوب أفريقيا فرصة على <em>المدى المتوسط</em></h2>
       <table data-k="E1" style="font-size:23px">
         <tr><th style="width:190px">العامل</th><th>الوضع</th><th style="width:330px">الأثر</th></tr>
-        <tr><td class="b">الحمى القلاعية</td><td>انتشرت في 9 مقاطعات خلال 2026، مع قيود على حركة الحيوانات وحملات تطعيم</td><td class="r">يوقف الأغنام الحية مؤقتاً</td></tr>
-        <tr><td class="b">الرفق بالحيوان</td><td>معارضة جمعية NSPCA لتصدير المواشي الحية ودعاوى مرتبطة بالشحن البحري</td><td class="m">مخاطر قانونية وإعلامية</td></tr>
-        <tr><td class="b">شركة المواشي</td><td>تشحن عبر ميناء إيست لندن، وواجهت إجراءات إدارية ضريبية</td><td class="m">يلزم معالجة الوضع قبل التوسع</td></tr>
-        <tr><td class="b">الموانئ</td><td>8 موانئ تجارية منها إيست لندن وديربان وكيب تاون</td><td class="t">بنية تصدير جاهزة</td></tr>
-        <tr><td class="b">الحلال</td><td>المجلس الوطني للحلال في جنوب أفريقيا (SANHA)</td><td class="t">جهة اعتماد قائمة</td></tr>
+        <tr><td class="b">الحمى القلاعية</td><td>انتشرت في 9 مقاطعات خلال 2026، مع قيود على حركة الحيوانات وحملات تطعيم</td><td class="imp r">يوقف الأغنام الحية مؤقتاً</td></tr>
+        <tr><td class="b">الرفق بالحيوان</td><td>معارضة جمعية NSPCA لتصدير المواشي الحية ودعاوى مرتبطة بالشحن البحري</td><td class="imp m">مخاطر قانونية وإعلامية</td></tr>
+        <tr><td class="b">شركة المواشي</td><td>تشحن عبر ميناء إيست لندن، وواجهت إجراءات إدارية ضريبية</td><td class="imp m">يلزم معالجة الوضع قبل التوسع</td></tr>
+        <tr><td class="b">الموانئ</td><td>8 موانئ تجارية منها إيست لندن وديربان وكيب تاون</td><td class="imp t">بنية تصدير جاهزة</td></tr>
+        <tr><td class="b">الحلال</td><td>المجلس الوطني للحلال في جنوب أفريقيا (SANHA)</td><td class="imp t">جهة اعتماد قائمة</td></tr>
       </table>
-      <div class="callout r" data-k="E3">يلزم استعادة الخلو من الحمى القلاعية وبروتوكول بيطري ثنائي قبل أي شحنات حية؛ وقد ورّدت جنوب أفريقيا للكويت أغناماً حية بقيمة <b class="num">1,610,000</b> د.ك في 2024.</div>
-      <p class="src">المصدر: مرئيات سفارة دولة الكويت في بريتوريا؛ تقرير وزارة الزراعة في جنوب أفريقيا (2026/9/30)؛ قاعدة بيانات الأمم المتحدة</p>
+      <span data-k="Ef" hidden></span><div class="callout r" data-k="E3">يلزم استعادة الخلو من الحمى القلاعية وبروتوكول بيطري ثنائي قبل أي شحنات حية؛ وقد ورّدت جنوب أفريقيا للكويت أغناماً حية بقيمة <b class="num">1,610,000</b> د.ك في 2024.</div>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="F" style="left:6700px;top:1550px;transform:translate(-50%,-50%) rotate(2deg)">
@@ -381,11 +395,11 @@ body.nologo #mlogo{opacity:0}
       <h2>الأعلاف فرصة <em>قريبة المدى</em> في ظل إنتاج كبير من الذرة وحصة محدودة في السوق الكويتي</h2>
       <div class="row" style="flex:1">
         <div class="card t" data-k="F1"><h3><svg class="ic"><use href="#i-maize"/></svg>الذرة الصفراء</h3><span class="big num">7,910,000</span><p>طن إنتاج متوقع في 2026، من إجمالي إنتاج الذرة البالغ 17,690,000 طن</p></div>
-        <div class="card g" data-k="F1"><h3><svg class="ic"><use href="#i-wheat"/></svg>الأعلاف والبرسيم والتبن</h3><span class="big num">9,440,000</span><p>د.ك واردات الكويت (HS 1214)، وحصة جنوب أفريقيا منها ⁦2.6%⁩ فقط</p></div>
+        <div class="card g" data-k="F1"><h3><svg class="ic"><use href="#i-wheat"/></svg>الأعلاف والبرسيم والتبن</h3><span class="big num">9,440,000</span><p>د.ك واردات الكويت، وحصة جنوب أفريقيا منها ⁦2.6%⁩ فقط</p></div>
         <div class="card r" data-k="F1"><h3>الاعتماد الحالي للذرة</h3><span class="big">⁦98.1%⁩</span><p>من واردات الكويت من الذرة مصدرها الأرجنتين، بقيمة 18,380,000 د.ك</p></div>
       </div>
       <div class="callout" data-k="F2">يلزم التحقق من توافق الأصناف المعدلة وراثياً مع الاشتراطات الكويتية قبل التعاقد.</div>
-      <p class="src">المصدر: مرئيات سفارة دولة الكويت في بريتوريا؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="G" style="left:6700px;top:2600px;transform:translate(-50%,-50%)">
@@ -395,14 +409,14 @@ body.nologo #mlogo{opacity:0}
         <tr><th>القطاع</th><th>القدرة المتوقعة (د.ك)</th><th>نسبة التحقق</th><th>غير المستغل (د.ك)</th></tr><tr><td class="b">أغذية مصنعة</td><td>1,851,150</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:11"/></svg><span class="num" style="font-size:19px">⁦11%⁩</span></div></td><td class="g">1,645,125</td></tr><tr><td class="b">مشروبات غير كحولية</td><td>688,800</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:8"/></svg><span class="num" style="font-size:19px">⁦8%⁩</span></div></td><td class="g">633,450</td></tr><tr><td class="b">زيوت ودهون نباتية</td><td>590,400</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:0"/></svg><span class="num" style="font-size:19px">⁦0%⁩</span></div></td><td class="g">590,400</td></tr><tr><td class="b">فواكه</td><td>7,752,075</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:93"/></svg><span class="num" style="font-size:19px">⁦93%⁩</span></div></td><td class="g">565,800</td></tr><tr><td class="b">لحوم دواجن</td><td>556,575</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:0"/></svg><span class="num" style="font-size:19px">⁦0%⁩</span></div></td><td class="g">556,575</td></tr><tr><td class="b">ألبان</td><td>369,000</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:11"/></svg><span class="num" style="font-size:19px">⁦11%⁩</span></div></td><td class="g">329,025</td></tr><tr><td class="b">ذرة وحبوب أخرى</td><td>261,375</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:1"/></svg><span class="num" style="font-size:19px">⁦1%⁩</span></div></td><td class="g">261,375</td></tr><tr><td class="b">مكسرات</td><td>338,250</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:32"/></svg><span class="num" style="font-size:19px">⁦32%⁩</span></div></td><td class="g">230,625</td></tr><tr><td class="b">خضروات</td><td>298,275</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:28"/></svg><span class="num" style="font-size:19px">⁦28%⁩</span></div></td><td class="g">215,250</td></tr><tr><td class="b">أعلاف ومخلفات نباتية</td><td>418,200</td><td><div class="rcell"><svg class="ring" viewBox="0 0 44 44" width="30" height="30"><circle class="rb" cx="22" cy="22" r="18"/><circle class="rp" cx="22" cy="22" r="18" pathLength="100" style="--p:58"/></svg><span class="num" style="font-size:19px">⁦58%⁩</span></div></td><td class="g">175,275</td></tr>
       </table>
       <div class="callout" data-k="G2">إجمالي القدرة الغذائية غير المستغلة <b class="num">6,040,059</b> د.ك من <b class="num">16,943,076</b> د.ك، بنسبة تحقق <b>⁦64%⁩</b>.</div>
-      <p class="src">المصدر: مركز التجارة الدولية – تقديرات القدرة التصديرية</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="H" style="left:6700px;top:3650px;transform:translate(-50%,-50%) rotate(-2deg)">
       <div class="eb">المنتجات غير المستغلة <span>Untapped Products</span></div>
       <h2>تتصدر المنتجات غير المستغلة <em>زيت الذرة والأفوكادو والدواجن المجمدة</em></h2>
       <div class="gbars" data-k="H1" style="gap:8px"><div class="gr"><span class="gn">زيت ذرة مكرر</span><span class="gt"><i style="--w:100.0%;--o:0.00s"></i></span><b>457,560</b></div><div class="gr"><span class="gn">أفوكادو</span><span class="gt"><i style="--w:98.6%;--o:0.08s"></i></span><b>451,102</b></div><div class="gr"><span class="gn">دجاج كامل مجمد</span><span class="gt"><i style="--w:93.2%;--o:0.16s"></i></span><b>426,502</b></div><div class="gr"><span class="gn">صلصات ومستحضراتها</span><span class="gt"><i style="--w:45.9%;--o:0.24s"></i></span><b>210,022</b></div><div class="gr"><span class="gn">مستحضرات غذائية أخرى</span><span class="gt"><i style="--w:44.4%;--o:0.32s"></i></span><b>203,258</b></div><div class="gr"><span class="gn">ذرة</span><span class="gt"><i style="--w:43.8%;--o:0.40s"></i></span><b>200,490</b></div><div class="gr"><span class="gn">مياه ومشروبات محلاة</span><span class="gt"><i style="--w:42.0%;--o:0.48s"></i></span><b>192,188</b></div><div class="gr"><span class="gn">أغذية الأطفال</span><span class="gt"><i style="--w:38.1%;--o:0.56s"></i></span><b>174,352</b></div><div class="gr"><span class="gn">مكسرات أخرى</span><span class="gt"><i style="--w:34.3%;--o:0.64s"></i></span><b>156,825</b></div><div class="gr"><span class="gn">قطع دجاج مجمدة</span><span class="gt"><i style="--w:26.0%;--o:0.72s"></i></span><b>119,002</b></div><div class="gr"><span class="gn">حليب مجفف</span><span class="gt"><i style="--w:24.3%;--o:0.80s"></i></span><b>111,315</b></div><div class="sleg" style="font-size:17px">القدرة غير المستغلة · د.ك</div></div>
-      <p class="src">المصدر: مركز التجارة الدولية – تقديرات القدرة التصديرية على مستوى المنتج (HS6)</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="I" style="left:2600px;top:4150px;transform:translate(-50%,-50%)">
@@ -410,7 +424,7 @@ body.nologo #mlogo{opacity:0}
       <h2>الكويت الثالثة خليجياً في الواردات الغذائية من جنوب أفريقيا، و<em>الأولى في اللحوم</em></h2>
       <div class="gbars" data-k="I1" style="flex:none;gap:14px"><div class="gr"><span class="gn"><i class="fl fl-ae"></i>الإمارات 2023</span><span class="gt"><i style="--w:100.0%;--o:0.00s"></i></span><b class="num" style="font-size:26px">168,400,284</b></div><div class="gr"><span class="gn"><i class="fl fl-sa"></i>السعودية 2025</span><span class="gt"><i style="--w:64.2%;--o:0.25s"></i></span><b class="num" style="font-size:26px">108,153,260</b></div><div class="gr kw"><span class="gn"><i class="fl fl-kw"></i>الكويت 2025</span><span class="gt"><i style="--w:26.6%;--o:0.50s"></i></span><b class="num" style="font-size:26px">44,792,774</b></div><div class="sleg" style="font-size:17px">إجمالي الواردات الغذائية من جنوب أفريقيا · د.ك</div></div>
       <table data-k="I2" style="font-size:22px"><tr><th>الفصل</th><th><i class="fl fl-kw"></i>الكويت</th><th><i class="fl fl-sa"></i>السعودية</th><th><i class="fl fl-ae"></i>الإمارات</th><th>ترتيب الكويت</th></tr><tr><td class="b">لحوم</td><td class="g">21,248,444</td><td>4,050,174</td><td>8,829,984</td><td>1</td></tr><tr><td class="b">فواكه ومكسرات</td><td class="">22,286,242</td><td>81,128,858</td><td>107,509,066</td><td>3</td></tr><tr><td class="b">ألبان وبيض وعسل</td><td class="">1,628</td><td>8,653,953</td><td>389,916</td><td>3</td></tr><tr><td class="b">مشروبات</td><td class="">295,522</td><td>3,322,997</td><td>27,236,801</td><td>3</td></tr></table>
-      <p class="src">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · د.ك · الإمارات: آخر سنة متاحة 2023</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="J" style="left:500px;top:4150px;transform:translate(-50%,-50%) rotate(2deg)">
@@ -424,7 +438,7 @@ body.nologo #mlogo{opacity:0}
         </div>
       </div>
       <div class="callout" data-k="J2">يمكن تحقيق هذه القدرة عبر منتجي البتروكيماويات الكويتيين دون استثمارات جديدة.</div>
-      <p class="src">المصدر: مركز التجارة الدولية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="K" style="left:-1700px;top:4350px;transform:translate(-50%,-50%)">
@@ -438,14 +452,15 @@ body.nologo #mlogo{opacity:0}
         <tr><td class="b">تشجيع وحماية الاستثمارات</td><td>2005/9/26</td><td class="r">علّقها الجانب الجنوب أفريقي</td><td class="m">لا يمكن الاعتماد عليها لحماية الاستثمار</td></tr>
       </table>
       <div class="callout" data-k="K2">تفعيل اللجنة المشتركة بموجب المادة 9 من الاتفاق التجاري يوفّر إطاراً قائماً لملف الأمن الغذائي دون الحاجة إلى اتفاقية جديدة.</div>
-      <p class="src">المصدر: سجل الاتفاقيات؛ الدليل الاقتصادي – وزارة الخارجية</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="L" style="left:2600px;top:-1050px;transform:translate(-50%,-50%)">
       <div class="eb">أدوار الجهات الحكومية <span>Government Roles</span></div>
-      <h2>خمس جهات تعمل بالتوازي، والاشتراطات الصحية والبيطرية <em>أولاً</em></h2>
+      <h2>توزيع الأدوار بين الجهات الحكومية، مع أولوية <em>الاشتراطات الصحية والبيطرية</em></h2>
       <div class="row"><div class="card g" data-k="L1"><h3>الهيئة العامة للغذاء والتغذية</h3><p>اعتماد الاشتراطات الصحية للحوم والدواجن والألبان، واعتماد المسالخ والمصانع وشهادات الحلال، وفحص الإرساليات</p></div><div class="card r" data-k="L1"><h3>الهيئة العامة لشؤون الزراعة والثروة السمكية</h3><p>بروتوكول بيطري ثنائي، ومتابعة الخلو من الحمى القلاعية، والحجر البيطري للشحنات الحية والأعلاف</p></div><div class="card " data-k="L1"><h3>الإدارة العامة للجمارك</h3><p>تطبيق نظام الجمارك الموحد وقواعد المنشأ، ومسار تخليص سريع للسلع الغذائية والمواشي</p></div></div>
       <div class="row"><div class="card g" data-k="L1"><h3>وزارة التجارة والصناعة</h3><p>تفعيل الاتفاق التجاري واللجنة المشتركة، وتحديد السلع المستهدفة، وربط التجار بالمصدّرين</p></div><div class="card t" data-k="L1"><h3>وزارة الخارجية</h3><p>التنسيق عبر سفارة دولة الكويت في بريتوريا، ونقل الطلبات الفنية، وترتيب زيارات الوفود</p></div></div>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="N" style="left:4700px;top:-1050px;transform:translate(-50%,-50%) rotate(-2deg)">
@@ -453,12 +468,14 @@ body.nologo #mlogo{opacity:0}
       <h2>التوصيات <em>المقترحة</em></h2>
       <div class="row"><div class="card g" data-k="N1"><h3>1 · تفعيل اللجنة المشتركة</h3><p>وفق المادة 9 من الاتفاق التجاري (2005) كإطار لملف الأمن الغذائي، بالتنسيق مع وزارة التجارة والصناعة الجنوب أفريقية</p></div><div class="card t" data-k="N2"><h3>2 · الأعلاف أولاً</h3><p>بحث عقود للذرة الصفراء والبرسيم والتبن، مع التحقق من توافق الأصناف المعدلة وراثياً مع الاشتراطات الكويتية</p></div><div class="card g" data-k="N3"><h3>3 · اللحوم المبردة والمجمدة</h3><p>التوسع عبر مسالخ معتمدة وفق اشتراطات الحمى القلاعية، مع الحفاظ على حصتها الحالية في لحوم الأغنام والأبقار</p></div></div>
       <div class="row"><div class="card r" data-k="N4"><h3>4 · الأغنام الحية</h3><p>فرصة متوسطة المدى بعد استعادة الخلو من الحمى القلاعية ومعالجة ملفي الرفق بالحيوان والوضع الضريبي لشركة المواشي</p></div><div class="card g" data-k="N5"><h3>5 · الألبان والأغذية المصنعة والزيوت</h3><p>أكبر قدرة غير مستغلة، نحو 2,561,000 د.ك مجتمعة</p></div><div class="card t" data-k="N6"><h3>6 · تزويد السفارة بالأولويات</h3><p>المنتجات والكميات والمواصفات والاشتراطات الصحية، وتحديد نقاط اتصال وزيارات ميدانية قبل أي خطوة تنفيذية</p></div></div>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc" id="Q" style="left:6700px;top:-1050px;transform:translate(-50%,-50%)">
       <div class="eb">نقاط للطرح في الاجتماع <span>Points for Discussion</span></div>
       <h2>أسئلة مقترحة للجانب <em>الجنوب أفريقي</em></h2>
       <div style="display:flex;flex-direction:column;gap:26px"><div class="qq" data-k="Q1"><span class="qn">1</span><p>هل يمكن تحديد مناطق خالية من الحمى القلاعية لتصدير الأغنام الحية أو اللحوم؟ ومتى يُتوقع استعادة الخلو؟</p></div><div class="qq" data-k="Q2"><span class="qn">2</span><p>ما الكميات المتاحة للتصدير من الذرة الصفراء والبرسيم والتبن، وهل تتوفر أصناف غير معدلة وراثياً؟</p></div><div class="qq" data-k="Q3"><span class="qn">3</span><p>هل الجانب الجنوب أفريقي مستعد لعقد اجتماع للجنة المشتركة بموجب الاتفاق التجاري (2005)؟</p></div></div>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
     </section>
 
     <section class="sc bare" id="END2" data-no="" style="left:1640px;top:-2400px;transform:translate(-50%,-50%) scale(1.6);justify-content:center;align-items:center;text-align:center;gap:0">
@@ -553,7 +570,7 @@ const CAM={map:[1800,1440,4150,3300,0],za:[1820,2420,2700,1520,0],world:[2500,16
 // build one-at-a-time overlays from each board's cards
 ['C','F','L','N'].forEach(id=>{const b=document.getElementById(id);const h=b.querySelector('h2');
   const so=document.createElement('div');so.className='solo';so.style.top=(h.offsetTop+h.offsetHeight+34)+'px';
-  [...b.querySelectorAll('.card')].forEach((c,i)=>{const d=document.createElement('div');d.className='sl gen '+[...c.classList].filter(x=>['r','g','t'].includes(x)).join(' ');d.dataset.k=id+'s'+(i+1);d.innerHTML=c.innerHTML;so.appendChild(d)});
+  [...b.querySelectorAll('.card')].forEach((c,i)=>{const d=document.createElement('div');d.className='sl gen '+(c.classList.contains('crow')?'crowsl ':'')+[...c.classList].filter(x=>['r','g','t'].includes(x)).join(' ');d.dataset.k=id+'s'+(i+1);d.innerHTML=c.innerHTML;so.appendChild(d)});
   b.appendChild(so)});
 const isMap=k=>k==='map'||k==='za';
 const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
@@ -564,7 +581,7 @@ const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
  ['B',['B1'],'أهم السلع'],['B',['B2']],
  ['C',['Cs1'],'الاعتماد على جنوب أفريقيا'],['C',['Cs2']],['C',['Cs3']],['C',['Cs4']],['C',['C1','C2']],
  ['D',['D1'],'أداء 2026'],['D',['D2'],'',0,['D2']],
- ['za',['zafocus'],'الأغنام الحية'],['E',['E1']],['E',['E3'],'',0,['E3']],
+ ['za',['zafocus'],'الأغنام الحية'],['E',['E1']],['E',['Ef']],['E',['E3'],'',0,['E3']],
  ['F',['Fs1'],'الأعلاف'],['F',['Fs2']],['F',['Fs3']],['F',['F1','F2']],
  ['G',['G1'],'القدرة التوريدية'],['G',['G2'],'',0,['G2']],
  ['H',['H1'],'المنتجات غير المستغلة'],
