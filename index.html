@@ -225,6 +225,50 @@ body.onmap .sc{opacity:.1}
 .fin .fthx{font:800 64px var(--display);color:var(--gold2);opacity:0;transform:translateY(20px);margin-top:20px}
 .fin .fq{font:400 30px var(--body);color:var(--mute);opacity:0}
 .fin.on .fthx{animation:fen 1s ease 5.2s forwards} .fin.on .fq{animation:fen 1s ease 6s forwards}
+/* ===== animation set: entrance / emphasis / exit / motion path ===== */
+/* Entrance · Float In (figures) */
+.sc .kpi[data-k]:not(.on){transform:translateY(46px)}
+/* Entrance · Fly In from the right (cards) */
+.sc .card[data-k]:not(.on){transform:translateX(110px);filter:blur(4px)}
+.sc [data-k].on>.card,.sc .cgrid.on>.card{animation:flyin .75s cubic-bezier(.2,.7,.2,1) both}
+.sc [data-k].on>.card:nth-child(2),.sc .cgrid.on>.card:nth-child(2){animation-delay:.12s}
+.sc [data-k].on>.card:nth-child(3),.sc .cgrid.on>.card:nth-child(3){animation-delay:.24s}
+.sc [data-k].on>.card:nth-child(4),.sc .cgrid.on>.card:nth-child(4){animation-delay:.36s}
+@keyframes flyin{from{opacity:0;transform:translateX(110px)}}
+/* Entrance · Wipe (tables, right to left) */
+.sc table[data-k]{transform:none!important;filter:none!important;clip-path:inset(0 0 0 100%);transition:clip-path 1.1s cubic-bezier(.65,0,.2,1),opacity .4s}
+.sc table[data-k].on{clip-path:inset(0 0 0 0)}
+/* Entrance · Split (key messages open from the centre) */
+.sc .callout[data-k]{transform:none!important;filter:none!important;clip-path:inset(0 50% 0 50%);transition:clip-path .9s cubic-bezier(.65,0,.2,1),opacity .3s,box-shadow .8s}
+.sc .callout[data-k].on{clip-path:inset(-40px -40px -40px -40px)}
+/* Entrance · Grow & Turn (donut charts and rings) */
+.on #donut,#donut.on,.on #dIm,.on #dEx{animation:growturn 1.1s cubic-bezier(.2,.7,.2,1) both}
+@keyframes growturn{from{opacity:0;transform:scale(.55) rotate(-120deg)}}
+.on .rgw .ring{animation:wheel 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wheel{from{transform:rotate(-270deg) scale(.6);opacity:0}}
+/* Entrance · Zoom / Exit · Fly Out to the left (one-at-a-time cards) */
+.solo .sl{transform:scale(.82)!important;opacity:0}
+.solo .sl.on{transform:none!important;opacity:1}
+.solo .sl.gone{transform:translateX(-180px) scale(.96)!important;opacity:0}
+/* Emphasis · Pulse (spotlight) */
+.sc.spot .focus{animation:pulse2 1.1s ease 1s 2}
+@keyframes pulse2{50%{transform:scale(1.045)}}
+/* Emphasis · Underline (key figures in a spotlight) */
+.callout b{background-image:linear-gradient(var(--gold),var(--gold));background-repeat:no-repeat;background-position:100% 100%;background-size:0 3px;transition:background-size .8s ease}
+.sc.spot .focus b{background-size:100% 3px;transition-delay:1.2s}
+/* Emphasis · Teeter (decline arrows) */
+.on .pp .ar{display:inline-block;animation:teeter .5s ease 1.6s 4}
+@keyframes teeter{25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+/* Emphasis · Grow/Shrink (count-up figures settle) */
+.on .kpi .n{animation:growshrink .6s ease 2.2s 1}
+@keyframes growshrink{50%{transform:scale(1.08)}}
+.kpi .n{display:inline-block;transform-origin:right center}
+/* Motion path · Arcs (title flags) */
+.tflags.on .tf:first-child{animation:arcR 1.4s cubic-bezier(.3,.6,.3,1) both}
+.tflags.on .tf:last-child{animation:arcL 1.4s cubic-bezier(.3,.6,.3,1) .25s both}
+@keyframes arcR{0%{opacity:0;transform:translate(320px,-220px) rotate(16deg)}40%{opacity:1;transform:translate(190px,-250px) rotate(8deg)}75%{transform:translate(60px,-120px) rotate(2deg)}100%{transform:none}}
+@keyframes arcL{0%{opacity:0;transform:translate(-320px,-220px) rotate(-16deg)}40%{opacity:1;transform:translate(-190px,-250px) rotate(-8deg)}75%{transform:translate(-60px,-120px) rotate(-2deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.sc [data-k].on>.card,.on .rgw .ring,.on #donut,.on #dIm,.on #dEx,.sc.spot .focus,.on .pp .ar,.on .kpi .n,.tflags.on .tf{animation:none!important}.sc table[data-k],.sc .callout[data-k]{clip-path:none!important}}
 .callout{padding:24px 32px;background:rgba(212,184,90,.12);border-inline-start:6px solid var(--gold);font:600 29px/1.55 var(--body);color:var(--ink)}
 .callout.r{background:rgba(224,122,107,.12);border-color:var(--red)}
 .callout.t{background:rgba(95,168,154,.14);border-color:var(--teal)}
@@ -748,6 +792,8 @@ function render(){
   const intro=document.getElementById('intro');clearTimeout(window.__it);
   if(isChap){document.getElementById('inN').textContent=chapNo[STEPS[cur][2]];document.getElementById('inT').textContent=STEPS[cur][2];intro.classList.add('show');window.__it=setTimeout(()=>intro.classList.remove('show'),1900)}else intro.classList.remove('show');
   document.querySelectorAll('[data-k]').forEach(e=>{const f=fresh.includes(e.dataset.k);const dd=f?base+(i++)*0.22:0;e.style.transitionDelay=dd.toFixed(2)+'s';e.style.setProperty('--rd',dd.toFixed(2)+'s');if(f&&!on.has(e.dataset.k)===false&&!e.classList.contains('on'))countUp(e,dd);e.classList.toggle('on',on.has(e.dataset.k))});
+  const seen=new Set();for(let j=0;j<cur;j++)STEPS[j][1].forEach(k=>seen.add(k));
+  document.querySelectorAll('.solo [data-k]').forEach(e=>e.classList.toggle('gone',!on.has(e.dataset.k)&&seen.has(e.dataset.k)));
   const fo=STEPS[cur][4]||[];
   document.querySelectorAll('.sc').forEach(sc=>sc.classList.toggle('spot',sc.id===STEPS[cur][0]&&fo.length>0));
   document.querySelectorAll('[data-k]').forEach(e=>e.classList.toggle('focus',fo.includes(e.dataset.k)));
