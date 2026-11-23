@@ -991,7 +991,7 @@ function countUp(el,delay){
     cancelAnimationFrame(n._raf);n.textContent=pre+fmt(0)+suf;const t0=performance.now()+delay*1000+150,dur=1300;
     const tick=now=>{const k=Math.min(1,Math.max(0,(now-t0)/dur)),e=1-Math.pow(1-k,3);n.textContent=pre+fmt(val*e)+suf;if(k<1)n._raf=requestAnimationFrame(tick);else n.textContent=o};n._raf=requestAnimationFrame(tick)})}
 let cur=0, overview=false, dir=1;
-const MQ=matchMedia('(orientation: portrait) and (max-width: 1100px)');
+const MQ=matchMedia('not all'); // scrolling reading mode switched off: every device gets the presentation
 const isMob=()=>document.body.classList.contains('mobile');
 let io=null;
 function setMode(){const m=MQ.matches;document.body.classList.toggle('mobile',m);
