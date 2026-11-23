@@ -364,6 +364,84 @@ body.nologo #mlogo{opacity:0}
 #hint{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);font:400 14px var(--body);color:#6F7C98;z-index:5;pointer-events:none;transition:opacity .8s}
 @media (max-width:640px){#hint{display:none}#hud button.opt{display:none}}
 @media (prefers-reduced-motion:reduce){#world{transition-duration:.01s}[data-k]{transition:opacity .4s;transform:none;filter:none}.pulse,.grain{animation:none}}
+
+/* ---------- phone / portrait-tablet reading mode ---------- */
+body.mobile{overflow-x:hidden;overflow-y:auto;height:auto}
+body.mobile #stage{position:relative;inset:auto;overflow:visible;cursor:auto;min-height:100vh}
+body.mobile #bgfar,body.mobile .grain,body.mobile #hud,body.mobile #intro,body.mobile #chap,body.mobile #hint,body.mobile #cap,body.mobile #capbg,body.mobile #mhint,body.mobile #mlogo{display:none!important}
+body.mobile #world{position:relative;transform:none!important;transition:none!important;filter:none!important;display:flex;flex-direction:column;gap:14px;padding:14px 12px 48px}
+body.mobile #T{order:-3}body.mobile #AF{order:-2}body.mobile #map{order:-1}
+body.mobile #START{display:none!important}
+body.mobile #map{width:100%!important;height:auto!important;background:linear-gradient(160deg,var(--navy) 0%,#0A1633 100%);border:1px solid var(--line);border-radius:10px}
+body.mobile #map [data-k]:not([data-k="routes"]):not([data-k="zaroute"]){display:none!important}
+body.mobile #map .node text{font-size:120px}body.mobile #map .node.kw text{font-size:130px}
+body.mobile #map .plab{font-size:84px}body.mobile #map .lgt{font-size:62px}
+body.mobile .sc{position:relative!important;left:auto!important;top:auto!important;transform:none!important;width:auto!important;height:auto!important;padding:22px 16px!important;gap:14px!important;opacity:1!important;border-radius:10px;box-shadow:none!important}
+body.mobile .sc [data-k],body.mobile #map [data-k]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
+body.mobile .solo,body.mobile .sl{display:none!important}
+body.mobile .row{flex-direction:column!important;gap:12px!important;flex:none!important;align-items:stretch!important}
+body.mobile .cgrid{grid-template-columns:1fr!important;gap:12px!important}
+body.mobile .sc h2{font-size:22px!important;line-height:1.4!important;margin:0!important}
+body.mobile #T h2{font-size:30px!important}
+body.mobile .eb{font-size:13px!important}
+body.mobile .lead,body.mobile .sc p,body.mobile .callout{font-size:15px!important;line-height:1.7!important}
+body.mobile .callout{padding:14px 16px!important}
+body.mobile .kpi,body.mobile .card{padding:14px 16px!important;flex:none!important}
+body.mobile .kpi .n{font-size:32px!important}body.mobile .kpi .l,body.mobile .kpi .c{font-size:13px!important}
+body.mobile .card h3{font-size:18px!important}body.mobile .card .big{font-size:34px!important}
+body.mobile .card div[style*="grid"]{font-size:15px!important}
+body.mobile .sc table{font-size:13px!important;display:block;overflow-x:auto}
+body.mobile .sc th,body.mobile .sc td{padding:8px 6px!important;font-size:13px!important}
+body.mobile .sc svg[viewBox]:not(.ring):not(.ic){width:100%!important;height:auto!important}
+body.mobile #donut,body.mobile #dIm,body.mobile #dEx{max-width:260px;align-self:center}
+body.mobile #leg .lrow{font-size:14px!important;gap:10px!important}body.mobile #leg .lrow b{font-size:15px!important}body.mobile #leg .lrow i{width:14px!important;height:14px!important}
+body.mobile #lIm>div,body.mobile #lEx>div{font-size:14px!important}
+body.mobile .gr{grid-template-columns:110px 1fr 76px!important;font-size:13px!important;gap:8px!important}
+body.mobile .gr b{font-size:13px!important}
+body.mobile .src{position:static!important;font-size:11px!important}
+body.mobile .moci img{width:56px!important;height:auto!important}
+body.mobile .tflags{flex-direction:column}
+body.mobile .femb{width:150px!important;height:auto!important}
+body.mobile .fname{font-size:30px!important}body.mobile .fen{font-size:13px!important}
+body.mobile .prs .pr{grid-template-columns:90px 1fr 70px 70px!important;font-size:13px!important;gap:6px!important}
+body.mobile .qq p{font-size:15px!important}
+
+body.mobile #map{position:relative!important;left:auto!important;top:auto!important;overflow:hidden}
+body.mobile .card.crow{grid-template-columns:84px 1fr!important;gap:12px!important}
+body.mobile .card.crow .rgw,body.mobile .card.crow .rgw .ring{width:84px!important;height:84px!important}
+body.mobile .card.crow .rgw .big{font-size:20px!important}
+body.mobile .card.crow .cc{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}
+body.mobile .card.crow .ic{width:26px;height:26px}
+
+body.mobile #T>div[style*="space-between"]{flex-direction:column!important;align-items:stretch!important;gap:14px!important}
+body.mobile .tflags{flex-direction:row!important;gap:12px!important;justify-content:center}
+body.mobile .tflags .fl{width:64px!important;height:44px!important}
+body.mobile .tflags .tf span{font-size:13px!important}
+body.mobile .tflags .tsep{display:none}
+body.mobile .sc th{width:auto!important}
+body.mobile .prs .pp{font-size:16px!important}body.mobile .prs .pv{font-size:11px!important}body.mobile .prs .pn{font-size:13px!important}
+body.mobile .card .amt{font-size:13px!important}body.mobile .card .amt b{font-size:22px!important}
+body.mobile #lIm b,body.mobile #lEx b{font-size:14px!important}
+body.mobile #lIm i,body.mobile #lEx i{width:12px!important;height:12px!important}
+
+@media (min-width:700px){
+body.mobile #world{max-width:860px;margin:0 auto;padding:24px 20px 60px;gap:22px}
+body.mobile .sc{padding:34px 30px!important;gap:20px!important}
+body.mobile .sc h2{font-size:32px!important}body.mobile #T h2{font-size:44px!important}
+body.mobile .eb{font-size:17px!important}
+body.mobile .lead,body.mobile .sc p,body.mobile .callout{font-size:20px!important}
+body.mobile .kpi .n{font-size:44px!important}body.mobile .kpi .l,body.mobile .kpi .c{font-size:16px!important}
+body.mobile .card h3{font-size:24px!important}body.mobile .card .big{font-size:44px!important}
+body.mobile .card div[style*="grid"]{font-size:19px!important}
+body.mobile .sc table,body.mobile .sc th,body.mobile .sc td{font-size:17px!important}
+body.mobile .gr,body.mobile .gr b{font-size:17px!important}body.mobile .gr{grid-template-columns:170px 1fr 110px!important}
+body.mobile #leg .lrow{font-size:19px!important}body.mobile #leg .lrow b{font-size:20px!important}
+body.mobile #donut,body.mobile #dIm,body.mobile #dEx{max-width:340px}
+body.mobile .src{font-size:13px!important}
+body.mobile .prs .pp{font-size:20px!important}body.mobile .prs .pn{font-size:17px!important}body.mobile .prs .pv{font-size:14px!important}
+body.mobile .prs .pr{grid-template-columns:150px 1fr 100px 110px!important}
+body.mobile .qq p{font-size:20px!important}
+}
 </style>
 
 <div id="stage" aria-live="polite">
@@ -911,8 +989,18 @@ function countUp(el,delay){
     cancelAnimationFrame(n._raf);n.textContent=pre+fmt(0)+suf;const t0=performance.now()+delay*1000+150,dur=1300;
     const tick=now=>{const k=Math.min(1,Math.max(0,(now-t0)/dur)),e=1-Math.pow(1-k,3);n.textContent=pre+fmt(val*e)+suf;if(k<1)n._raf=requestAnimationFrame(tick);else n.textContent=o};n._raf=requestAnimationFrame(tick)})}
 let cur=0, overview=false, dir=1;
+const MQ=matchMedia('(max-width: 900px), (orientation: portrait) and (max-width: 1100px)');
+const isMob=()=>document.body.classList.contains('mobile');
+let io=null;
+function setMode(){const m=MQ.matches;document.body.classList.toggle('mobile',m);
+  if(m){if(io)io.disconnect();io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.2});
+    document.querySelectorAll('[data-k]').forEach(e=>{e.style.transitionDelay='0s';e.style.setProperty('--rd','0s');e.classList.remove('on');io.observe(e)});window.scrollTo(0,0)}
+  else{if(io){io.disconnect();io=null}window.scrollTo(0,0);render()}}
+MQ.addEventListener('change',setMode);
+
 function camFor(key){return CAM[key]||S(key)}
 function apply(rect){
+  if(isMob())return;
   const W=innerWidth,H=innerHeight,[cx,cy,w,h,r]=rect;
   const s=Math.min(W/w,(H-60)/h)*.94;
   world.style.transform=`translate(${W/2}px,${(H-30)/2}px) rotate(${-r}deg) scale(${s}) translate(${-cx}px,${-cy}px)`;
@@ -920,6 +1008,7 @@ function apply(rect){
   const key=rect.join(',');if(window.__lastCam&&window.__lastCam!==key&&!matchMedia('(prefers-reduced-motion: reduce)').matches){world.classList.add('moving');clearTimeout(window.__mv);window.__mv=setTimeout(()=>world.classList.remove('moving'),950)}window.__lastCam=key;
 }
 function render(){
+  if(isMob())return;
   const MAPK=['routes','bubbles','iran','aus','horn','zaring'];
   const SOLO=[...document.querySelectorAll('.solo [data-k]')].map(e=>e.dataset.k);
   let ms=cur;while(ms>0&&STEPS[cur][0]==='map'&&STEPS[ms-1][0]==='map'&&!STEPS[ms][2])ms--;
@@ -949,7 +1038,7 @@ function render(){
 }
 function go(i){cc.classList.remove('show');dir=i>cur?1:-1;overview=false;cur=Math.max(0,Math.min(STEPS.length-1,i));render();if(cur>0)document.getElementById('hint').style.opacity=0}
 const next=()=>go(cur+1), prev=()=>go(cur-1);
-stage.addEventListener('click',e=>{if(overview){overview=false;dir=0;render();return}const nd=e.target.closest('.node[data-n]');if(nd&&document.body.classList.contains('onmap')){e.stopPropagation();showCard(nd.dataset.n);return}if(cc.classList.contains('show')){cc.classList.remove('show');return}next()});
+stage.addEventListener('click',e=>{if(isMob())return;if(overview){overview=false;dir=0;render();return}const nd=e.target.closest('.node[data-n]');if(nd&&document.body.classList.contains('onmap')){e.stopPropagation();showCard(nd.dataset.n);return}if(cc.classList.contains('show')){cc.classList.remove('show');return}next()});
 cc.addEventListener('click',e=>{e.stopPropagation();cc.classList.remove('show')});
 addEventListener('keydown',e=>{if(e.key==='Escape')cc.classList.remove('show')},true);
 document.getElementById('bNext').onclick=e=>{e.stopPropagation();next()};
@@ -969,6 +1058,7 @@ let tx=null;stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{pa
 stage.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){dx>0?next():prev()}tx=null},{passive:true});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>apply(overview?CAM.world:camFor(STEPS[cur][0])),120)});
 const h=(location.hash.match(/^#s(\d+)$/)||[])[1];
+setMode();
 world.style.transition='none';cur=h?Math.max(0,Math.min(STEPS.length-1,+h-1)):0;render();
 requestAnimationFrame(()=>requestAnimationFrame(()=>{world.style.transition=''}));
 addEventListener('hashchange',()=>{const m=(location.hash.match(/^#s(\d+)$/)||[])[1];if(m&&+m-1!==cur)go(+m-1)});
