@@ -451,6 +451,24 @@ body.mobile .qq p{font-size:20px!important}
 
 #G .callout{font-size:20px;line-height:1.5;padding:12px 22px}
 #G table{font-size:22px!important}
+
+#GM .eqrow{display:flex;align-items:stretch;justify-content:center;gap:18px;direction:rtl}
+#GM .eqb{flex:1;max-width:330px;background:var(--navy2);border-top:6px solid var(--gold);padding:22px 20px;text-align:center;display:flex;flex-direction:column;gap:8px;justify-content:center}
+#GM .eqb.t{border-top-color:var(--mint)}#GM .eqb.r{border-top-color:var(--red)}
+#GM .eqb b{font:800 30px var(--display);color:var(--ink)}#GM .eqb span{font:400 21px/1.5 var(--body);color:var(--mute)}
+#GM .op{align-self:center;font:800 54px var(--display);color:var(--gold2)}
+#GM .res{align-self:center;font:800 30px/1.4 var(--display);color:var(--gold2);text-align:center;max-width:250px}
+#GM .eq2{display:flex;gap:22px}
+#GM .eq2>div{flex:1;background:rgba(212,184,90,.10);border-inline-start:6px solid var(--gold);padding:18px 24px;font:600 25px/1.6 var(--body);color:var(--ink)}
+#GM .eq2 em{font-style:normal;color:var(--gold2);font-weight:800}
+#GM .eq2 small{display:block;font:400 19px/1.5 var(--body);color:var(--mute);margin-top:4px}
+#G .callout[data-k="G2"]{display:none}
+
+#GM{justify-content:center;gap:40px!important}
+#GM .eqb{padding:34px 22px;max-width:360px}#GM .eqb b{font-size:36px}#GM .eqb span{font-size:23px}
+#GM .op{font-size:64px}#GM .res{font-size:36px}
+#GM .eq2>div{font-size:28px;padding:24px 28px}#GM .eq2 small{font-size:23px}
+#GM .src{position:absolute}
 </style>
 
 <div id="stage" aria-live="polite">
@@ -676,6 +694,26 @@ body.mobile .qq p{font-size:20px!important}
       </table>
       <span data-k="Ff" hidden></span><div class="callout t" data-k="F2">التوصية: إثيوبيا على المدى القريب، وجنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية، مع الأعلاف من جنوب أفريقيا.</div>
       <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
+    </section>
+
+    <!-- GM EXPORT POTENTIAL METHOD -->
+    <section class="sc" id="GM" data-no="" style="left:-6300px;top:1480px;transform:translate(-50%,-50%)">
+      <div class="eb">كيف تُحسب القدرة التوريدية؟ <span>Method · ITC 2030</span></div>
+      <h2>القدرة التوريدية المتوقعة: تقدير <em>مركز التجارة الدولية (ITC)</em> لما يمكن أن تورّده كل دولة إلى الكويت بحلول 2030</h2>
+      <div class="eqrow" data-k="GM1">
+        <div class="eqb"><b>قدرة المورّد</b><span>حجم إنتاج الدولة وصادراتها من السلعة</span></div>
+        <div class="op">×</div>
+        <div class="eqb t"><b>الطلب الكويتي</b><span>الطلب المتوقع على السلعة وفق توقعات النمو الاقتصادي</span></div>
+        <div class="op">×</div>
+        <div class="eqb r"><b>سهولة التبادل</b><span>المسافة والرسوم وإجراءات التجارة بين البلدين</span></div>
+        <div class="op">=</div>
+        <div class="res">القدرة التوريدية المتوقعة</div>
+      </div>
+      <div class="eq2" data-k="GM2">
+        <div>غير المستغل = القدرة المتوقعة − الواردات الفعلية<small>مثال إثيوبيا: 9.77 − 3.04 = <em>6.73</em> مليون د.ك</small></div>
+        <div>نسبة الاستغلال = الواردات الفعلية ÷ القدرة المتوقعة<small>مثال إثيوبيا: 3.04 ÷ 9.77 = <em>⁦31%⁩</em></small></div>
+      </div>
+      <p class="src">المصدر: مركز التجارة الدولية (ITC) – خريطة إمكانات التصدير · منهجية التقدير</p>
     </section>
 
     <!-- G CAPACITY -->
@@ -961,7 +999,7 @@ const STEPS=[  // [camera, reveal, chapter, (filled), spotlight]
  ['D',['Ds1'],'الاعتماد'],['D',['Ds2']],['D',['Ds3']],['D',['Ds4']],['D',['D1','D2']],
  ['map',['iran'],'الأغنام الحية'],['map',['aus']],['E',['E1','E2']],['E',['E3'],'',0,['E3']],
  ['map',['horn'],'البدائل'],['F',['F1']],['F',['Ff']],['F',['F2'],'',0,['F2']],
- ['G',[],'القدرة التوريدية'],['G',['G2']],['G',['G1']],['G',['Gf']],
+ ['GM',['GM1'],'القدرة التوريدية'],['GM',['GM2']],['G',['G1']],['G',['Gf']],
  ['H',['Hs1'],'الفرص العاجلة'],['H',['Hs2']],['H',['Hs3']],['H',['H1','H2','H3']],
  ['I',['Is1'],'النفاذ إلى السوق'],['I',['Is2']],['I',['Is3']],['I',['I1','I2','I3']],['I',['I4'],'',0,['I4']],
  ['J',['J1'],'الاتفاقيات'],['J',['J2'],'',0,['J2']],
