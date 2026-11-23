@@ -772,7 +772,7 @@ STEPS.forEach(st=>{const cs=st[1].filter(isC),rest=st[1].filter(k=>!isC(k));
   else out.push(st);});STEPS.length=0;out.forEach(x=>STEPS.push(x));})();
 // chapter labels carry forward
 let chap='';STEPS.forEach(s=>{if(s[2])chap=s[2];s[3]=chap});
-const chapNo={};let n=0;STEPS.forEach(s=>{if(s[2]){chapNo[s[2]]=String(n).padStart(2,'0');n++}});
+const chapNo={};let n=0;STEPS.forEach(s=>{if(s[2]){chapNo[s[2]]=String(n);n++}});
 
 const world=document.getElementById('world'), stage=document.getElementById('stage'), cc=document.getElementById('cc');
 const CD={};
@@ -836,6 +836,7 @@ function render(){
   document.getElementById('cnt').textContent=(cur+1)+' / '+STEPS.length;
   document.getElementById('chapT').textContent=STEPS[cur][3];
   document.getElementById('chapN').textContent=chapNo[STEPS[cur][3]];
+  document.getElementById('chap').style.visibility=(STEPS[cur][3]==='البداية'&&!overview)?'hidden':'';
   try{history.replaceState(null,'','#s'+(cur+1))}catch(e){}
 }
 function go(i){cc.classList.remove('show');dir=i>cur?1:-1;overview=false;cur=Math.max(0,Math.min(STEPS.length-1,i));render();if(cur>0)document.getElementById('hint').style.opacity=0}
