@@ -64,6 +64,8 @@ body{margin:0;background:var(--night);color:var(--ink);font-family:var(--body);o
 .on .sr{stroke-dashoffset:0}
 .arw{fill:none;stroke-width:8;opacity:0;transition:opacity .5s ease 3.4s}.arw.s{stroke:var(--gold)}.arw.l{stroke:var(--mint)}
 .on .arw{opacity:1}
+.sr.rs{stroke:#7CC4F2;stroke-width:8}.lr.rs{stroke:#7CC4F2;stroke-width:8}.arw.r{stroke:#7CC4F2}.plab.rsl{fill:#7CC4F2;font-size:54px;font-weight:700}
+.arw.r,.lr.rs+.arw{transition-delay:4.6s}
 .port{fill:#0B193A;stroke:var(--gold2);stroke-width:6}
 .plab{font:600 46px var(--body);fill:var(--mute)}
 .lgt{font:600 50px var(--body);fill:var(--ink)}
@@ -384,7 +386,7 @@ body.nologo #mlogo{opacity:0}
       <defs><marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E07A6B"/></marker></defs>
       <!-- routes to Kuwait (x2719,y345) -->
       <g data-k="routes" class="k">
-        <defs><marker id="arrG" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#D4B85A"/></marker><marker id="arrM" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9ED9C9"/></marker></defs>
+        <defs><marker id="arrG" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#D4B85A"/></marker><marker id="arrM" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9ED9C9"/></marker><marker id="arrB" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7CC4F2"/></marker></defs>
         <path class="lr" style="--d:.3s" d="M2348,1160 C2363,1149 2411,1119 2440,1096 C2469,1073 2507,1034 2520,1022"/>
         <path class="arw l" d="M2491,1049 L2511,1030" marker-end="url(#arrM)"/>
         <path class="lr" style="--d:.3s" d="M2272,1572 C2283,1582 2311,1614 2336,1632 C2361,1650 2406,1672 2420,1680"/>
@@ -424,6 +426,11 @@ body.nologo #mlogo{opacity:0}
         <path id="tr_west" class="sr t" pathLength="100" style="--d:1.6s" d="M640,1308 C647,1323 633,1380 680,1400 C727,1420 857,1395 920,1428 C983,1461 1019,1505 1060,1600 C1101,1695 1143,1880 1168,2000 C1193,2120 1183,2207 1212,2320 C1241,2433 1292,2577 1340,2680 C1388,2783 1430,2894 1500,2940 C1570,2986 1680,2965 1760,2956 C1840,2947 1920,2921 1980,2888 C2040,2855 2097,2781 2120,2760"/>
         <path id="tr_east" class="sr t" pathLength="100" style="--d:1.9s" d="M2120,2760 C2137,2737 2196,2677 2224,2624 C2252,2571 2261,2497 2288,2440 C2315,2383 2352,2340 2384,2280 C2416,2220 2460,2147 2480,2080 C2500,2013 2499,1943 2504,1880 C2509,1817 2501,1753 2512,1700 C2523,1647 2530,1610 2568,1560 C2606,1510 2685,1460 2740,1400 C2795,1340 2853,1260 2900,1200 C2947,1140 2977,1100 3020,1040 C3063,980 3123,903 3160,840 C3197,777 3232,706 3240,660 C3248,614 3231,587 3208,564 C3185,541 3129,537 3104,520 C3079,503 3078,469 3056,464 C3034,459 3003,496 2972,492 C2941,488 2899,457 2872,440 C2845,423 2829,403 2808,388 C2787,373 2755,358 2744,352"/>
         <path class="arw s" d="M2779,372 L2754,358" marker-end="url(#arrG)"/>
+        <path id="tr_rs" class="sr rs" pathLength="100" style="--d:2.8s" d="M2900,1200 C2905,1183 2931,1134 2928,1100 C2925,1066 2915,1013 2880,996 C2845,979 2760,994 2720,996 C2680,998 2663,1003 2640,1006 C2617,1009 2602,1012 2584,1013 C2566,1014 2544,1018 2532,1014 C2520,1009 2523,1004 2512,984 C2501,964 2485,932 2464,896 C2443,860 2400,807 2384,768 C2368,729 2371,678 2368,660"/>
+        <path class="arw r" d="M2374,700 L2370,672" marker-end="url(#arrB)"/>
+        <path class="lr rs" style="--d:3.6s" d="M2368,660 C2390,645 2453,602 2500,568 C2547,534 2611,493 2648,456 C2685,419 2707,364 2719,345"/>
+        <path class="arw r" d="M2698,379 L2713,355" marker-end="url(#arrB)"/>
+        <circle class="port" cx="2368" cy="660" r="14"/><text class="plab rsl" direction="rtl" x="2338" y="676" text-anchor="start">ميناء جدة</text>
         <circle class="port" cx="2040" cy="2716" r="14"/><text class="plab" direction="rtl" x="2010" y="2732" text-anchor="start">ديربان</text>
         <circle class="port" cx="2210" cy="2312" r="14"/><text class="plab" direction="rtl" x="2210" y="2374" text-anchor="middle">بيرا</text>
         <circle class="port" cx="2420" cy="1680" r="14"/><text class="plab" direction="rtl" x="2450" y="1696" text-anchor="end">مومباسا</text>
@@ -431,9 +438,10 @@ body.nologo #mlogo{opacity:0}
         <circle class="port" cx="2776" cy="2246" r="14"/><text class="plab" direction="rtl" x="2776" y="2212" text-anchor="middle">تواماسينا</text>
         <circle class="port" cx="936" cy="1280" r="14"/><text class="plab" direction="rtl" x="936" y="1342" text-anchor="middle">لاغوس</text>
         <text class="plab" direction="rtl" x="3076" y="614" text-anchor="middle">مضيق هرمز</text>
-        <g class="ships"><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-2s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-8s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-13s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="14s" repeatCount="indefinite" begin="-5s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_west"/></animateMotion></use></g>
-        <g class="rleg"><rect x="80" y="2390" width="980" height="290" rx="16" fill="rgba(7,18,43,.9)" stroke="var(--line)" stroke-width="4"/>
-<line x1="980" y1="2468" x2="860" y2="2468" stroke="var(--gold)" stroke-width="9"/><text direction="rtl" x="830" y="2486" text-anchor="start" class="lgt">مسار بحري</text>
+        <g class="ships"><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-2s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-8s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="16s" repeatCount="indefinite" begin="-13s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_east"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="14s" repeatCount="indefinite" begin="-5s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_west"/></animateMotion></use><use href="#i-dhow" width="76" height="63" x="-38" y="-56"><animateMotion dur="9s" repeatCount="indefinite" begin="-3s" keyPoints="0;1" keyTimes="0;1" calcMode="linear"><mpath href="#tr_rs"/></animateMotion></use></g>
+        <g class="rleg"><rect x="80" y="2310" width="1000" height="370" rx="16" fill="rgba(7,18,43,.9)" stroke="var(--line)" stroke-width="4"/>
+<line x1="980" y1="2388" x2="860" y2="2388" stroke="var(--gold)" stroke-width="9"/><text direction="rtl" x="830" y="2406" text-anchor="start" class="lgt">بحري عبر مضيق هرمز</text>
+<line x1="980" y1="2468" x2="860" y2="2468" stroke="#7CC4F2" stroke-width="9"/><text direction="rtl" x="830" y="2486" text-anchor="start" class="lgt">بديل: البحر الأحمر وميناء جدة</text>
 <line x1="980" y1="2548" x2="860" y2="2548" stroke="var(--mint)" stroke-width="8" stroke-dasharray="22 16"/><text direction="rtl" x="830" y="2566" text-anchor="start" class="lgt">نقل بري إلى ميناء التصدير</text>
 <circle class="port" cx="920" cy="2628" r="14"/><text direction="rtl" x="830" y="2646" text-anchor="start" class="lgt">ميناء</text></g>
       </g>
