@@ -469,6 +469,14 @@ body.mobile .qq p{font-size:20px!important}
 #GM .op{font-size:64px}#GM .res{font-size:36px}
 #GM .eq2>div{font-size:28px;padding:24px 28px}#GM .eq2 small{font-size:23px}
 #GM .src{position:absolute}
+
+.pwrap{display:flex;align-items:center;gap:16px;direction:rtl}
+.pleg{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.pleg div{display:flex;align-items:center;gap:8px;font:500 19px var(--body);color:var(--ink)}
+.pleg i{width:14px;height:14px;flex:none}.pleg span{flex:1}.pleg b{font-weight:700;color:var(--gold2)}
+.solo .sl:has(.pwrap){gap:8px;padding:22px 70px;justify-content:flex-start}.solo .sl:has(.pwrap) h3{font-size:44px}.solo .sl:has(.pwrap) .big{font-size:76px;line-height:1}.solo .sl:has(.pwrap) p{font-size:24px;margin:0}
+.sl .pwrap .pie{width:190px;height:190px}.sl .pwrap{gap:26px}.sl .pleg div{font-size:24px}.sl .pleg i{width:18px;height:18px}
+#FEED1 .pleg div{font-size:26px}#FEED1 .pleg i{width:20px;height:20px}
 </style>
 
 <div id="stage" aria-live="polite">
@@ -715,8 +723,8 @@ body.mobile .qq p{font-size:20px!important}
       <div class="eb">الفرص العاجلة <span>Urgent Opportunities</span></div>
       <h2>الفرص ذات الأولوية</h2>
       <div class="row" style="flex:1">
-        <div class="card r" data-k="H1"><span class="tag" style="color:var(--red);align-self:flex-start">1 · الأولوية القصوى</span><h3>الأغنام الحية</h3><span class="big">⁦76.1%⁩</span><p>من إيران وأستراليا. إثيوبيا عبر جيبوتي قريباً؛ جنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية.</p></div>
-        <div class="card g" data-k="H2"><span class="tag" style="color:var(--gold);align-self:flex-start">2 · أولوية فورية</span><h3>إثيوبيا</h3><span class="big">6.73</span><p>مليون د.ك غير مستغلة</p><p style="color:var(--gold2)">نسبة الاستغلال الحالية ⁦31%⁩</p><p>بن 3.83 · خضروات 1.84 · لحوم حمراء 0.39</p></div>
+        <div class="card r" data-k="H1"><span class="tag" style="color:var(--red);align-self:flex-start">1 · الأولوية القصوى</span><h3>الأغنام الحية</h3><span class="big">⁦76.1%⁩</span><p>من إيران وأستراليا</p><div class="pwrap"><svg class="pie" viewBox="0 0 300 300" width="150" height="150" style="flex:none"><path d="M150.00,10.00 A140,140 0 1 1 34.71,229.42 L82.47,196.52 A82,82 0 1 0 150.00,68.00 Z" fill="#E07A6B" stroke="#0B193A" stroke-width="2"/><path d="M34.71,229.42 A140,140 0 0 1 10.33,140.33 L68.20,144.34 A82,82 0 0 0 82.47,196.52 Z" fill="#F0A898" stroke="#0B193A" stroke-width="2"/><path d="M10.33,140.33 A140,140 0 0 1 150.00,10.00 L150.00,68.00 A82,82 0 0 0 68.20,144.34 Z" fill="#3C4A6B" stroke="#0B193A" stroke-width="2"/></svg><div class="pleg"><div><i style="background:#E07A6B"></i><span>إيران</span><b>⁦65.4%⁩</b></div><div><i style="background:#F0A898"></i><span>أستراليا</span><b>⁦10.7%⁩</b></div><div><i style="background:#3C4A6B"></i><span>مصادر أخرى</span><b>⁦23.9%⁩</b></div></div></div><p>البديل: إثيوبيا عبر جيبوتي قريباً؛ جنوب أفريقيا وناميبيا بعد الخلو من الحمى القلاعية.</p></div>
+        <div class="card g" data-k="H2"><span class="tag" style="color:var(--gold);align-self:flex-start">2 · أولوية فورية</span><h3>إثيوبيا</h3><span class="big">6.73</span><p>مليون د.ك غير مستغلة</p><p style="color:var(--gold2)">نسبة الاستغلال الحالية ⁦31%⁩</p><p>توزيع القدرة غير المستغلة (مليون د.ك):</p><div class="pwrap"><svg class="pie" viewBox="0 0 300 300" width="150" height="150" style="flex:none"><path d="M150.00,10.00 A140,140 0 1 1 91.19,277.05 L115.55,224.41 A82,82 0 1 0 150.00,68.00 Z" fill="#D4B85A" stroke="#0B193A" stroke-width="2"/><path d="M91.19,277.05 A140,140 0 0 1 32.75,73.50 L81.32,105.20 A82,82 0 0 0 115.55,224.41 Z" fill="#9ED9C9" stroke="#0B193A" stroke-width="2"/><path d="M32.75,73.50 A140,140 0 0 1 67.71,36.74 L101.80,83.66 A82,82 0 0 0 81.32,105.20 Z" fill="#E07A6B" stroke="#0B193A" stroke-width="2"/><path d="M67.71,36.74 A140,140 0 0 1 150.00,10.00 L150.00,68.00 A82,82 0 0 0 101.80,83.66 Z" fill="#55617D" stroke="#0B193A" stroke-width="2"/></svg><div class="pleg"><div><i style="background:#D4B85A"></i><span>بن 3.83</span><b>⁦56.9%⁩</b></div><div><i style="background:#9ED9C9"></i><span>خضروات 1.84</span><b>⁦27.3%⁩</b></div><div><i style="background:#E07A6B"></i><span>لحوم حمراء 0.39</span><b>⁦5.8%⁩</b></div><div><i style="background:#55617D"></i><span>بقوليات وأخرى 0.67</span><b>⁦10.0%⁩</b></div></div></div></div>
         <div class="card t" data-k="H3"><span class="tag" style="color:var(--mint);align-self:flex-start">3 · فرصة تكميلية</span><h3>زامبيا</h3><span class="big">1.68</span><p>مليون د.ك غير مستغلة</p><p style="color:var(--gold2)">نسبة الاستغلال الحالية ⁦0%⁩</p><p>أعلاف تدعم الإنتاج المحلي من الدواجن والمواشي</p></div>
       </div>
       <p class="src">المصدر: مركز التجارة الدولية (ITC) – خريطة إمكانات التصدير؛ الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية · بيانات 2025 و2026 أولية</p>
@@ -726,23 +734,19 @@ body.mobile .qq p{font-size:20px!important}
     <section class="sc" id="FEED1" data-no="" style="left:-8600px;top:1480px;transform:translate(-50%,-50%)">
       <div class="eb">الأعلاف <span>Feed &amp; Fodder</span></div>
       <h2>الأعلاف أساس الإنتاج المحلي من الدواجن والمواشي، ومصادرها <em>مركّزة</em> خارج أفريقيا</h2>
-      <div class="row">
-        <div class="kpi t" data-k="FA1"><span class="l">الأعلاف والبرسيم والتبن</span><span class="n">9.44</span><span class="c">مليون د.ك · حصة جنوب أفريقيا ⁦2.6%⁩ فقط</span></div>
-        <div class="kpi r" data-k="FA1"><span class="l">الذرة الصفراء</span><span class="n">18.38</span><span class="c">مليون د.ك · الأرجنتين ⁦98.1%⁩</span></div>
-        <div class="kpi g" data-k="FA1"><span class="l">الشعير</span><span class="n">36.46</span><span class="c">مليون د.ك · رومانيا ⁦42.0%⁩</span></div>
-      </div>
+      <div class="row" style="align-items:center;gap:40px"><div data-k="FA0" class="pwrap" style="flex:1.3"><svg class="pie" viewBox="0 0 300 300" width="270" height="270" style="flex:none"><path d="M150.00,10.00 A140,140 0 1 1 92.79,277.78 L116.49,224.84 A82,82 0 1 0 150.00,68.00 Z" fill="#D4B85A" stroke="#0B193A" stroke-width="2"/><path d="M92.79,277.78 A140,140 0 0 1 38.31,65.59 L84.58,100.56 A82,82 0 0 0 116.49,224.84 Z" fill="#E07A6B" stroke="#0B193A" stroke-width="2"/><path d="M38.31,65.59 A140,140 0 0 1 150.00,10.00 L150.00,68.00 A82,82 0 0 0 84.58,100.56 Z" fill="#9ED9C9" stroke="#0B193A" stroke-width="2"/><text x="150" y="150" text-anchor="middle" font-size="44" font-weight="700" fill="#F0DB93" font-family="Almarai,Tahoma,sans-serif">64.28</text><text x="150" y="188" text-anchor="middle" font-size="24" fill="#C9D1DE" font-family="Almarai,Tahoma,sans-serif" direction="rtl">مليون د.ك</text></svg><div class="pleg"><div><i style="background:#D4B85A"></i><span>الشعير</span><b>⁦56.7%⁩</b></div><div><i style="background:#E07A6B"></i><span>الذرة الصفراء</span><b>⁦28.6%⁩</b></div><div><i style="background:#9ED9C9"></i><span>الأعلاف والبرسيم والتبن</span><b>⁦14.7%⁩</b></div></div></div><div class="kpi g" data-k="FA0" style="flex:1"><span class="l">حجم سوق الأعلاف في الكويت</span><span class="n">64.28</span><span class="c">مليون د.ك · واردات 2025 من الشعير والذرة الصفراء والأعلاف والبرسيم والتبن</span></div></div><div class="row"><div class="kpi t" data-k="FA1"><span class="l">الأعلاف والبرسيم والتبن · ⁦14.7%⁩</span><span class="n">9.44</span><span class="c">مليون د.ك · حصة جنوب أفريقيا ⁦2.6%⁩ فقط</span></div><div class="kpi r" data-k="FA1"><span class="l">الذرة الصفراء · ⁦28.6%⁩</span><span class="n">18.38</span><span class="c">مليون د.ك · الأرجنتين ⁦98.1%⁩</span></div><div class="kpi g" data-k="FA1"><span class="l">الشعير · ⁦56.7%⁩</span><span class="n">36.46</span><span class="c">مليون د.ك · رومانيا ⁦42.0%⁩</span></div></div>
       <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية · واردات 2025، بيانات أولية</p>
     </section>
 
     <!-- FEED2 FEED OPPORTUNITIES -->
     <section class="sc" id="FEED2" data-no="" style="left:-8600px;top:3300px;transform:translate(-50%,-50%)">
       <div class="eb">فرص الأعلاف <span>Feed Opportunities</span></div>
-      <h2>4 فرص أفريقية في <em>الأعلاف</em></h2>
+      <h2>3 فرص أفريقية في <em>الأعلاف</em></h2>
       <div class="row" style="flex:1">
         <div class="card g" data-k="FB1"><span class="tag" style="color:var(--gold);align-self:flex-start">1 · الأقرب</span><h3>الذرة الصفراء من جنوب أفريقيا</h3><span class="big">7.9</span><p>مليون طن إنتاج موسم 2026؛ مصدر ثانٍ بدلاً من الاعتماد شبه الكامل على الأرجنتين، مع التحقق من توافق الأصناف المعدلة وراثياً</p></div>
         <div class="card t" data-k="FB1"><span class="tag" style="color:var(--mint);align-self:flex-start">2 · غير مستغلة</span><h3>زامبيا</h3><span class="big">1.68</span><p>مليون د.ك قدرة توريدية للأعلاف · نسبة الاستغلال الحالية ⁦0%⁩ · التصدير عبر ميناء دار السلام</p></div>
-        <div class="card g" data-k="FB1"><span class="tag" style="color:var(--gold);align-self:flex-start">3 · توسّع</span><h3>أعلاف ومخلفات نباتية من جنوب أفريقيا</h3><span class="big">0.18</span><p>مليون د.ك غير مستغلة من قدرة 0.42 مليون د.ك</p></div>
-        <div class="card" data-k="FB1"><span class="tag" style="color:var(--mute);align-self:flex-start">4 · مدى أطول</span><h3>البرسيم والأعلاف الخضراء</h3><span class="big" style="font-size:40px">شرق أفريقيا</span><p>كينيا وتنزانيا وإثيوبيا: زراعة تعاقدية أو استثمار مرتبط بالتوريد إلى دولة الكويت</p></div>
+        
+        <div class="card" data-k="FB1"><span class="tag" style="color:var(--mute);align-self:flex-start">3 · مدى أطول</span><h3>البرسيم والأعلاف الخضراء</h3><span class="big" style="font-size:40px">شرق أفريقيا</span><p>كينيا وتنزانيا وإثيوبيا: زراعة تعاقدية أو استثمار مرتبط بالتوريد إلى دولة الكويت</p></div>
       </div>
       <p class="src">المصدر: الإدارة المركزية للإحصاء؛ مركز التجارة الدولية (ITC) – خريطة إمكانات التصدير؛ لجنة تقديرات المحاصيل في جنوب أفريقيا</p>
     </section>
@@ -994,19 +998,20 @@ const STEPS=[  // short version: key slides only
  ['T',['t1','t2']],
  ['NEED1',['NA1','NA2'],'التحدي والمبادرة'],['NEED1',['NA3'],'',0,['NA3']],
  ['A',['A1','A2','A3','A4'],'التبادل التجاري'],
+ ['J',['J1'],'الاتفاقيات'],
  ['C',['C1'],'أهم المورّدين'],['C',['C2'],'',0,['C2']],
  
  ['E',['E1','E2'],'الأغنام الحية'],['E',['E3'],'',0,['E3']],
  ['F',['F1','Ff'],'البدائل'],['F',['F2'],'',0,['F2']],
  ['GM',['GM1'],'القدرة التوريدية'],['GM',['GM2']],['G',['G1','Gf']],
  ['H',['Hs1'],'الفرص العاجلة'],['H',['Hs2']],['H',['Hs3']],['H',['H1','H2','H3']],
- ['FEED1',['FA1'],'الأعلاف'],
- ['FEED2',['FEED2s1']],['FEED2',['FEED2s2']],['FEED2',['FEED2s3']],['FEED2',['FEED2s4']],['FEED2',['FB1']],
+ ['FEED1',['FA0'],'الأعلاف'],['FEED1',['FA1']],
+ ['FEED2',['FEED2s1']],['FEED2',['FEED2s2']],['FEED2',['FEED2s3']],['FEED2',['FB1']],
  ['map',['routes'],'مسارات التوريد'],
 
  ['NEED2',['NB1'],'الاحتياجات حسب السلعة'],
  ['I',['Is1'],'النفاذ إلى السوق'],['I',['Is2']],['I',['Is3']],['I',['I1','I2','I3']],
- ['J',['J1'],'الاتفاقيات'],
+
  ['Z1',['Z1a'],'جنوب أفريقيا'],['Z1',['Z1b'],'',0,['Z1b']],
  ['N',['S1'],'التوصيات'],['N',['S2']],['N',['S3']],['N',['S4']],['N',['S5']],['N',['S6']],['N',['N1','N2','N3','N4','N5','N6']],
  ['END2',['end'],'الختام']
