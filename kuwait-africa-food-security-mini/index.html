@@ -484,6 +484,14 @@ body.mobile .qq p{font-size:20px!important}
 #A{gap:16px!important}
 
 #J svg[data-k="J1"]{margin-top:30px}
+
+.ftrow{gap:20px!important;flex:none!important}.ftrow .kpi{padding:14px 24px;gap:2px}.ftrow .kpi .n{font-size:48px}.ftrow .kpi .l{font-size:20px}.ftrow .kpi .c{font-size:17px;line-height:1.5}
+#A .row:not(.ftrow) .kpi{padding:16px 26px}#A .row:not(.ftrow) .kpi .n{font-size:54px}
+
+.kfleg{flex:1;display:flex;flex-direction:column;gap:9px}
+.kfleg div{display:flex;align-items:center;gap:14px;font:500 24px var(--body);color:var(--ink);direction:rtl}
+.kfleg i{width:20px;height:20px;flex:none}.kfleg span{flex:1}.kfleg em{font-style:normal;color:var(--mute);min-width:80px;text-align:left}.kfleg b{min-width:80px;text-align:left;color:var(--gold2)}
+.kfleg div.hl span{color:var(--gold2);font-weight:700}
 </style>
 
 <div id="stage" aria-live="polite">
@@ -614,8 +622,8 @@ body.mobile .qq p{font-size:20px!important}
     <!-- A TRADE -->
     <section class="sc" id="A" data-no="01" style="left:4700px;top:450px;transform:translate(-50%,-50%);gap:22px">
       <div class="eb">التبادل التجاري مع 44 دولة أفريقية غير عربية <span>Trade Exchange</span></div>
-      <h2>مصدر رئيسي لواردات الكويت من <em>اللحوم والفواكه</em></h2>
-      <div class="ftot" data-k="A0"><span class="fl1">إجمالي واردات الكويت الغذائية</span><span><b>2,042.6</b> مليون د.ك · 2025 <small>(⁦15.7%⁩ من إجمالي الواردات)</small></span><span class="sep"></span><span><b>876.6</b> مليون د.ك · النصف الأول 2026</span></div>
+      <h2>مصدر رئيسي لواردات الكويت <em>الغذائية</em></h2>
+      <div class="row ftrow"><div class="kpi g" data-k="A0" style="flex:1.6"><span class="l">إجمالي واردات الكويت من الغذاء والأعلاف · 2025</span><span class="n">2,023.5</span><span class="c">مليون د.ك · ⁦15.5%⁩ من إجمالي الواردات</span></div><div class="kpi" data-k="A0" style="flex:1"><span class="l">النصف الأول 2026</span><span class="n">869.2</span><span class="c">مليون د.ك · غذاء وأعلاف</span></div></div>
       <div class="row">
         <div class="kpi" data-k="A1"><span class="l">الواردات منها 2025</span><span class="n">108.38</span><span class="c">مليون د.ك · ⁦0.8%⁩ من واردات الكويت</span></div>
         <div class="kpi t" data-k="A2"><span class="l">الصادرات غير النفطية إليها</span><span class="n">18.49</span><span class="c">مليون د.ك</span></div>
@@ -623,7 +631,7 @@ body.mobile .qq p{font-size:20px!important}
       </div>
       <svg data-k="A4" id="trend" viewBox="0 -36 1408 270" width="1408" height="250" aria-label="الواردات من الدول الأفريقية غير العربية 2015-2025 ثم النصف الأول 2026"></svg>
       <div class="callout r" data-k="A5">النصف الأول 2026: الواردات <b class="num">28.23</b> مليون د.ك، بتراجع <b>⁦46.5%⁩</b> عن النصف الأول 2025 (تراجع ⁦47.1%⁩ في الربع الأول و⁦45.8%⁩ في الربع الثاني)، بالتزامن مع اضطراب الملاحة في مضيق هرمز.</div>
-      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية، الربع الثاني 2026 (الواردات حسب الفصول 1–23)؛ قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع · بيانات 2025 و2026 أولية</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء · بيانات 2025 و2026 أولية</p>
     </section>
 
     <!-- B MIX -->
@@ -743,7 +751,7 @@ body.mobile .qq p{font-size:20px!important}
       <div class="eb">الأعلاف <span>Feed &amp; Fodder</span></div>
       <h2>الأعلاف أساس الإنتاج المحلي من الدواجن والمواشي، ومصادرها <em>مركّزة</em> خارج أفريقيا</h2>
       <div class="row" style="align-items:center;gap:40px"><div data-k="FA0" class="pwrap" style="flex:1.4"><svg class="pie" viewBox="0 0 300 300" width="270" height="270" style="flex:none"><path d="M150.00,10.00 A140,140 0 0 1 255.60,241.92 L211.85,203.84 A82,82 0 0 0 150.00,68.00 Z" fill="#B39020" stroke="#0B193A" stroke-width="2"/><path d="M255.60,241.92 A140,140 0 0 1 11.72,171.90 L69.01,162.83 A82,82 0 0 0 211.85,203.84 Z" fill="#D4B85A" stroke="#0B193A" stroke-width="2"/><path d="M11.72,171.90 A140,140 0 0 1 72.77,33.23 L104.77,81.61 A82,82 0 0 0 69.01,162.83 Z" fill="#E07A6B" stroke="#0B193A" stroke-width="2"/><path d="M72.77,33.23 A140,140 0 0 1 150.00,10.00 L150.00,68.00 A82,82 0 0 0 104.77,81.61 Z" fill="#9ED9C9" stroke="#0B193A" stroke-width="2"/><text x="150" y="150" text-anchor="middle" font-size="44" font-weight="700" fill="#F0DB93" font-family="Almarai,Tahoma,sans-serif">101.01</text><text x="150" y="188" text-anchor="middle" font-size="24" fill="#C9D1DE" font-family="Almarai,Tahoma,sans-serif" direction="rtl">مليون د.ك</text></svg><div class="pleg"><div><i style="background:#B39020"></i><span>أعلاف محضرة ومخلفات صناعة الأغذية</span><b>⁦36.4%⁩</b></div><div><i style="background:#D4B85A"></i><span>الشعير</span><b>⁦36.1%⁩</b></div><div><i style="background:#E07A6B"></i><span>الذرة الصفراء</span><b>⁦18.2%⁩</b></div><div><i style="background:#9ED9C9"></i><span>الأعلاف والبرسيم والتبن</span><b>⁦9.3%⁩</b></div></div></div><div class="kpi g" data-k="FA0" style="flex:1"><span class="l">حجم سوق الأعلاف في الكويت</span><span class="n">101.01</span><span class="c">مليون د.ك · واردات 2025 من الأعلاف المحضرة والشعير والذرة الصفراء والبرسيم والتبن</span></div></div><div class="row"><div class="kpi" data-k="FA1"><span class="l">أعلاف محضرة · ⁦36.4%⁩</span><span class="n">36.73</span><span class="c">مليون د.ك · بقايا صناعة الأغذية وأغذية محضرة للحيوانات</span></div><div class="kpi g" data-k="FA1"><span class="l">الشعير · ⁦36.1%⁩</span><span class="n">36.46</span><span class="c">مليون د.ك · رومانيا ⁦42.0%⁩</span></div><div class="kpi r" data-k="FA1"><span class="l">الذرة الصفراء · ⁦18.2%⁩</span><span class="n">18.38</span><span class="c">مليون د.ك · الأرجنتين ⁦98.1%⁩</span></div><div class="kpi t" data-k="FA1"><span class="l">الأعلاف والبرسيم والتبن · ⁦9.3%⁩</span><span class="n">9.44</span><span class="c">مليون د.ك · حصة جنوب أفريقيا ⁦2.6%⁩ فقط</span></div></div>
-      <p class="src">المصدر: الإدارة المركزية للإحصاء – إحصاءات التجارة الخارجية · واردات 2025، بيانات أولية · الأعلاف المحضرة: الفصل 23</p>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء · بيانات 2025 أولية</p>
     </section>
 
     <!-- FEED2 FEED OPPORTUNITIES -->
@@ -769,6 +777,17 @@ body.mobile .qq p{font-size:20px!important}
         <div class="card t" data-k="I3"><h3>دور وزارة التجارة والصناعة</h3><p>التنسيق مع غرفة تجارة وصناعة الكويت · الإشراف على السوق والأسعار · إدارة المخزون الاستراتيجي والتموين · متابعة الاستيراد والإمداد لضمان تدفق السلع الغذائية · متابعة العلاقات التجارية الدولية وإحصاءات التجارة الخارجية</p></div>
       </div>
       <div class="callout" data-k="I4">التسلسل: البروتوكول البيطري والزيارة الفنية ← شحنات تجريبية ← إتاحة الاستيراد للتجار</div>
+    </section>
+
+    <!-- KFM KUWAIT FOOD IMPORT MIX -->
+    <section class="sc" id="KFM" data-no="" style="left:-10900px;top:1480px;transform:translate(-50%,-50%)">
+      <div class="eb">تركيبة واردات الكويت الغذائية 2025 <span>Kuwait Food &amp; Feed Imports</span></div>
+      <h2>واردات الكويت من الغذاء والأعلاف <em>2,023.5 مليون د.ك</em> في 2025</h2>
+      <div class="row" data-k="KF1" style="align-items:center;gap:60px">
+        <svg viewBox="0 0 300 300" width="430" height="430" style="flex:none"><path d="M150.00,10.00 A140,140 0 0 1 284.44,110.94 L232.59,126.01 A86,86 0 0 0 150.00,64.00 Z" fill="#D4B85A" stroke="#0B193A" stroke-width="2"><title>لحوم وأسماك ومحضراتها 20.5%</title></path><path d="M284.44,110.94 A140,140 0 0 1 264.29,230.86 L220.21,199.67 A86,86 0 0 0 232.59,126.01 Z" fill="#F0DB93" stroke="#0B193A" stroke-width="2"><title>محضرات غذائية ومشروبات 14.3%</title></path><path d="M264.29,230.86 A140,140 0 0 1 171.90,288.28 L163.45,234.94 A86,86 0 0 0 220.21,199.67 Z" fill="#9AA6BF" stroke="#0B193A" stroke-width="2"><title>ألبان وبيض وعسل 12.7%</title></path><path d="M171.90,288.28 A140,140 0 0 1 82.55,272.68 L108.57,225.36 A86,86 0 0 0 163.45,234.94 Z" fill="#B39020" stroke="#0B193A" stroke-width="2"><title>سكر وكاكاو وبن وشاي 10.5%</title></path><path d="M82.55,272.68 A140,140 0 0 1 22.95,208.81 L71.96,186.13 A86,86 0 0 0 108.57,225.36 Z" fill="#E07A6B" stroke="#0B193A" stroke-width="2"><title>حبوب ومنتجات مطاحن 10.1%</title></path><path d="M22.95,208.81 A140,140 0 0 1 11.10,132.45 L64.68,139.22 A86,86 0 0 0 71.96,186.13 Z" fill="#9ED9C9" stroke="#0B193A" stroke-width="2"><title>فواكه 8.9%</title></path><path d="M11.10,132.45 A140,140 0 0 1 35.71,69.14 L79.79,100.33 A86,86 0 0 0 64.68,139.22 Z" fill="#5FA89A" stroke="#0B193A" stroke-width="2"><title>محضرات الحبوب والمخابز 7.8%</title></path><path d="M35.71,69.14 A140,140 0 0 1 66.29,37.78 L98.58,81.07 A86,86 0 0 0 79.79,100.33 Z" fill="#2E7D6E" stroke="#0B193A" stroke-width="2"><title>خضر 5.0%</title></path><path d="M66.29,37.78 A140,140 0 0 1 96.83,20.49 L117.34,70.44 A86,86 0 0 0 98.58,81.07 Z" fill="#55617D" stroke="#0B193A" stroke-width="2"><title>زيوت ودهون 4.0%</title></path><path d="M96.83,20.49 A140,140 0 0 1 127.23,11.86 L136.01,65.15 A86,86 0 0 0 117.34,70.44 Z" fill="#F0A898" stroke="#0B193A" stroke-width="2"><title>أعلاف وبذور زيتية 3.6%</title></path><path d="M127.23,11.86 A140,140 0 0 1 150.00,10.00 L150.00,64.00 A86,86 0 0 0 136.01,65.15 Z" fill="#3C4A6B" stroke="#0B193A" stroke-width="2"><title>حيوانات حية ومنتجات حيوانية 2.6%</title></path><text x="150" y="150" text-anchor="middle" font-size="40" font-weight="700" fill="#F0DB93" font-family="Almarai,Tahoma,sans-serif">2,023.5</text><text x="150" y="184" text-anchor="middle" font-size="21" fill="#C9D1DE" font-family="Almarai,Tahoma,sans-serif" direction="rtl">مليون د.ك</text></svg>
+        <div class="kfleg"><div><i style="background:#D4B85A"></i><span>لحوم وأسماك ومحضراتها</span><em>415.0</em><b>⁦20.5%⁩</b></div><div><i style="background:#F0DB93"></i><span>محضرات غذائية ومشروبات</span><em>288.9</em><b>⁦14.3%⁩</b></div><div><i style="background:#9AA6BF"></i><span>ألبان وبيض وعسل</span><em>257.0</em><b>⁦12.7%⁩</b></div><div><i style="background:#B39020"></i><span>سكر وكاكاو وبن وشاي</span><em>213.2</em><b>⁦10.5%⁩</b></div><div class="hl"><i style="background:#E07A6B"></i><span>حبوب ومنتجات مطاحن</span><em>203.4</em><b>⁦10.1%⁩</b></div><div><i style="background:#9ED9C9"></i><span>فواكه</span><em>180.1</em><b>⁦8.9%⁩</b></div><div><i style="background:#5FA89A"></i><span>محضرات الحبوب والمخابز</span><em>157.9</em><b>⁦7.8%⁩</b></div><div><i style="background:#2E7D6E"></i><span>خضر</span><em>100.5</em><b>⁦5.0%⁩</b></div><div><i style="background:#55617D"></i><span>زيوت ودهون</span><em>81.5</em><b>⁦4.0%⁩</b></div><div class="hl"><i style="background:#F0A898"></i><span>أعلاف وبذور زيتية</span><em>72.8</em><b>⁦3.6%⁩</b></div><div><i style="background:#3C4A6B"></i><span>حيوانات حية ومنتجات حيوانية</span><em>53.1</em><b>⁦2.6%⁩</b></div></div>
+      </div>
+      <p class="src">المصدر: الإدارة المركزية للإحصاء · بيانات 2025 أولية · القيم بالمليون د.ك</p>
     </section>
 
     <!-- J AGREEMENTS -->
@@ -998,7 +1017,7 @@ const STEPS=[  // short version: key slides only
  ['START',['start'],'البداية'],
  ['T',['t1','t2']],
  ['NEED1',['NA1','NA2'],'التحدي والمبادرة'],['NEED1',['NA3'],'',0,['NA3']],
- ['A',['A0','A1','A2','A3','A4'],'التبادل التجاري'],
+ ['A',['A0','A1','A2','A3','A4'],'التبادل التجاري'],['KFM',['KF1']],
  ['J',['J1'],'الاتفاقيات'],
  ['C',['C1'],'أهم المورّدين'],['C',['C2'],'',0,['C2']],
  
