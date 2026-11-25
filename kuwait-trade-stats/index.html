@@ -75,6 +75,16 @@ select{font:15px Almarai,sans-serif;min-height:44px;padding:0 10px;border-radius
 .itc dt{font-size:13px;color:var(--mut)}.itc dd{margin:0;font-weight:800;font-size:20px}
 .note{font-size:13px;color:var(--mut);margin-top:10px}
 .copy{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 16px;border-radius:10px;border:0;background:var(--sage);color:#fff;cursor:pointer}
+.cur{display:inline-flex;gap:0;margin-inline-start:8px;vertical-align:middle}.cur button{font:700 13px Almarai,sans-serif;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}.cur button:first-child{border-radius:0 8px 8px 0}.cur button:last-child{border-radius:8px 0 0 8px}.cur button[aria-pressed=true]{background:var(--navy);color:var(--bg);border-color:var(--navy)}
+.lead{margin:12px 0 0;font-size:16px;line-height:1.8;background:var(--panel);border-inline-start:5px solid var(--sage);padding:10px 14px;border-radius:8px}
+.agr{margin-top:8px;font-size:14px;color:var(--mut)}.agr b{color:var(--ink)}
+.k .mp{display:block;margin-top:4px;color:var(--ink);font-weight:700;font-size:12.5px;white-space:normal}
+.inds{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:8px}.inds div{background:var(--panel);border-radius:10px;padding:10px 12px}.inds small{display:block;color:var(--mut);font-size:13px}.inds b{font-size:18px;font-weight:800}
+.ibs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:12px;margin-top:10px}.ib{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}.ib h4{margin:0;font-size:16px}.ib>small{color:var(--mut);font-size:13px}.ib.food{margin-top:12px;border-color:var(--mint)}
+.bar2{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:4px 0 8px}.bar2 i{display:block;height:100%;background:var(--mint)}
+.pr{font-size:14px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(18em,1fr));gap:16px}
+.rep h4{margin:14px 0 6px}.rep ul,.rep ol{margin:4px 0;padding-inline-start:20px}.rep p{margin:4px 0 8px;line-height:1.8}
+tr.hl td{background:var(--panel);font-weight:700}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
@@ -96,16 +106,20 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
 </header>
 <main>
   <section id="vEnt">
-    <div class="head"><div><h2 id="nm">…</h2><div class="en" id="nmEn"></div></div><div class="unit" id="unit"></div></div>
+    <div class="head"><div><h2 id="nm">…</h2><div class="en" id="nmEn"></div></div><div class="unit"><span id="unit"></span> <span class="cur" role="group" aria-label="العملة"><button id="cKd" aria-pressed="true">د.ك</button><button id="cUsd" aria-pressed="false">دولار</button></span> <span class="cur" role="group" aria-label="الوحدة"><button id="uM" aria-pressed="true">مليون</button><button id="uK" aria-pressed="false">ألف</button></span></div></div>
+    <p class="lead hide" id="lead"></p>
+    <div class="agr hide" id="agr"></div>
     <div class="kpis" id="kpis"></div>
-    <div class="grid">
+    <div class="card hide" id="ind"></div>
+    <div class="card itc hide" id="itc" style="margin-top:16px"></div>
+    <div class="card hide" id="ctp" style="margin-top:16px"></div>
+    <div class="card rep hide" id="rep" style="margin-top:16px"></div>
+    <div class="grid" style="margin-top:16px">
       <div class="card"><h3 id="cTitle">التبادل التجاري السنوي 2015–2025</h3><div class="fig" id="fY"></div>
         <div class="lg"><span style="--c:var(--mint)">الصادرات</span><span style="--c:var(--navy)">الواردات</span><span style="--c:var(--sage)">الميزان التجاري</span></div></div>
       <div class="card"><h3>ربعياً 2025–2026</h3><div class="fig sm" id="fQ"></div>
         <div class="lg"><span style="--c:var(--mint)">الصادرات</span><span style="--c:var(--navy)">الواردات</span></div></div>
     </div>
-    <div class="card hide" id="ctp" style="margin-top:16px"></div>
-    <div class="card itc hide" id="itc" style="margin-top:16px"></div>
     <div class="card" style="margin-top:16px"><h3>الجدول التفصيلي</h3><div class="scroll"><table id="tbl"></table></div></div>
     <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="copy" id="cp">نسخ ملخص البيانات</button><span class="note" id="cpMsg"></span></div>
   </section>
@@ -138,13 +152,11 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
 {
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let D=null,META=null,TOT={},C=[],G=[],BY={},cur=null,HS=[],SITC=null;
+let D=null,META=null,TOT={},C=[],G=[],BY={},cur=null,HS=[],SITC=null,H4N={};
 const Y=['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
 const QL={'2025-Q1':'ر1 2025','2025-Q2':'ر2 2025','2025-Q3':'ر3 2025','2025-Q4':'ر4 2025','2026-Q1':'ر1 2026','2026-Q2':'ر2 2026','2026-Q3':'ر3 2026','2026-Q4':'ر4 2026'};
 const fmtN=(v,d)=>v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 let U={div:1000,lab:'مليون د.ك',d:2};
-function unitFor(max){U=max>=10000?{div:1000,lab:'مليون د.ك',d:2}:{div:1,lab:'ألف د.ك',d:1};}
-const f=v=>v==null?'–':fmtN(v/U.div,U.d);
 const pct=(a,b)=>b?((a-b)/Math.abs(b))*100:null;
 const g=(o,k)=>o&&o[k]?o[k]:0;
 function quarters(){return META.periods.filter(p=>p.includes('-Q'));}
@@ -155,7 +167,7 @@ function svgBars(el,labels,series,opts){
     const pad={l:8,r:52,t:14,b:28},iw=W-pad.l-pad.r,ih=H-pad.t-pad.b;
     let mx=0,mn=0;series.forEach(s=>s.v.forEach(v=>{mx=Math.max(mx,v);mn=Math.min(mn,v);}));if(mx===0&&mn===0)mx=1;
     const y=v=>pad.t+ih*(mx-v)/(mx-mn),n=labels.length,bw=iw/n,ns=series.filter(s=>!s.line).length,gw=Math.min(bw*0.8,60),sw=gw/ns;
-    let o='';const ticks=4;for(let i=0;i<=ticks;i++){const v=mn+(mx-mn)*i/ticks,yy=y(v);o+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${yy}" y2="${yy}" stroke="var(--line)"/><text x="${W-pad.r+6}" y="${yy+4}" text-anchor="start">${esc(fmtN(v/U.div,v/U.div>=100?0:1))}</text>`;}
+    let o='';const ticks=4;for(let i=0;i<=ticks;i++){const v=mn+(mx-mn)*i/ticks,yy=y(v);o+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${yy}" y2="${yy}" stroke="var(--line)"/><text x="${W-pad.r+6}" y="${yy+4}" text-anchor="start">${esc(fmtN(v*(U.k||1)/U.div,v*(U.k||1)/U.div>=100?0:(U.div>1?2:1)))}</text>`;}
     if(mn<0)o+=`<line x1="${pad.l}" x2="${W-pad.r}" y1="${y(0)}" y2="${y(0)}" stroke="var(--grey)"/>`;
     // rtl: first label on the right
     labels.forEach((l,i)=>{const cx=W-pad.r-bw*(i+.5);let k=0;
@@ -167,33 +179,73 @@ function svgBars(el,labels,series,opts){
 }
 function show(v){['vEnt','vTop','vGr','vPr'].forEach(id=>$('#'+id).classList.toggle('hide',id!==v));
   $('#tKw').setAttribute('aria-pressed',v==='vEnt'&&cur&&cur.kw?'true':'false');$('#tTop').setAttribute('aria-pressed',v==='vTop');$('#tGr').setAttribute('aria-pressed',v==='vGr');$('#tPr').setAttribute('aria-pressed',v==='vPr');}
+let CUR='kd',UNIT='m';const RATE=3.21,UK=0.3075;
+function unitFor(max){const usd=CUR==='usd',c=usd?'دولار':'د.ك';U=UNIT==='m'?{div:1000,lab:'مليون '+c,d:2}:{div:1,lab:'ألف '+c,d:1};U.k=usd?RATE:1;}
+const f=v=>{if(v==null)return '–';const z=v*(U.k||1)/U.div;return z!==0&&Math.abs(z)<0.005?(z<0?'−':'')+'<0.01':fmtN(z,U.d);};
+const mv=kd=>CUR==='usd'?kd/UK:kd; // ITC / Comtrade values stored in million KD
+const MU=()=>CUR==='usd'?'مليون دولار':'مليون د.ك';
+const pc=(v,d=2)=>v==null||!isFinite(v)?'–':fmtN(v,d)+'%';
+function rankOf(e,key,L){const list=C.filter(c=>(key==='m'||c.id!=='603')&&g(c[key],L)>0).map(c=>[c.id,g(c[key],L)]).sort((a,b)=>b[1]-a[1]);const r=list.findIndex(z=>z[0]===e.id);return r>=0?r+1:null;}
 function render(e){cur=e;show('vEnt');
   const all=[...Y,...quarters()];let mx=0;all.forEach(p=>{mx=Math.max(mx,g(e.x,p),g(e.m,p));});unitFor(mx);
-  $('#nm').textContent=e.ar;$('#nmEn').textContent=e.en;$('#unit').textContent='القيم بال'+(U.lab.startsWith('مليون')?'مليون':'ألف')+' دينار كويتي';
-  const L='2025',x=g(e.x,L),m=g(e.m,L),Q=ytd(),sx=Q.cur.reduce((a,p)=>a+g(e.x,p),0),sm=Q.cur.reduce((a,p)=>a+g(e.m,p),0),px=Q.prev.reduce((a,p)=>a+g(e.x,p),0),pm=Q.prev.reduce((a,p)=>a+g(e.m,p),0);
-  const ch=(a,b)=>{const c=pct(a,b);return c==null?'':`<i class="${c>=0?'up':'dn'}">${c>=0?'▲':'▼'} ${fmtN(Math.abs(c),1)}% عن ${Q.lab} 2025</i>`;};
-  let rankTxt='';if(!e.kw&&!e.id.startsWith('g')){const r=C.filter(c=>c.id!=='603').map(c=>[c.id,g(c.x,L)+g(c.m,L)]).sort((a,b)=>b[1]-a[1]).findIndex(z=>z[0]===e.id);if(r>=0)rankTxt=`<div class="k"><small>الترتيب بين الشركاء 2025</small><b>${r+1}</b><small>حصة ${fmtN((x+m)/(TOT[L].x+TOT[L].m)*100,2)}% من إجمالي التبادل</small></div>`;}
-  $('#kpis').innerHTML=`<div class="k"><small>الصادرات 2025</small><b>${f(x)}</b>${ch(x,g(e.x,'2024')).replace(Q.lab+' 2025','2024')}</div>
-  <div class="k"><small>الواردات 2025</small><b>${f(m)}</b>${ch(m,g(e.m,'2024')).replace(Q.lab+' 2025','2024')}</div>
-  <div class="k"><small>الميزان التجاري 2025</small><b class="${x-m>=0?'up':'dn'}">${f(x-m)}</b><small>${x-m>=0?'فائض':'عجز'}</small></div>
-  <div class="k"><small>التبادل ${Q.lab} 2026</small><b>${f(sx+sm)}</b>${ch(sx+sm,px+pm)}</div>${rankTxt}`;
+  const isC=!e.kw&&!e.id.startsWith('g');
+  $('#nm').textContent=e.ar;$('#nmEn').textContent=e.en;$('#unit').textContent='القيم بال'+U.lab.replace(' ',' ').replace('د.ك','دينار كويتي');
+  $('#cKd').setAttribute('aria-pressed',CUR==='kd');$('#cUsd').setAttribute('aria-pressed',CUR==='usd');$('#uM').setAttribute('aria-pressed',UNIT==='m');$('#uK').setAttribute('aria-pressed',UNIT==='k');
+  const L='2025',x=g(e.x,L),m=g(e.m,L),x0=g(e.x,'2024'),m0=g(e.m,'2024'),Q=ytd(),sx=Q.cur.reduce((a,p)=>a+g(e.x,p),0),sm=Q.cur.reduce((a,p)=>a+g(e.m,p),0),px=Q.prev.reduce((a,p)=>a+g(e.x,p),0),pm=Q.prev.reduce((a,p)=>a+g(e.m,p),0);
+  const ch=(a,b,lab)=>{const c=pct(a,b);return c==null||!isFinite(c)?'':`<i class="${c>=0?'up':'dn'}">${c>=0?'▲':'▼'} ${fmtN(Math.abs(c),1)}% ${lab}</i>`;};
+  const vg=pct(x+m,x0+m0);
+  // lead sentence (as in the country sheet)
+  const ld=$('#lead');if(isC&&(x+m)>0){ld.classList.remove('hide');ld.innerHTML=`بلغ حجم التبادل التجاري بين دولة الكويت و${esc(e.ar)} خلال عام 2025 نحو <b>${f(x+m)}</b> ${U.lab}${vg!=null&&isFinite(vg)?`، بنسبة ${vg>=0?'ارتفاع':'انخفاض'} قدرها ${fmtN(Math.abs(vg),1)}% مقارنة بعام 2024`:''}، وسجّل الميزان التجاري ${x-m>=0?'فائضاً':'عجزاً'} قدره <b>${f(Math.abs(x-m))}</b> ${U.lab}.`;}else ld.classList.add('hide');
+  const ag=$('#agr');if(isC){ag.classList.remove('hide');ag.innerHTML=e.rep&&e.rep.agr?'<b>الاتفاقيات:</b> '+esc(e.rep.agr):e.agr?'<b>الاتفاقيات:</b> توجد اتفاقية ثنائية مع دولة الكويت ضمن ملفات الاتفاقيات (الدليل الاقتصادي).':'<b>الاتفاقيات:</b> لا توجد اتفاقيات ثنائية مسجّلة ضمن ملفات الاتفاقيات.';}else ag.classList.add('hide');
+  const t4=e.top4||{},main=k=>t4[k]&&t4[k][0]?`<small class="mp">أهم سلعة: ${esc(H4N[t4[k][0].hs]||t4[k][0].hs)}</small>`:'';
+  $('#kpis').innerHTML=`<div class="k"><small>الصادرات 2025</small><b>${f(x)}</b>${ch(x,x0,'عن 2024')}${main('x')}</div>
+  <div class="k"><small>الواردات 2025</small><b>${f(m)}</b>${ch(m,m0,'عن 2024')}${main('m')}</div>
+  <div class="k"><small>الميزان التجاري 2025</small><b class="${x-m>=0?'up':'dn'}">${f(x-m)}</b><small>${x-m>=0?'فائض':'عجز'}${isC?(x-m>=0?' لصالح الكويت':' لصالح '+esc(e.ar)):''}</small></div>
+  <div class="k"><small>حجم التبادل 2025</small><b>${f(x+m)}</b>${ch(x+m,x0+m0,'عن 2024')}</div>
+  <div class="k"><small>التبادل ${Q.lab} 2026</small><b>${f(sx+sm)}</b>${ch(sx+sm,px+pm,'على أساس سنوي')}</div>`;
+  // key indicators
+  const ind=$('#ind');if(isC){const T=TOT[L],ri=rankOf(e,'m',L),rx=rankOf(e,'x',L),ra=(()=>{const r=C.filter(c=>c.id!=='603').map(c=>[c.id,g(c.x,L)+g(c.m,L)]).sort((a,b)=>b[1]-a[1]).findIndex(z=>z[0]===e.id);return r>=0?r+1:null;})();
+    const v15=g(e.x,'2015')+g(e.m,'2015'),cagr=v15>0&&(x+m)>0?(Math.pow((x+m)/v15,1/10)-1)*100:null;
+    let hy='',hv=-1;Y.forEach(p=>{const v=g(e.x,p)+g(e.m,p);if(v>hv){hv=v;hy=p;}});
+    const items=[['ترتيبها بين مصادر الواردات',ri?'المرتبة '+ri:'–'],['حصتها من إجمالي واردات الكويت',pc(m/T.m*100)],
+      ['ترتيبها بين وجهات الصادرات غير النفطية',rx?'المرتبة '+rx:'–'],['حصتها من الصادرات الكويتية غير النفطية',pc(x/(T.nonoil+T.rex)*100)],
+      ['نسبة تغطية الصادرات للواردات',m?pc(x/m*100,1):'–'],[`حجم التبادل في ${Q.lab} 2026`,(()=>{const c=pct(sx+sm,px+pm);return c==null||!isFinite(c)?'–':(c>=0?'+':'−')+fmtN(Math.abs(c),1)+'% على أساس سنوي';})()],
+      ['متوسط النمو السنوي لحجم التبادل (2015–2025)',cagr==null?'–':(cagr>=0?'+':'−')+fmtN(Math.abs(cagr),1)+'%'],['أعلى حجم تبادل خلال الفترة',hv>0?`${hy} (${f(hv)} ${U.lab})`:'–'],
+      ['الترتيب بين جميع الشركاء (إجمالي التبادل)',ra?'المرتبة '+ra:'–']];
+    ind.classList.remove('hide');ind.style.marginTop='0';ind.innerHTML='<h3>أهم المؤشرات (2025)</h3><div class="inds">'+items.map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('')+'</div><div class="note">الصادرات لا تشمل النفط ومشتقاته وتشمل السلع المعاد تصديرها. المصدر: الإدارة المركزية للإحصاء.</div>';}else ind.classList.add('hide');
+  // ITC supply / export capacity
+  const it=$('#itc');if(isC){it.classList.remove('hide');
+    const blk=(t,ttl,sub)=>`<div class="ib"><h4>${ttl}</h4><small>${sub}</small>`+(t?`<dl><div><dt>القدرة المتوقعة</dt><dd>${fmtN(mv(t.pot),2)}</dd></div><div><dt>غير المستغلة</dt><dd>${fmtN(mv(t.gap),2)}</dd></div><div><dt>نسبة الاستغلال</dt><dd>${t.real}%</dd></div></dl><div class="bar2"><i style="width:${Math.min(t.real,100)}%"></i></div><div class="pr"><b>أهم المنتجات:</b> ${esc(t.prod)}</div>`:'<div class="note">لا تتوفر تقديرات منشورة لدى مركز التجارة الدولية لهذا الاتجاه.</div>')+'</div>';
+    let h=`<h3>القدرة التوريدية والتصديرية المتوقعة – مركز التجارة الدولية (ITC)</h3><div class="note" style="margin-top:0">جميع المنتجات · تقديرات 2031 · ${MU()}</div><div class="ibs">`;
+    h+=blk(e.itc&&e.itc.inn,'القدرة التوريدية لـ'+esc(e.ar)+' إلى دولة الكويت','ما يمكن أن تورّده '+esc(e.ar)+' للكويت')+blk(e.itc&&e.itc.out,'القدرة التصديرية لدولة الكويت إلى '+esc(e.ar),'ما يمكن أن تصدّره الكويت إليها')+'</div>';
+    const fd=(e.rep&&e.rep.food)||e.itcFood;if(fd){h+=`<div class="ib food"><h4>القطاعات الغذائية – القدرة التوريدية لـ${esc(e.ar)} إلى الكويت</h4><small>تقديرات تقرير الأمن الغذائي (2030)</small><dl><div><dt>القدرة المتوقعة</dt><dd>${fmtN(mv(fd.pot),2)}</dd></div><div><dt>غير المستغلة</dt><dd>${fmtN(mv(fd.gap),2)}</dd></div><div><dt>نسبة الاستغلال</dt><dd>${fd.real}%</dd></div><div><dt>المستوى</dt><dd>${esc(fd.lvl)}</dd></div></dl>${e.itcFood?`<div class="pr"><b>أهم الفرص:</b> ${esc(e.itcFood.prod)}</div>`:''}</div>`;}
+    h+='<div class="note">القدرة المتوقعة: ما يمكن توريده وفق قدرة العرض والطلب المتوقع وسهولة التجارة؛ غير المستغلة: الفرق بين القدرة المتوقعة والتجارة الفعلية. تشمل الصادرات الوطنية فقط ولا تُقارن مباشرة بأرقام الإدارة المركزية للإحصاء. المصدر: مركز التجارة الدولية – خريطة إمكانات التصدير.</div>';
+    it.innerHTML=h;}else it.classList.add('hide');
+  // top 5 HS4 products 2025 (UN Comtrade)
+  const cp=$('#ctp');if(isC&&(t4.x||t4.m)){cp.classList.remove('hide');
+    const tb=(Lst,ttl)=>`<div><h4 style="margin:6px 0">${ttl}</h4>`+(Lst?`<div class="scroll"><table><thead><tr><th>#</th><th>HS</th><th>السلعة</th><th class="n">القيمة</th><th class="n">الحصة</th></tr></thead><tbody>${Lst.map((r,i)=>{const v=CUR==='usd'?r.usd:r.kd;return `<tr><td>${i+1}</td><td>${esc(r.hs)}</td><td style="white-space:normal;min-width:10em">${esc(H4N[r.hs]||r.hs)}</td><td class="n">${v<0.01?'<0.01':fmtN(v,2)}</td><td class="n">${fmtN(r.s,1)}%</td></tr>`;}).join('')}</tbody></table></div>`:'<div class="note">لا توجد بيانات.</div>')+'</div>';
+    cp.innerHTML=`<h3>أهم 5 سلع في التبادل مع ${esc(e.ar)} – 2025 · ${MU()}</h3><div class="two">`+tb(t4.m,'أهم 5 سلع مستوردة من '+esc(e.ar))+tb(t4.x,'أهم 5 سلع مصدّرة إلى '+esc(e.ar))+`</div><div class="note">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (UN Comtrade)، بيانات الكويت المُبلّغة لسنة 2025 على مستوى البند الرباعي (HS4)${CUR==='kd'?'، محوّلة من الدولار (1 دولار = 0.3075 د.ك)':''}. الحصة من إجمالي الصادرات أو الواردات مع ${esc(e.ar)}. الصادرات تشمل إعادة التصدير.</div>`;}
+  else if(isC&&e.top){cp.classList.remove('hide');cp.innerHTML='<h3>أهم 5 فصول سلعية – 2024 (مليون د.ك)</h3>'+['x','m'].map(k=>e.top[k]?`<h4>${k==='x'?'صادرات الكويت':'واردات الكويت'}</h4><table><tbody>${e.top[k].map((r,i)=>`<tr><td>${i+1}</td><td style="white-space:normal">${esc(r.hs+' – '+r.n)}</td><td class="n">${fmtN(r.kd,2)}</td><td class="n">${fmtN(r.s,1)}%</td></tr>`).join('')}</tbody></table>`:'').join('')+'<div class="note">المصدر: UN Comtrade 2024.</div>';}
+  else cp.classList.add('hide');
+  // extras from the issued country report
+  const rp=$('#rep');if(isC&&e.rep){const r=e.rep;rp.classList.remove('hide');let h=`<h3>من تقرير ${esc(e.ar)} (صدر ${esc(r.date)})</h3>`;
+    if(r.food&&r.food.txt)h+=`<p>${esc(r.food.txt)}</p>`;
+    if(r.gcc){const mx2=Math.max(...r.gcc.rows.map(z=>z[1]));h+=`<h4>${esc(r.gcc.ttl)}</h4><div class="rank">`+r.gcc.rows.map(z=>`<div class="row" style="cursor:default"><span></span><span class="nm">${esc(z[0])}</span><span class="trk"><i style="width:${z[1]/mx2*100}%;background:${z[0]==='الكويت'?'var(--mint)':'var(--grey)'}"></i></span><span class="v">${fmtN(z[1],2)}</span></div>`).join('')+`</div><div class="note">${esc(r.gcc.note)}</div>`;}
+    if(r.opp)h+=`<h4>أهم الفرص التصديرية لـ${esc(e.ar)} إلى دولة الكويت</h4><div class="scroll"><table><thead><tr><th>#</th><th>الفرصة</th><th>الأساس</th><th>المدى</th></tr></thead><tbody>${r.opp.map((z,i)=>`<tr><td>${i+1}</td><td><b>${esc(z[0])}</b></td><td style="white-space:normal;min-width:14em">${esc(z[1])}</td><td>${esc(z[2])}</td></tr>`).join('')}</tbody></table></div>`;
+    h+='<div class="two">'+(r.transport?`<div><h4>النقل والإمداد</h4><ul>${r.transport.map(z=>`<li>${esc(z)}</li>`).join('')}</ul></div>`:'')+(r.prop?`<div><h4>المقترحات</h4><ol>${r.prop.map(z=>`<li>${esc(z)}</li>`).join('')}</ol></div>`:'')+'</div><div class="note">القيم في هذا القسم بالمليون دينار كويتي كما وردت في التقرير.</div>';
+    rp.innerHTML=h;}else rp.classList.add('hide');
   svgBars($('#fY'),Y,[{n:'الصادرات',c:'var(--mint)',v:Y.map(p=>g(e.x,p))},{n:'الواردات',c:'var(--navy)',v:Y.map(p=>g(e.m,p))},{n:'الميزان',c:'var(--sage)',line:1,v:Y.map(p=>g(e.x,p)-g(e.m,p))}],{aria:'التبادل التجاري السنوي'});
   const qs=quarters();svgBars($('#fQ'),qs.map(q=>QL[q]||q),[{n:'الصادرات',c:'var(--mint)',v:qs.map(p=>g(e.x,p))},{n:'الواردات',c:'var(--navy)',v:qs.map(p=>g(e.m,p))}],{aria:'التبادل الربعي'});
   const row=(lab,p,cls)=>{const a=g(e.x,p),b=g(e.m,p);return `<tr class="${cls||''}"><td>${esc(lab)}</td><td class="n">${f(a)}</td><td class="n">${f(b)}</td><td class="n ${a-b>=0?'up':'dn'}">${f(a-b)}</td><td class="n">${f(a+b)}</td></tr>`;};
-  $('#tbl').innerHTML=`<thead><tr><th>الفترة</th><th class="n">الصادرات</th><th class="n">الواردات</th><th class="n">الميزان</th><th class="n">التبادل</th></tr></thead><tbody>${[...Y].reverse().map(p=>row(p,p)).join('')}${[...qs].reverse().map(p=>row(QL[p]||p,p,'sub')).join('')}</tbody>`;
-  const cp=$('#ctp');if(e.top){cp.classList.remove('hide');const tb=(L,ttl)=>L?`<div style="margin-top:8px"><h4 style="margin:6px 0">${ttl}</h4><div class="scroll"><table><thead><tr><th>م</th><th>الفصل (HS)</th><th class="n">مليون د.ك</th><th class="n">الحصة</th></tr></thead><tbody>${L.map((r,i)=>`<tr><td>${i+1}</td><td style="white-space:normal;min-width:12em">${esc(r.hs+' – '+r.n)}</td><td class="n">${fmtN(r.kd,2)}</td><td class="n">${fmtN(r.s,1)}%</td></tr>`).join('')}</tbody></table></div></div>`:'';
-    cp.innerHTML='<h3>أهم 5 سلع في التبادل مع '+esc(e.ar)+' – 2024</h3>'+tb(e.top.x,'صادرات الكويت')+tb(e.top.m,'واردات الكويت')+'<div class="note">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (UN Comtrade)، بيانات الكويت المُبلّغة لسنة 2024، محوّلة من الدولار (0.3075 د.ك). الصادرات تشمل إعادة التصدير.</div>';}else cp.classList.add('hide');
-    const it=$('#itc');if(e.itc||e.itcFood){it.classList.remove('hide');
-    const blk=(t,ttl,note)=>t?`<div><h4 style="margin:10px 0 4px">${ttl}</h4><dl><div><dt>الإمكانات التصديرية</dt><dd>${fmtN(t.pot,2)}</dd></div><div><dt>غير المستغل</dt><dd>${fmtN(t.gap,2)}</dd></div><div><dt>المتحقق</dt><dd>${t.real}%</dd></div></dl><div>أهم المنتجات: ${esc(t.prod)}</div></div>`:(note?`<div><h4 style="margin:10px 0 4px">${ttl}</h4><div class="note">${esc(note)}</div></div>`:'');
-    let h='<h3>الإمكانات التصديرية – مركز التجارة الدولية (ITC)</h3>';
-    if(e.itc){h+=blk(e.itc.out,'من الكويت إلى '+esc(e.ar))+blk(e.itc.inn,'من '+esc(e.ar)+' إلى الكويت',e.itc.note);
-      h+='<div class="note">جميع المنتجات · تقديرات المركز لسنة 2031 · بالمليون دينار كويتي (تقريبي، 1 دولار = 0.3075 د.ك).</div>';}
-    if(e.itcFood){const t=e.itcFood;h+=`<div><h4 style="margin:14px 0 4px">القطاعات الغذائية فقط – من ${esc(e.ar)} إلى الكويت (تقرير الأمن الغذائي)</h4><dl><div><dt>القدرة المتوقعة</dt><dd>${fmtN(t.pot,2)}</dd></div><div><dt>غير المستغل</dt><dd>${fmtN(t.gap,2)}</dd></div><div><dt>نسبة الاستغلال</dt><dd>${t.real}%</dd></div><div><dt>المستوى</dt><dd>${esc(t.lvl)}</dd></div></dl><div>أهم الفرص: ${esc(t.prod)}</div></div>`;}
-    h+='<div class="note">المصدر: مركز التجارة الدولية (ITC) – خريطة إمكانات التصدير. تشمل التقديرات الصادرات الوطنية فقط ولا تُقارن مباشرة بأرقام الإدارة المركزية للإحصاء.</div>';
-    it.innerHTML=h;}else it.classList.add('hide');
+  const hp=Q.cur.length?`<tr class="hl"><td>${Q.lab} 2026</td><td class="n">${f(sx)}</td><td class="n">${f(sm)}</td><td class="n ${sx-sm>=0?'up':'dn'}">${f(sx-sm)}</td><td class="n">${f(sx+sm)}</td></tr>`:'';
+  $('#tbl').innerHTML=`<thead><tr><th>الفترة</th><th class="n">الصادرات</th><th class="n">الواردات</th><th class="n">الميزان</th><th class="n">التبادل</th></tr></thead><tbody>${hp}${[...Y].reverse().map(p=>row(p,p)).join('')}${[...qs].reverse().map(p=>row(QL[p]||p,p,'sub')).join('')}</tbody>`;
   try{history.replaceState(null,'','#'+(e.kw?'kw':e.id.startsWith('g')?e.id:'c'+e.id));}catch(_){}
 }
-function summary(e){const Q=ytd(),L=[];L.push(e.ar+' ('+e.en+') – بالألف دينار كويتي');Y.forEach(p=>L.push(`${p}: صادرات ${fmtN(g(e.x,p),1)} | واردات ${fmtN(g(e.m,p),1)} | ميزان ${fmtN(g(e.x,p)-g(e.m,p),1)}`));quarters().forEach(p=>L.push(`${QL[p]||p}: صادرات ${fmtN(g(e.x,p),1)} | واردات ${fmtN(g(e.m,p),1)}`));if(e.itc&&e.itc.out)L.push(`ITC 2031 من الكويت (مليون د.ك): إمكانات ${e.itc.out.pot}، غير مستغل ${e.itc.out.gap}، المنتجات: ${e.itc.out.prod}`);if(e.itc&&e.itc.inn)L.push(`ITC 2031 إلى الكويت (مليون د.ك): إمكانات ${e.itc.inn.pot}، غير مستغل ${e.itc.inn.gap}، المنتجات: ${e.itc.inn.prod}`);if(e.top){['x','m'].forEach(f=>{if(e.top[f])L.push((f==='x'?'أهم الصادرات':'أهم الواردات')+' 2024 (Comtrade، مليون د.ك): '+e.top[f].map(r=>r.hs+' '+r.n.split('؛')[0].trim()+' '+r.kd).join(' | '));});}if(e.itcFood)L.push(`ITC قطاعات غذائية إلى الكويت (مليون د.ك): ${e.itcFood.pot}، غير مستغل ${e.itcFood.gap}`);L.push('المصدر: '+META.source);return L.join('\n');}
+function summary(e){const Q=ytd(),Lx=[],u=U.lab;Lx.push(e.ar+' ('+e.en+') – '+u);Y.forEach(p=>Lx.push(`${p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))} | ميزان ${f(g(e.x,p)-g(e.m,p))}`));quarters().forEach(p=>Lx.push(`${QL[p]||p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))}`));
+  const it=e.itc||{};if(it.inn)Lx.push(`القدرة التوريدية لـ${e.ar} إلى الكويت (ITC 2031، ${MU()}): ${fmtN(mv(it.inn.pot),2)}، غير مستغلة ${fmtN(mv(it.inn.gap),2)}، استغلال ${it.inn.real}%، أهم المنتجات: ${it.inn.prod}`);
+  if(it.out)Lx.push(`القدرة التصديرية للكويت إلى ${e.ar} (ITC 2031، ${MU()}): ${fmtN(mv(it.out.pot),2)}، غير مستغلة ${fmtN(mv(it.out.gap),2)}، استغلال ${it.out.real}%، أهم المنتجات: ${it.out.prod}`);
+  const t4=e.top4||{};['m','x'].forEach(k=>{if(t4[k])Lx.push((k==='x'?'أهم 5 سلع مصدّرة':'أهم 5 سلع مستوردة')+` 2025 (UN Comtrade، ${MU()}): `+t4[k].map(r=>`${r.hs} ${H4N[r.hs]||''} ${fmtN(CUR==='usd'?r.usd:r.kd,2)} (${fmtN(r.s,1)}%)`).join(' | '));});
+  Lx.push('المصدر: '+META.source);return Lx.join('\n');}
 function rank(){const p=$('#sP').value,mk=$('#sM').value,n=+$('#sN').value;
   const val=c=>{const x=g(c.x,p),m=g(c.m,p);return mk==='v'?x+m:mk==='x'?x:mk==='m'?m:mk==='b'?x-m:m-x;};
   const list=C.filter(c=>c.id!=='603').map(c=>({c,v:val(c),x:g(c.x,p),m:g(c.m,p)})).filter(r=>r.v>0).sort((a,b)=>b.v-a.v).slice(0,n);const mx=list.length?list[0].v:1;
@@ -223,7 +275,8 @@ $('#rk').addEventListener('click',e=>{const b=e.target.closest('.row');if(b){ren
 $('#gr').addEventListener('click',e=>{const b=e.target.closest('.row');if(b){render(BY[b.dataset.g]);window.scrollTo(0,0);}});
 $('#cp').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summary(cur));$('#cpMsg').textContent='تم النسخ';}catch(_){$('#cpMsg').textContent='تعذّر النسخ في هذا العرض';}});
 window.addEventListener('hashchange',route);
-fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;});
+$('#cKd').onclick=()=>{CUR='kd';render(cur);};$('#cUsd').onclick=()=>{CUR='usd';render(cur);};$('#uM').onclick=()=>{UNIT='m';render(cur);};$('#uK').onclick=()=>{UNIT='k';render(cur);};
+fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;else if(r.t==='hs4n')H4N=r.n;});
   $('#pP').innerHTML=$('#sP').innerHTML;
   $('#sub').textContent='آخر بيانات: '+(QL[META.latest]||META.latest)+' · '+C.length+' دولة · '+G.length+' مجموعة';
   $('#sP').innerHTML=[...Y].reverse().concat(quarters().reverse()).map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
