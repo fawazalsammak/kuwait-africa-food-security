@@ -143,11 +143,49 @@ tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px
 .flowg .am{stroke:#9fb3d9}.flowg .ax{stroke:#D4B85A}
 .brand{display:flex;align-items:center;gap:12px}.brand img{width:54px;height:auto;flex:none;filter:drop-shadow(0 2px 6px #0006)}.brand .min{color:#D4B85A;font-weight:800;font-size:14px;letter-spacing:.2px;border-bottom:1.5px solid #D4B85A55;display:inline-block;padding-bottom:2px;margin-bottom:4px}
 @media(max-width:520px){.brand img{width:44px}.brand .min{font-size:12.5px}}
+
+#intro{position:fixed;inset:0;z-index:100;overflow:auto;color:#fff;background:radial-gradient(60% 45% at 50% 38%,#2a4a8f 0%,#14285a 45%,#0B193A 100%);transition:opacity .6s,transform .6s}
+#intro.out{opacity:0;transform:scale(1.04);pointer-events:none}
+.istars{position:absolute;inset:0;background-image:radial-gradient(#ffffff55 1px,transparent 1.5px),radial-gradient(#ffffff33 1px,transparent 1.5px);background-size:140px 140px,90px 90px;background-position:0 0,45px 60px;opacity:.5;pointer-events:none}
+.iin{position:relative;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px 32px;text-align:center}
+.iemb{width:clamp(80px,14vh,120px);height:auto;filter:drop-shadow(0 0 28px #ffffff40);animation:iup .9s ease both}
+.imin{font-weight:800;font-size:clamp(30px,7vw,48px);margin-top:14px;animation:iup .9s .15s ease both;text-shadow:0 2px 12px #0006}
+.iline{width:min(60%,280px);height:2px;background:#D4B85A;margin:12px 0 10px;animation:igrow 1s .3s ease both;transform-origin:center}
+.ien{color:#D4B85A;font-weight:700;font-size:clamp(13px,2.6vw,17px);direction:ltr;animation:iup .9s .35s ease both}
+.ititle{margin:18px 0 6px;font-size:clamp(18px,4vw,24px);color:#e6ebf3;font-weight:700;animation:iup .9s .5s ease both}
+#imap{width:min(100%,900px);max-height:44vh;height:auto;margin-top:8px}
+#imap{animation:idot 1.2s .4s ease both}
+.iarc{fill:none;stroke:#D4B85A;stroke-width:1.4;stroke-dasharray:4 4;opacity:0;animation:iarc 1s ease forwards,flow 1.6s linear infinite}
+.ibtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px;animation:iup .9s 1s ease both}
+.ibtn{font:800 15px Almarai,sans-serif;min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid #D4B85A;background:#ffffff0d;color:#fff;cursor:pointer}
+.ibtn.main{background:#D4B85A;color:#0B193A}
+@keyframes iup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes igrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes idot{from{opacity:0}to{opacity:1}}
+@keyframes iarc{to{opacity:.85}}
+@media(prefers-reduced-motion:reduce){#intro *{animation:none!important}}
+body.noscroll{overflow:hidden}
+/* header in same theme */
+.top{background:radial-gradient(70% 140% at 80% 0%,#2a4a8f 0%,#14285a 50%,#0B193A 100%)!important;position:relative}
+.top::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff40 1px,transparent 1.5px);background-size:110px 110px;opacity:.35;pointer-events:none}
+.top>*{position:relative}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
 </head>
 <body>
+<div id="intro" role="dialog" aria-label="الصفحة الافتتاحية">
+  <div class="istars"></div>
+  <div class="iin">
+    <img src="emblem.png" alt="شعار دولة الكويت" class="iemb">
+    <div class="imin">وزارة التجارة والصناعة</div>
+    <div class="iline"></div>
+    <div class="ien">Ministry of Commerce &amp; Industry · State of Kuwait</div>
+    <h2 class="ititle">إحصاءات التجارة الخارجية الكويتية</h2>
+    <svg id="imap" viewBox="0 0 1000 520" aria-hidden="true"></svg>
+    <div class="ibtns"><button id="iGo" class="ibtn main">ادخل إلى المنصة</button><button id="iFood" class="ibtn">الأمن الغذائي</button><button id="iOil" class="ibtn">النفط</button></div>
+  </div>
+</div>
 <header class="top">
   <div class="brand"><img src="emblem.png" alt="شعار دولة الكويت" width="54" height="56"><div><div class="min">وزارة التجارة والصناعة</div><h1>إحصاءات التجارة الخارجية الكويتية</h1></div></div>
   <p id="sub">إحصاءات التجارة الخارجية حسب الدولة والمجموعة</p>
@@ -485,6 +523,22 @@ function oil(){show('vOil');const L='2025',T=TOT,o=p=>T[p]?T[p].oil:0,x=p=>T[p]?
   try{history.replaceState(null,'','#oil');}catch(_){}
 }
 
+// ---------- intro ----------
+function intro(){const el=$('#intro');let seen=false;try{seen=sessionStorage.getItem('kwIntro')==='1';}catch(_){}
+  if(seen||location.hash.length>1&&location.hash!=='#kw'){el.remove();return;}
+  document.body.classList.add('noscroll');
+  loadWorld().then(w=>{const L='2025',v={};Object.entries(ISO).forEach(([iso,id])=>{const c=BY[id];if(c)v[iso]=g(c.x,L)+g(c.m,L);});
+    const vals=Object.values(v).filter(x=>x>0).sort((a,b)=>a-b),q=[.5,.75,.9,.97].map(p=>vals[Math.floor(p*(vals.length-1))]);
+    const GL=['#2a4278','#6f6a4a','#a58a3a','#d4b85a','#f3dfa0'];
+    let o='';w.dm.forEach((d,i)=>{const x=v[d[2]]||0,k=x?1+q.filter(t=>x>t).length:0;o+=`<circle cx="${d[0]}" cy="${d[1]}" r="${d[3]?2.3:1.8}" fill="${d[2]==='414'?'#fff':GL[Math.min(k,4)]}"/>`;});
+    const tops=Object.entries(v).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([iso])=>w.c[iso]||w.dots[iso]).filter(Boolean);
+    o+=tops.map((c,i)=>{const k=w.kw,mx=(k.x+c.x)/2,my=Math.min(k.y,c.y)-Math.abs(k.x-c.x)*0.25-20;return `<path d="M${c.x},${c.y} Q${mx},${my} ${k.x},${k.y}" class="iarc" style="animation-delay:${1.6+i*0.15}s"/>`;}).join('');
+    o+=`<circle cx="${w.kw.x}" cy="${w.kw.y}" r="4" fill="none" stroke="#D4B85A" stroke-width="1.5"><animate attributeName="r" values="3;14;3" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="${w.kw.x}" cy="${w.kw.y}" r="3" fill="#fff"/>`;
+    $('#imap').innerHTML=o;});
+  const close=h=>{try{sessionStorage.setItem('kwIntro','1');}catch(_){}el.classList.add('out');document.body.classList.remove('noscroll');setTimeout(()=>el.remove(),700);if(h)location.hash=h;};
+  $('#iGo').onclick=()=>close();$('#iFood').onclick=()=>close('food');$('#iOil').onclick=()=>close('oil');
+}
+
 function rank(){const p=$('#sP').value,mk=$('#sM').value,n=+$('#sN').value;
   const val=c=>{const x=g(c.x,p),m=g(c.m,p);return mk==='v'?x+m:mk==='x'?x:mk==='m'?m:mk==='b'?x-m:m-x;};
   const list=C.filter(c=>c.id!=='603').map(c=>({c,v:val(c),x:g(c.x,p),m:g(c.m,p)})).filter(r=>r.v>0).sort((a,b)=>b.v-a.v).slice(0,n);const mx=list.length?list[0].v:1;
@@ -535,7 +589,7 @@ fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='
   const opts=PER.map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
   $('#sP').innerHTML=opts;$('#pP').innerHTML=opts;
   $('#ft').textContent='المصدر: '+META.source+' تحديث البيانات: '+META.updated+'. تقديرات مركز التجارة الدولية (ITC) معروضة حيث تتوفر.';
-  route();}).catch(()=>{$('#nm').textContent='تعذّر تحميل البيانات';});
+  route();intro();}).catch(()=>{$('#nm').textContent='تعذّر تحميل البيانات';});
 }
 </script>
 </body>
