@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#22095E">
+<meta name="theme-color" content="#0B193A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="تجارة الكويت">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,19 +19,19 @@
    COLOUR white ground, near-black navy ink, mint and sage teal working colours, greys for context
    TYPE Almarai 800 for figures and titles, Almarai 400 for text
    LAYOUT search bar on top; partner title + four figures; chart full width; tables; ITC card; on phones everything stacks */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#120d2c);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e4e0f2,#2c2552);--panel:light-dark(#F1EEFB,#1d1640);--mint:#2EC4DC;--sage:#7B4FD6;--navy:light-dark(#2A1478,#b7a8f0);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1620);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e2e6ea,#253141);--panel:light-dark(#ECEFF5,#16212d);--mint:#D4B85A;--sage:#B39020;--navy:light-dark(#0B193A,#9fb3d9);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.55 Almarai,Tahoma,sans-serif;overflow-x:clip}
-.top{background:linear-gradient(120deg,#22095E 0%,#3A2A96 55%,#4F7FC0 100%);border-bottom:5px solid;border-image:linear-gradient(90deg,#2EC4DC,#7B4FD6,#B05BE0) 1;color:#fff;padding:18px max(4vw,16px) 16px}
+.top{background:linear-gradient(135deg,#0B193A 0%,#173063 70%,#244176 100%);border-bottom:5px solid #D4B85A;color:#fff;padding:18px max(4vw,16px) 16px}
 .top h1{margin:0;font-size:clamp(24px,4vw,34px);font-weight:800;line-height:1.1}
 .top p{margin:4px 0 12px;color:#c9d2e3;font-size:14px}
 .bar{display:flex;gap:8px;flex-wrap:wrap}
 .bar input{flex:1 1 220px;font:16px Almarai,sans-serif;padding:11px 14px;border-radius:10px;border:0;min-height:44px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #8C86D8;background:#ffffff14;color:#fff;cursor:pointer}
-.tabs button[aria-pressed=true]{background:#fff;color:#2A1478;border-color:#fff}
+.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #2d4677;background:#ffffff0d;color:#e6ebf3;cursor:pointer}
+.tabs button[aria-pressed=true]{background:#D4B85A;color:#0B193A;border-color:#D4B85A}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
 #sugg{background:var(--bg);color:var(--ink);border-radius:10px;margin-top:6px;max-height:280px;overflow:auto;display:none;box-shadow:0 6px 18px #0003}
 #sugg button{display:flex;justify-content:space-between;width:100%;text-align:start;padding:10px 14px;border:0;border-bottom:1px solid var(--line);background:none;color:inherit;font:15px Almarai,sans-serif;cursor:pointer;min-height:44px}
@@ -79,7 +79,7 @@ select{font:15px Almarai,sans-serif;min-height:44px;padding:0 10px;border-radius
 .lead{margin:12px 0 0;font-size:16px;line-height:1.8;background:var(--panel);border-inline-start:5px solid var(--sage);padding:10px 14px;border-radius:8px}
 .agr{margin-top:8px;font-size:14px;color:var(--mut)}.agr b{color:var(--ink)}
 .k .mp{display:block;margin-top:4px;color:var(--ink);font-weight:700;font-size:12.5px;white-space:normal}
-.inds{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:8px}.inds div{background:var(--panel);border-radius:10px;padding:10px 12px}.inds small{display:block;color:var(--mut);font-size:13px}.inds b{font-size:18px;font-weight:800}
+.inds{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5em,1fr));gap:8px}.inds div{background:var(--panel);border-radius:10px;padding:10px 12px}.inds small{display:block;color:var(--mut);font-size:13px}.inds b{font-size:18px;font-weight:800}
 .ibs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17em,1fr));gap:12px;margin-top:10px}.ib{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}.ib h4{margin:0;font-size:16px}.ib>small{color:var(--mut);font-size:13px}.ib.food{margin-top:12px;border-color:var(--mint)}
 .bar2{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:4px 0 8px}.bar2 i{display:block;height:100%;background:var(--mint)}
 .pr{font-size:14px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(18em,1fr));gap:16px}
@@ -97,12 +97,46 @@ tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px
 .ctry{cursor:pointer;transition:opacity .15s}.ctry:hover{opacity:.75;stroke:var(--ink);stroke-width:.8}
 .mtip{position:absolute;display:none;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 4px 14px #0003;white-space:nowrap;z-index:2}
 .flowg{display:grid;grid-template-columns:minmax(0,2fr) minmax(12em,1fr);gap:12px;align-items:center}@media(max-width:640px){.flowg{grid-template-columns:1fr}}
-.flowg svg{width:100%;height:auto;display:block;border-radius:10px;background:light-dark(#f6f4fd,#171034)}
+.flowg svg{width:100%;height:auto;display:block;border-radius:10px;background:light-dark(#f7f9fc,#121c27)}
 .arc{fill:none;stroke-linecap:round;stroke-dasharray:6 5;animation:flow 1.6s linear infinite}.ax{stroke:var(--mint)}.am{stroke:var(--navy)}@keyframes flow{to{stroke-dashoffset:-22}}
 @media(prefers-reduced-motion:reduce){.arc{animation:none}}
 .ml{font-family:Almarai,sans-serif;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:.25em}
 .fh{margin:0 0 8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.fh .dk,.fh .dc{width:12px;height:12px;border-radius:50%;display:inline-block}.fh .dk{background:var(--navy)}.fh .dc{background:var(--sage)}.fh .ar{color:var(--mint)}
 .fleg{display:grid;gap:8px}.fleg div{display:flex;align-items:center;gap:8px;font-size:14px;background:var(--panel);border-radius:8px;padding:8px 10px}.fleg i{width:14px;height:14px;border-radius:3px;flex:none}.fleg b{margin-inline-start:auto;font-size:18px}.fleg small{color:var(--mut)}
+
+/* ---- combined layout ---- */
+#vEnt.isK .kpis,#vEnt.isK #lead{display:none!important}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+@media(max-width:820px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bento .t{background:var(--panel);border-radius:22px;padding:16px;position:relative;overflow:hidden;color:inherit;text-decoration:none;min-height:118px;display:block}
+.bento .t small{display:block;color:var(--mut);font-size:13px}.bento .t b{display:block;font-size:clamp(22px,3.2vw,30px);font-weight:800;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.bento .w2{grid-column:span 2}.bento .dark{background:#0B193A;color:#fff}.bento .dark small{color:#b9c6dc}.bento .gold{background:#D4B85A;color:#0B193A}.bento .gold small{color:#4b3d12}
+.bento .dark .up{color:#9fe3b8}.bento .dark .dn{color:#ffa3a3}
+.mini{display:flex;align-items:flex-end;gap:5px;height:56px;margin-top:10px}.mini i{flex:1;background:#D4B85A;border-radius:5px 5px 0 0;min-height:3px}
+.mlab{display:flex;gap:5px;font-size:11px;color:#b9c6dc;margin-top:3px}.mlab span{flex:1;text-align:center}
+.th{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.th b{font-size:16px!important;margin:0!important}.th a{color:var(--sage);font-weight:700;text-decoration:none;font-size:14px}
+.lr{display:grid;grid-template-columns:1.4em 8.5em 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);color:inherit;text-decoration:none;font-size:14px}.lr:last-child{border:0}
+.lr .no{color:var(--sage);font-weight:800}.lr .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lr .tr{height:8px;background:var(--bg);border-radius:4px;overflow:hidden}.lr .tr i{display:block;height:100%;background:var(--navy)}.lr b{font-size:14px!important;margin:0!important}
+.bento .lnk .go{position:absolute;bottom:12px;left:14px;width:30px;height:30px;border-radius:50%;background:#0000000f;display:grid;place-items:center;font-weight:800}.bento .dark .go{background:#ffffff1f}
+.bento .food{background:light-dark(#f3ecd6,#2a2412)}
+/* country header (A) + story (B) */
+#vEnt.isC .head{background:linear-gradient(135deg,#0B193A,#173063 70%,#244176);color:#fff;border-radius:24px;padding:20px 18px 72px;align-items:flex-start;border-bottom:4px solid #D4B85A}
+#vEnt.isC .head .en{color:#b9c6dc}#vEnt.isC .unit{color:#b9c6dc}
+#vEnt.isC .head .cur button{background:#ffffff12;color:#fff;border-color:#ffffff33}#vEnt.isC .head .cur button[aria-pressed=true]{background:#D4B85A;color:#0B193A;border-color:#D4B85A}
+#hstory .rk{display:inline-block;margin-top:8px;background:#D4B85A;color:#0B193A;font-weight:800;font-size:13px;border-radius:999px;padding:3px 12px}
+#hstory p{margin:10px 0 0;color:#e6ebf3;line-height:1.8;font-size:15px;max-width:44em}#hstory b{color:#fff}
+#vEnt.isC #lead{display:none!important}
+#vEnt.isC .kpis{margin-top:-56px;padding:0 10px;position:relative;z-index:1}
+#vEnt.isC .agr{margin:0 0 6px}
+#vEnt.isC .kpis .k{background:var(--bg);box-shadow:0 8px 24px #0b193a22;border-radius:18px}
+.secnav{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 2px;margin:4px 0 12px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);scrollbar-width:none}
+.secnav button{flex:none;font:700 14px Almarai,sans-serif;border:0;background:var(--panel);color:var(--ink);padding:8px 14px;border-radius:999px;min-height:40px;cursor:pointer}.secnav button.on{background:#0B193A;color:#fff}
+/* bottom nav (A) on phones */
+.bnav{display:none}
+@media(max-width:760px){.bnav{display:flex;position:fixed;bottom:0;inset-inline:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+ .bnav button{flex:1;border:0;background:none;color:var(--mut);font:700 11px Almarai,sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px;cursor:pointer}.bnav button i{font-style:normal;font-size:20px;line-height:1}
+ .bnav button.on{color:#0B193A}.bnav button.on i{color:#B39020}
+ .top .tabs{display:none}body{padding-bottom:76px}}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
@@ -126,23 +160,26 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
 <main>
   <section id="vEnt">
     <div class="head"><div><h2 id="nm">…</h2><div class="en" id="nmEn"></div></div><div class="unit"><span id="unit"></span> <span class="cur" role="group" aria-label="العملة"><button id="cKd" aria-pressed="true">د.ك</button><button id="cUsd" aria-pressed="false">دولار</button></span> <span class="cur" role="group" aria-label="الوحدة"><button id="uM" aria-pressed="true">مليون</button><button id="uK" aria-pressed="false">ألف</button></span></div></div>
-    <div class="card hide" id="flow" style="margin-top:12px"></div>
     <p class="lead hide" id="lead"></p>
-    <div class="agr hide" id="agr"></div>
     <div class="kpis" id="kpis"></div>
+    <div class="agr hide" id="agr"></div>
+    <nav class="secnav hide" id="secnav" aria-label="أقسام الصفحة"></nav>
+    <div class="bento hide" id="bento"></div>
     <div class="card hide" id="mapc" style="margin-bottom:16px"></div>
+    <div class="bento hide" id="bento2"></div>
+    <div class="card hide" id="flow" style="margin-bottom:16px"></div>
     <div class="card hide" id="ind"></div>
     <div class="card itc hide" id="itc" style="margin-top:16px"></div>
     <div class="card hide" id="ctp" style="margin-top:16px"></div>
     <div class="card hide" id="cfood" style="margin-top:16px"></div>
     <div class="card rep hide" id="rep" style="margin-top:16px"></div>
-    <div class="grid" style="margin-top:16px">
+    <div class="grid" id="charts" style="margin-top:16px">
       <div class="card"><h3 id="cTitle">التبادل التجاري السنوي 2015–2025</h3><div class="fig" id="fY"></div>
         <div class="lg"><span style="--c:var(--mint)">الصادرات</span><span style="--c:var(--navy)">الواردات</span><span style="--c:var(--sage)">الميزان التجاري</span></div></div>
       <div class="card"><h3>ربعياً 2025–2026</h3><div class="fig sm" id="fQ"></div>
         <div class="lg"><span style="--c:var(--mint)">الصادرات</span><span style="--c:var(--navy)">الواردات</span></div></div>
     </div>
-    <div class="card" style="margin-top:16px"><h3>الجدول التفصيلي</h3><div class="scroll"><table id="tbl"></table></div></div>
+    <div class="card" id="tblc" style="margin-top:16px"><h3>الجدول التفصيلي</h3><div class="scroll"><table id="tbl"></table></div></div>
     <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="copy" id="cp">نسخ ملخص البيانات</button><span class="note" id="cpMsg"></span></div>
   </section>
   <section id="vTop" class="hide">
@@ -178,6 +215,7 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
     <div class="card" style="margin-top:16px"><h3 id="sT">أهم السلع</h3><div class="scroll"><table id="sTb"></table></div></div>
   </section>
   <footer id="ft"></footer>
+<nav class="bnav" aria-label="التنقل"><button data-go="kw"><i>⌂</i>الرئيسية</button><button data-go="top"><i>☰</i>الشركاء</button><button data-go="food"><i>❀</i>الغذاء</button><button data-go="products"><i>▦</i>السلع</button><button data-go="groups"><i>◎</i>المجموعات</button></nav>
 </main>
 <script>
 {
@@ -208,7 +246,7 @@ function svgBars(el,labels,series,opts){
     el.innerHTML=`<svg style="direction:ltr" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.aria)}">${o}</svg>`;};
   if(el._ro)el._ro.disconnect();const ro=new ResizeObserver(draw);ro.observe(el);el._ro=ro;draw();
 }
-function show(v){['vEnt','vTop','vGr','vPr','vFd'].forEach(id=>$('#'+id).classList.toggle('hide',id!==v));
+function show(v){const bm={vTop:'top',vGr:'groups',vPr:'products',vFd:'food'};document.querySelectorAll('.bnav button').forEach(b=>b.classList.toggle('on',b.dataset.go===(bm[v]||(v==='vEnt'&&cur&&cur.kw?'kw':''))));['vEnt','vTop','vGr','vPr','vFd'].forEach(id=>$('#'+id).classList.toggle('hide',id!==v));
   $('#tKw').setAttribute('aria-pressed',v==='vEnt'&&cur&&cur.kw?'true':'false');$('#tTop').setAttribute('aria-pressed',v==='vTop');$('#tGr').setAttribute('aria-pressed',v==='vGr');$('#tPr').setAttribute('aria-pressed',v==='vPr');$('#tFd').setAttribute('aria-pressed',v==='vFd');}
 let CUR='kd',UNIT='m';const RATE=3.21,UK=0.3075;
 function unitFor(max){const usd=CUR==='usd',c=usd?'دولار':'د.ك';U=UNIT==='m'?{div:1000,lab:'مليون '+c,d:2}:{div:1,lab:'ألف '+c,d:1};U.k=usd?RATE:1;}
@@ -274,6 +312,7 @@ function render(e){cur=e;show('vEnt');
   const hp=q26.length?`<tr class="hl"><td>${Q.lab} 2026 (المجموع)</td><td class="n">${f(sx)}</td><td class="n">${f(sm)}</td><td class="n ${sx-sm>=0?'up':'dn'}">${f(sx-sm)}</td><td class="n">${f(sx+sm)}</td></tr>`:'';
   $('#tbl').innerHTML=`<thead><tr><th>الفترة</th><th class="n">الصادرات</th><th class="n">الواردات</th><th class="n">الميزان</th><th class="n">التبادل</th></tr></thead><tbody>${sep('البيانات الفصلية 2025')}${row('2025 (السنة كاملة)','2025','hl')}${q25.map(p=>row(ql(p),p)).join('')}${q26.length?sep('البيانات الفصلية 2026'):''}${q26.map(p=>row(ql(p),p)).join('')}${hp}${sep('البيانات السنوية')}${[...Y].reverse().map(p=>row(p,p)).join('')}</tbody>`;
   foodCountry(e);flowCard(e);if(e.kw)mapCard();else $('#mapc').classList.add('hide');
+  layout(e,isC);
   try{history.replaceState(null,'','#'+(e.kw?'kw':e.id.startsWith('g')?e.id:'c'+e.id));}catch(_){}
 }
 function summary(e){const Q=ytd(),Lx=[],u=U.lab;Lx.push(e.ar+' ('+e.en+') – '+u);Y.forEach(p=>Lx.push(`${p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))} | ميزان ${f(g(e.x,p)-g(e.m,p))}`));quarters().forEach(p=>Lx.push(`${QL[p]||p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))}`));
@@ -324,7 +363,7 @@ function foodCountry(e){const el=$('#cfood');if(!e||e.kw||e.id.startsWith('g')||
 // ---------- maps ----------
 let WORLD=null,ISO={},CSB2ISO={};const MAPM={v:'التبادل',x:'الصادرات',m:'الواردات',b:'الميزان'};let MAPK='v';
 function loadWorld(){return WORLD?Promise.resolve(WORLD):fetch('world.json').then(r=>r.json()).then(w=>(WORLD=w));}
-const GOLD=['#d9f5fa','#a6e7f2','#62d2e6','#2EB5D0','#1A86A8'],BLUE=['#e8e0fa','#c9b6f2','#a083e6','#7B4FD6','#4A23A6'];
+const GOLD=['#f5ecd2','#e8d59c','#d9bd6a','#c4a03f','#9c7c22'],BLUE=['#dde4f2','#b3c3e3','#7d96c8','#4a6aa8','#244176'];
 function mapCard(){const el=$('#mapc');el.classList.remove('hide');
   el.innerHTML=`<div class="mh"><h3>خريطة شركاء الكويت التجاريين – 2025</h3><div class="cur" role="group" aria-label="المؤشر">${Object.entries(MAPM).map(([k,l])=>`<button data-k="${k}" aria-pressed="${k===MAPK}">${l}</button>`).join('')}</div></div>
   <div class="mapw"><svg id="wsvg" viewBox="0 0 1000 520" role="img" aria-label="خريطة العالم"></svg><div id="mtip" class="mtip"></div></div><div class="lg" id="mlg"></div><div class="note">اضغط على أي دولة لفتح ملفها التجاري. الصادرات غير نفطية. المصدر: الإدارة المركزية للإحصاء.</div>`;
@@ -343,7 +382,7 @@ function mapCard(){const el=$('#mapc');el.classList.remove('hide');
       tip.innerHTML=`<b>${esc(c.ar)}</b><br>الصادرات ${f(x)} · الواردات ${f(m)}<br>الميزان <span class="${x-m>=0?'up':'dn'}">${f(x-m)}</span> ${U.lab}`;tip.style.display='block';const r=sv.getBoundingClientRect();tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px';};
     sv.onmouseleave=()=>{tip.style.display='none';};
     sv.onclick=e=>{const t=e.target.closest('.ctry');if(!t)return;const c=BY[ISO[t.dataset.iso]];if(c){render(c);window.scrollTo(0,0);}};
-    const pal=MAPK==='m'?BLUE:GOLD;$('#mlg').innerHTML=(MAPK==='b'?'<span style="--c:#2EB5D0">فائض</span><span style="--c:#7B4FD6">عجز</span>':pal.map((c,i)=>`<span style="--c:${c}">${i===0?'أقل':i===4?'أعلى':''}</span>`).join(''))+'<span style="--c:var(--navy)">الكويت</span>';});}
+    const pal=MAPK==='m'?BLUE:GOLD;$('#mlg').innerHTML=(MAPK==='b'?'<span style="--c:#c4a03f">فائض</span><span style="--c:#4a6aa8">عجز</span>':pal.map((c,i)=>`<span style="--c:${c}">${i===0?'أقل':i===4?'أعلى':''}</span>`).join(''))+'<span style="--c:var(--navy)">الكويت</span>';});}
 function flowCard(e){const el=$('#flow');if(!e||e.kw||e.id.startsWith('g')||!CSB2ISO[e.id]){el.classList.add('hide');return;}
   loadWorld().then(w=>{const iso=CSB2ISO[e.id],c=w.c[iso]||w.dots[iso];if(!c){el.classList.add('hide');return;}
     el.classList.remove('hide');const L='2025',x=g(e.x,L),m=g(e.m,L),k=w.kw;
@@ -359,6 +398,40 @@ function flowCard(e){const el=$('#flow');if(!e||e.kw||e.id.startsWith('g')||!CSB
     
     el.innerHTML=`<h3 class="fh"><span class="dk"></span>دولة الكويت <span class="ar">⇄</span> <span class="dc"></span>${esc(e.ar)}</h3><div class="flowg"><svg viewBox="${vx} ${vy} ${bw} ${bh}" style="direction:ltr" role="img" aria-label="تدفق التجارة بين الكويت و${esc(e.ar)}">${o}</svg>
       <div class="fleg"><div><i style="background:var(--mint)"></i>صادرات الكويت إلى ${esc(e.ar)}<b>${f(x)}</b></div><div><i style="background:var(--navy)"></i>واردات الكويت من ${esc(e.ar)}<b>${f(m)}</b></div><div><i style="background:${x-m>=0?'var(--pos)':'var(--neg)'}"></i>الميزان التجاري<b class="${x-m>=0?'up':'dn'}">${f(x-m)}</b></div><small>2025 · ${U.lab}</small></div></div>`;});}
+
+function layout(e,isC){const V=$('#vEnt');V.classList.toggle('isC',isC);V.classList.toggle('isK',!!e.kw);
+  const L='2025',x=g(e.x,L),m=g(e.m,L);
+  // header story (country)
+  let hs=$('#hstory');if(!hs){hs=document.createElement('div');hs.id='hstory';$('#nmEn').after(hs);}
+  if(isC){const r=C.filter(c=>c.id!=='603').map(c=>[c.id,g(c.x,L)+g(c.m,L)]).sort((a,b)=>b[1]-a[1]).findIndex(z=>z[0]===e.id)+1;
+    const t4=e.top4||{},tm=t4.m&&t4.m[0],tx=t4.x&&t4.x[0];
+    hs.innerHTML=`<div class="rk">الشريك رقم ${r} · 2025</div><p>${x-m>=0?'فائض لصالح الكويت':'عجز لصالح '+esc(e.ar)} قدره <b>${f(Math.abs(x-m))}</b> ${U.lab}${tm?`؛ وأهم ما نستورده منها ${esc(H4N[tm.hs]||tm.hs)} (${fmtN(tm.s,0)}%)`:''}${tx?`، وأهم ما نصدّره إليها ${esc(H4N[tx.hs]||tx.hs)}`:''}.</p>`;}
+  else hs.innerHTML='';
+  // section nav (country)
+  const sn=$('#secnav');if(isC){const S=[['flow','نظرة عامة'],['ind','المؤشرات'],['itc','القدرة التوريدية'],['ctp','السلع'],['cfood','الغذاء'],['rep','من التقرير'],['charts','الرسوم'],['tblc','الجدول']].filter(([id])=>id==='flow'?!!CSB2ISO[e.id]:!$('#'+id).classList.contains('hide'));
+    sn.classList.remove('hide');sn.innerHTML=S.map(([id,l],i)=>`<button data-s="${id}" class="${i?'':'on'}">${l}</button>`).join('');
+    sn.onclick=ev=>{const b=ev.target.closest('button');if(!b)return;const t=$('#'+b.dataset.s);window.scrollTo({top:t.getBoundingClientRect().top+scrollY-70,behavior:'smooth'});};
+    if(window._io)window._io.disconnect();window._io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){sn.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.s===en.target.id));const a=sn.querySelector('.on');if(a)a.scrollIntoView({block:'nearest',inline:'center'});}});},{rootMargin:'-40% 0px -55% 0px'});
+    S.forEach(([id])=>window._io.observe($('#'+id)));}
+  else sn.classList.add('hide');
+  // home bento
+  const bt=$('#bento'),b2=$('#bento2');
+  if(e.kw){bt.classList.remove('hide');b2.classList.remove('hide');const T=TOT[L],x0=g(e.x,'2024'),m0=g(e.m,'2024'),Q=ytd(),sx=Q.cur.reduce((a,p)=>a+g(e.x,p),0),sm=Q.cur.reduce((a,p)=>a+g(e.m,p),0),px=Q.prev.reduce((a,p)=>a+g(e.x,p),0),pm=Q.prev.reduce((a,p)=>a+g(e.m,p),0);
+    const ys=Y.slice(-7),vmx=Math.max(...ys.map(y=>g(e.x,y)+g(e.m,y)));const pc2=(a,b)=>{const c=pct(a,b);return `<span class="${c>=0?'up':'dn'}">${c>=0?'▲':'▼'} ${fmtN(Math.abs(c),1)}%</span>`;};
+    bt.innerHTML=`<div class="t dark w2"><small>حجم التبادل غير النفطي 2025</small><b>${f(x+m)}</b><small>${U.lab} · ${pc2(x+m,x0+m0)} عن 2024 · بدون النفط ومشتقاته</small><div class="mini">${ys.map(y=>`<i title="${y}" style="height:${(g(e.x,y)+g(e.m,y))/vmx*100}%"></i>`).join('')}</div><div class="mlab">${ys.map(y=>`<span>${y.slice(2)}</span>`).join('')}</div></div>
+     <div class="t gold"><small>الصادرات غير النفطية</small><b>${f(x)}</b><small>${pc2(x,x0)} · وطنية ${f(T.nonoil)} + إعادة تصدير ${f(T.rex)}</small></div>
+     <div class="t"><small>الواردات</small><b>${f(m)}</b><small>${pc2(m,m0)} عن 2024</small></div>
+     <div class="t"><small>الميزان التجاري</small><b class="dn">${f(x-m)}</b><small>عجز غير نفطي</small></div>
+     <div class="t"><small>التبادل ${Q.lab} 2026</small><b>${f(sx+sm)}</b><small>${pc2(sx+sm,px+pm)} سنوياً</small></div>`;
+    const tl=C.filter(c=>c.id!=='603').map(c=>({c,v:g(c.x,L)+g(c.m,L)})).sort((a,b)=>b.v-a.v).slice(0,5);
+    const fd=FOOD.reduce((a,r)=>a+(r.w||0),0);
+    b2.innerHTML=`<div class="t w2"><div class="th"><b>أكبر الشركاء 2025</b><a href="#top">الكل ←</a></div>${tl.map((r,i)=>`<a class="lr" href="#c${r.c.id}"><span class="no">${i+1}</span><span class="nm">${esc(r.c.ar)}</span><span class="tr"><i style="width:${r.v/tl[0].v*100}%"></i></span><b>${f(r.v)}</b></a>`).join('')}</div>
+     <a class="t lnk food" href="#food"><small>الأمن الغذائي</small><b>${FOOD.length} سلعة</b><small>${fv(fd)} ${FMU()} · ${new Set(FOOD.flatMap(r=>Object.keys(r.p))).size} دولة</small><span class="go">←</span></a>
+     <a class="t lnk" href="#products"><small>السلع (الفصول)</small><b>${HS.length} فصلاً</b><small>الصادرات والواردات حسب الفصل</small><span class="go">←</span></a>
+     <a class="t lnk dark" href="#groups"><small>المجموعات</small><b>${G.length} مجموعة</b><small>الخليج، الاتحاد الأوروبي، آسيان…</small><span class="go">←</span></a>
+     <a class="t lnk gold" href="#top"><small>ترتيب الشركاء</small><b>${C.filter(c=>c.id!=='603'&&(g(c.x,L)+g(c.m,L))>0).length} دولة</b><small>حسب الفترة والمؤشر</small><span class="go">←</span></a>`;}
+  else{bt.classList.add('hide');b2.classList.add('hide');}
+}
 
 function rank(){const p=$('#sP').value,mk=$('#sM').value,n=+$('#sN').value;
   const val=c=>{const x=g(c.x,p),m=g(c.m,p);return mk==='v'?x+m:mk==='x'?x:mk==='m'?m:mk==='b'?x-m:m-x;};
@@ -389,6 +462,7 @@ $('#rk').addEventListener('click',e=>{const b=e.target.closest('.row');if(b){ren
 $('#gr').addEventListener('click',e=>{const b=e.target.closest('.row');if(b){render(BY[b.dataset.g]);window.scrollTo(0,0);}});
 $('#cp').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summary(cur));$('#cpMsg').textContent='تم النسخ';}catch(_){$('#cpMsg').textContent='تعذّر النسخ في هذا العرض';}});
 window.addEventListener('hashchange',route);
+document.querySelector('.bnav').addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;const k=b.dataset.go;if(k==='kw')render(entKw());else{location.hash=k;}window.scrollTo(0,0);});
 $('#tFd').onclick=()=>food();
 const fSug=()=>{const t=$('#fq').value.trim().toLowerCase(),box=$('#fSug');if(!t){box.style.display='none';return;}
   const d=t.replace(/\D/g,''),hits=FOOD.filter(r=>(d&&r.h.startsWith(d))||(H4N[r.h]||'').includes(t)).sort((a,b)=>(b.w||0)-(a.w||0)).slice(0,15);
