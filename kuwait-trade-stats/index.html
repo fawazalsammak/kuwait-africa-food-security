@@ -201,7 +201,7 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
     <div class="rank" id="gr" style="margin-top:14px"></div>
   </section>
   <section id="vFd" class="hide">
-    <div class="head"><div><h2>الأمن الغذائي: من أين تستورد الكويت غذاءها؟</h2><div class="en">Food imports by HS code and supplier · 2025</div></div><div class="unit"><span class="cur" role="group" aria-label="العملة"><button id="fKd" aria-pressed="true">د.ك</button><button id="fUsd" aria-pressed="false">دولار</button></span></div></div>
+    <div class="head"><div><h2>الأمن الغذائي: من أين تستورد الكويت غذاءها؟</h2><div class="en">الواردات الغذائية حسب البند والدولة المورّدة</div></div><div class="unit"><span class="cur" role="group" aria-label="العملة"><button id="fKd" aria-pressed="true">د.ك</button><button id="fUsd" aria-pressed="false">دولار</button></span></div></div>
     <div class="ctl" style="position:relative"><input id="fq" type="search" placeholder="ابحث برمز HS أو اسم السلعة واختر بنداً أو أكثر (قمح، أرز، 1006…)" autocomplete="off" aria-label="بحث السلع الغذائية" list="" style="flex:1 1 260px;font:16px Almarai,sans-serif;padding:10px 14px;border-radius:10px;border:1px solid var(--line);min-height:44px;background:var(--bg);color:var(--ink)"></div>
     <div id="fSug" class="fsug" role="listbox"></div>
     <div id="fChips" class="chips"></div>
@@ -210,7 +210,7 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
     <div class="note">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (UN Comtrade)، واردات الكويت المُبلّغة لسنة 2025 على مستوى البند الرباعي (HS4)، الفصول 01–24. القيم بالمليون (التحويل 1 دولار = 0.3075 د.ك). يمكن اختيار أكثر من بند لعرض مجموع الموردين.</div>
   </section>
   <section id="vOil" class="hide">
-    <div class="head"><div><h2>الصادرات النفطية لدولة الكويت</h2><div class="en">Kuwait oil exports</div></div><div class="unit">القيم بالمليون دينار كويتي</div></div>
+    <div class="head"><div><h2>الصادرات النفطية لدولة الكويت</h2><div class="en">النفط الخام والمشتقات والغاز</div></div><div class="unit">القيم بالمليون دينار كويتي</div></div>
     <div class="kpis" id="oK"></div>
     <div class="grid"><div class="card"><h3>الصادرات النفطية وغير النفطية 2015–2025</h3><div class="fig" id="oY"></div><div class="lg"><span style="--c:var(--navy)">النفط ومشتقاته</span><span style="--c:var(--mint)">غير النفطية</span></div></div>
       <div class="card"><h3>الصادرات النفطية الربعية</h3><div class="fig sm" id="oQ"></div></div></div>
@@ -244,7 +244,7 @@ const pct=(a,b)=>b?((a-b)/Math.abs(b))*100:null;
 const g=(o,k)=>{if(!o)return 0;if(o[k])return o[k];if(/-H[12]$/.test(k)){const y=k.slice(0,4),h=k.endsWith('1')?['Q1','Q2']:['Q3','Q4'];return h.reduce((a,q)=>a+(o[y+'-'+q]||0),0);}return 0;};
 function quarters(){return META.periods.filter(p=>p.includes('-Q'));}
 function ytd(){const q26=quarters().filter(p=>p.startsWith('2026'));return{cur:q26,prev:q26.map(p=>p.replace('2026','2025')),lab:q26.length===2?'النصف الأول':q26.length===1?'الربع الأول':q26.length===3?'الأرباع الثلاثة الأولى':'العام'};}
-function entKw(){const x={},m={};META.periods.forEach(p=>{if(TOT[p]){x[p]=TOT[p].x-TOT[p].oil;m[p]=TOT[p].m;}});return{id:'kw',ar:'دولة الكويت – التجارة الخارجية غير النفطية',en:'Kuwait – non-oil foreign trade',x,m,kw:true};}
+function entKw(){const x={},m={};META.periods.forEach(p=>{if(TOT[p]){x[p]=TOT[p].x-TOT[p].oil;m[p]=TOT[p].m;}});return{id:'kw',ar:'دولة الكويت – التجارة الخارجية غير النفطية',en:'',x,m,kw:true};}
 function svgBars(el,labels,series,opts){
   const draw=()=>{const W=el.clientWidth,H=el.clientHeight;if(!W)return;
     const pad={l:8,r:52,t:14,b:28},iw=W-pad.l-pad.r,ih=H-pad.t-pad.b;
@@ -355,6 +355,11 @@ function food(){show('vFd');const out=$('#fOut');
   const tot=FOOD.reduce((a,r)=>a+(r.w||0),0),sup={};FOOD.forEach(r=>Object.entries(r.p).forEach(([id,v])=>{sup[id]=(sup[id]||0)+v;}));
   const ts=Object.entries(sup).filter(([id])=>BY[id]).sort((a,b)=>b[1]-a[1]).slice(0,10);
   $('#fSum').innerHTML=`<div class="kpis"><div class="k"><small>واردات الكويت الغذائية 2025</small><b>${fv(tot)}</b><small>${FMU()}</small></div><div class="k"><small>عدد البنود الغذائية (HS4)</small><b>${FOOD.length}</b></div><div class="k"><small>عدد الدول المورّدة</small><b>${Object.keys(sup).filter(id=>BY[id]).length}</b></div></div>`;
+  const FCH=HS.filter(h=>+h.id>=1&&+h.id<=23&&h.id!=='05'&&h.id!=='06'),sumC=k=>FCH.reduce((a,h)=>a+g(h.m,k),0);
+  const u=v=>{const z=(CUR==='usd'?v*RATE:v)/1000;return fmtN(z,2);},cg=(a,b)=>{const c=pct(a,b);return c==null||!isFinite(c)?'–':`<span class="${c>=0?'up':'dn'}">${c>=0?'+':'−'}${fmtN(Math.abs(c),1)}%</span>`;};
+  $('#fSum').innerHTML+=`<div class="card" style="margin-bottom:16px"><h3>الواردات الغذائية حتى النصف الأول 2026 – ${FMU()}</h3><div class="kpis" style="margin:8px 0"><div class="k"><small>2025 (كامل)</small><b>${u(sumC('2025'))}</b></div><div class="k"><small>النصف الأول 2025</small><b>${u(sumC('2025-H1'))}</b></div><div class="k"><small>النصف الأول 2026</small><b>${u(sumC('2026-H1'))}</b>${cg(sumC('2026-H1'),sumC('2025-H1'))}</div></div>
+   <div class="scroll"><table class="cmp"><thead><tr><th>الفصل</th><th class="n">2025</th><th class="n">النصف الأول 2025</th><th class="n">النصف الأول 2026</th><th class="n">التغير</th></tr></thead><tbody>${FCH.map(h=>`<tr><td><b>${h.id}</b> ${esc(CHS[h.id]||h.ar)}</td><td class="n">${u(g(h.m,'2025'))}</td><td class="n">${u(g(h.m,'2025-H1'))}</td><td class="n"><b>${u(g(h.m,'2026-H1'))}</b></td><td class="n">${cg(g(h.m,'2026-H1'),g(h.m,'2025-H1'))}</td></tr>`).join('')}</tbody></table></div>
+   <div class="note">المصدر: الإدارة المركزية للإحصاء – الواردات حسب الفصول (بيانات 2026 أولية). بيانات 2026 متاحة على مستوى الفصل للكويت ككل فقط؛ أما توزيع البنود على الدول المورّدة أدناه فهو لسنة 2025 (UN Comtrade) لأن بيانات 2026 حسب الدولة لم تُنشر بعد.</div></div>`;
   $('#fChips').innerHTML=FSEL.length?FSEL.map(h=>`<button class="chip" data-x="${h}">${h} ${esc(H4N[h]||'')} ✕</button>`).join('')+'<button class="chip clr" data-x="*">مسح الكل</button>':'';
   if(FSEL.length){out.innerHTML=foodSel();try{history.replaceState(null,'','#food:'+FSEL.join(','));}catch(_){}return;}
   const byc={};FOOD.forEach(r=>{(byc[r.h.slice(0,2)]=byc[r.h.slice(0,2)]||[]).push(r);});
