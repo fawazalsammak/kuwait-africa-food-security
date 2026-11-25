@@ -223,11 +223,12 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let D=null,META=null,TOT={},C=[],G=[],BY={},cur=null,HS=[],SITC=null,H4N={};
 const Y=['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
-const QL={'2025-Q1':'ر1 2025','2025-Q2':'ر2 2025','2025-Q3':'ر3 2025','2025-Q4':'ر4 2025','2026-Q1':'ر1 2026','2026-Q2':'ر2 2026','2026-Q3':'ر3 2026','2026-Q4':'ر4 2026'};
+const QL={},QS={},QW={Q1:'الربع الأول',Q2:'الربع الثاني',Q3:'الربع الثالث',Q4:'الربع الرابع',H1:'النصف الأول',H2:'النصف الثاني'},QW2={Q1:'الأول',Q2:'الثاني',Q3:'الثالث',Q4:'الرابع'};
+['2024','2025','2026','2027'].forEach(y=>{['Q1','Q2','Q3','Q4','H1','H2'].forEach(q=>{QL[y+'-'+q]=QW[q]+' '+y;QS[y+'-'+q]=(QW2[q]||QW[q])+' '+y.slice(2);});});
 const fmtN=(v,d)=>v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
 let U={div:1000,lab:'مليون د.ك',d:2};
 const pct=(a,b)=>b?((a-b)/Math.abs(b))*100:null;
-const g=(o,k)=>o&&o[k]?o[k]:0;
+const g=(o,k)=>{if(!o)return 0;if(o[k])return o[k];if(/-H[12]$/.test(k)){const y=k.slice(0,4),h=k.endsWith('1')?['Q1','Q2']:['Q3','Q4'];return h.reduce((a,q)=>a+(o[y+'-'+q]||0),0);}return 0;};
 function quarters(){return META.periods.filter(p=>p.includes('-Q'));}
 function ytd(){const q26=quarters().filter(p=>p.startsWith('2026'));return{cur:q26,prev:q26.map(p=>p.replace('2026','2025')),lab:q26.length===2?'النصف الأول':q26.length===1?'الربع الأول':q26.length===3?'الأرباع الثلاثة الأولى':'العام'};}
 function entKw(){const x={},m={};META.periods.forEach(p=>{if(TOT[p]){x[p]=TOT[p].x-TOT[p].oil;m[p]=TOT[p].m;}});return{id:'kw',ar:'دولة الكويت – التجارة الخارجية غير النفطية',en:'Kuwait – non-oil foreign trade',x,m,kw:true};}
@@ -241,7 +242,7 @@ function svgBars(el,labels,series,opts){
     // rtl: first label on the right
     labels.forEach((l,i)=>{const cx=W-pad.r-bw*(i+.5);let k=0;
       series.forEach(s=>{if(s.line)return;const v=s.v[i],x0=cx-gw/2+sw*k++;const y1=y(Math.max(v,0)),y2=y(Math.min(v,0));o+=`<rect x="${x0+1}" y="${y1}" width="${Math.max(sw-2,1)}" height="${Math.max(y2-y1,0.5)}" rx="2" fill="${s.c}"><title>${esc(l+' · '+s.n+': '+f(v)+' '+U.lab)}</title></rect>`;});
-      if(W>=520||i%2===0)o+=`<text x="${cx}" y="${H-8}" text-anchor="middle">${esc(W<520?l.replace('20',''):l)}</text>`;});
+      if(W>=520||i%2===0)o+=`<text x="${cx}" y="${H-8}" text-anchor="middle">${esc(W<520&&/^\d{4}$/.test(l)?l.slice(2):l)}</text>`;});
     series.filter(s=>s.line).forEach(s=>{const pts=labels.map((l,i)=>`${W-pad.r-bw*(i+.5)},${y(s.v[i])}`);o+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${s.c}" stroke-width="2.5"/>`+labels.map((l,i)=>`<circle cx="${W-pad.r-bw*(i+.5)}" cy="${y(s.v[i])}" r="3.5" fill="${s.c}"><title>${esc(l+' · '+s.n+': '+f(s.v[i])+' '+U.lab)}</title></circle>`).join('');});
     el.innerHTML=`<svg style="direction:ltr" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.aria)}">${o}</svg>`;};
   if(el._ro)el._ro.disconnect();const ro=new ResizeObserver(draw);ro.observe(el);el._ro=ro;draw();
@@ -304,7 +305,7 @@ function render(e){cur=e;show('vEnt');
     h+='<div class="two">'+(r.transport?`<div><h4>النقل والإمداد</h4><ul>${r.transport.map(z=>`<li>${esc(z)}</li>`).join('')}</ul></div>`:'')+(r.prop?`<div><h4>المقترحات</h4><ol>${r.prop.map(z=>`<li>${esc(z)}</li>`).join('')}</ol></div>`:'')+'</div><div class="note">القيم في هذا القسم بالمليون دينار كويتي كما وردت في التقرير.</div>';
     rp.innerHTML=h;}else rp.classList.add('hide');
   svgBars($('#fY'),Y,[{n:'الصادرات',c:'var(--mint)',v:Y.map(p=>g(e.x,p))},{n:'الواردات',c:'var(--navy)',v:Y.map(p=>g(e.m,p))},{n:'الميزان',c:'var(--sage)',line:1,v:Y.map(p=>g(e.x,p)-g(e.m,p))}],{aria:'التبادل التجاري السنوي'});
-  const qs=quarters();svgBars($('#fQ'),qs.map(q=>QL[q]||q),[{n:'الصادرات',c:'var(--mint)',v:qs.map(p=>g(e.x,p))},{n:'الواردات',c:'var(--navy)',v:qs.map(p=>g(e.m,p))}],{aria:'التبادل الربعي'});
+  const qs=quarters();svgBars($('#fQ'),qs.map(q=>QS[q]||q),[{n:'الصادرات',c:'var(--mint)',v:qs.map(p=>g(e.x,p))},{n:'الواردات',c:'var(--navy)',v:qs.map(p=>g(e.m,p))}],{aria:'التبادل الربعي'});
   const row=(lab,p,cls)=>{const a=g(e.x,p),b=g(e.m,p);return `<tr class="${cls||''}"><td>${esc(lab)}</td><td class="n">${f(a)}</td><td class="n">${f(b)}</td><td class="n ${a-b>=0?'up':'dn'}">${f(a-b)}</td><td class="n">${f(a+b)}</td></tr>`;};
   const QN={'Q1':'الربع الأول','Q2':'الربع الثاني','Q3':'الربع الثالث','Q4':'الربع الرابع'},ql=p=>QN[p.slice(5)]+' '+p.slice(0,4);
   const q25=qs.filter(p=>p.startsWith('2025')),q26=qs.filter(p=>p.startsWith('2026'));
@@ -440,7 +441,7 @@ function rank(){const p=$('#sP').value,mk=$('#sM').value,n=+$('#sN').value;
 function groups(){const p='2025',list=G.map(c=>({c,x:g(c.x,p),m:g(c.m,p)})).sort((a,b)=>(b.x+b.m)-(a.x+a.m)),mx=Math.max(...list.map(r=>r.x+r.m));
   $('#gr').innerHTML=list.map((r,i)=>`<button class="row" data-g="${esc(r.c.id)}"><span class="v">${i+1}</span><span class="nm">${esc(r.c.ar)}</span><span class="trk"><i style="width:${r.x/mx*100}%;background:var(--mint)"></i><i style="width:${r.m/mx*100}%;background:var(--navy)"></i></span><span class="v">${fmtN((r.x+r.m)/1000,1)}</span></button>`).join('');}
 function prods(){const fl=$('#pF').value,p=$('#pP').value,n=+$('#pN').value;
-  const prev=p.includes('-Q')?p.replace(/^(\d{4})/,y=>String(+y-1)):String(+p-1);
+  const prev=p.includes('-')?p.replace(/^(\d{4})/,y=>String(+y-1)):String(+p-1);
   const tot=HS.reduce((a,h)=>a+g(h[fl],p),0);
   const list=HS.map(h=>({h,v:g(h[fl],p),pv:g(h[fl],prev)})).filter(r=>r.v>0).sort((a,b)=>b.v-a.v).slice(0,n);
   $('#pT').innerHTML=`<thead><tr><th>م</th><th>الفصل</th><th class="n">القيمة</th><th class="n">الحصة</th><th class="n">التغير عن ${esc(QL[prev]||prev)}</th></tr></thead><tbody>`+list.map((r,i)=>{const c=pct(r.v,r.pv);return `<tr><td>${i+1}</td><td style="white-space:normal;min-width:12em">${esc(r.h.id+' – '+r.h.ar)}</td><td class="n">${fmtN(r.v/1000,2)}</td><td class="n">${fmtN(r.v/tot*100,1)}%</td><td class="n ${c==null?'':c>=0?'up':'dn'}">${c==null?'–':fmtN(c,1)+'%'}</td></tr>`;}).join('')+`</tbody><tfoot><tr><td></td><td><b>الإجمالي</b></td><td class="n"><b>${fmtN(tot/1000,2)}</b></td><td></td><td></td></tr></tfoot>`;
@@ -477,8 +478,11 @@ $('#cKd').onclick=()=>{CUR='kd';render(cur);};$('#cUsd').onclick=()=>{CUR='usd';
 fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;else if(r.t==='hs4n')H4N=r.n;else if(r.t==='iso'){ISO=r.m;Object.entries(r.m).forEach(([i,c])=>CSB2ISO[c]=i);}else if(r.t==='food'){FOOD.push(r);FBY[r.h]=r;}});
   $('#pP').innerHTML=$('#sP').innerHTML;
   $('#sub').textContent='آخر بيانات: '+(QL[META.latest]||META.latest)+' · '+C.length+' دولة · '+G.length+' مجموعة';
-  $('#sP').innerHTML=[...Y].reverse().concat(quarters().reverse()).map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
-  $('#pP').innerHTML=[...Y].reverse().concat(quarters().reverse()).map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
+  const PER=(()=>{const qs=quarters(),out=[];const ly=qs.length?qs[qs.length-1].slice(0,4):null;
+    if(ly&&!Y.includes(ly)){const lq=qs.filter(p=>p.startsWith(ly));if(lq.length>=2)out.push(ly+'-H1');lq.slice().reverse().forEach(p=>out.push(p));}
+    [...Y].reverse().forEach(y=>{out.push(y);qs.filter(p=>p.startsWith(y)).reverse().forEach(p=>out.push(p));});return out;})();
+  const opts=PER.map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
+  $('#sP').innerHTML=opts;$('#pP').innerHTML=opts;
   $('#ft').textContent='المصدر: '+META.source+' تحديث البيانات: '+META.updated+'. تقديرات مركز التجارة الدولية (ITC) معروضة حيث تتوفر.';
   route();}).catch(()=>{$('#nm').textContent='تعذّر تحميل البيانات';});
 }
