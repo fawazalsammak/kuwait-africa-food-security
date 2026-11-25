@@ -161,7 +161,7 @@ const pct=(a,b)=>b?((a-b)/Math.abs(b))*100:null;
 const g=(o,k)=>o&&o[k]?o[k]:0;
 function quarters(){return META.periods.filter(p=>p.includes('-Q'));}
 function ytd(){const q26=quarters().filter(p=>p.startsWith('2026'));return{cur:q26,prev:q26.map(p=>p.replace('2026','2025')),lab:q26.length===2?'النصف الأول':q26.length===1?'الربع الأول':q26.length===3?'الأرباع الثلاثة الأولى':'العام'};}
-function entKw(){const x={},m={};META.periods.forEach(p=>{if(TOT[p]){x[p]=TOT[p].x;m[p]=TOT[p].m;}});return{id:'kw',ar:'دولة الكويت – إجمالي التجارة الخارجية',en:'Kuwait – total foreign trade',x,m,kw:true};}
+function entKw(){const x={},m={};META.periods.forEach(p=>{if(TOT[p]){x[p]=TOT[p].x-TOT[p].oil;m[p]=TOT[p].m;}});return{id:'kw',ar:'دولة الكويت – التجارة الخارجية غير النفطية',en:'Kuwait – non-oil foreign trade',x,m,kw:true};}
 function svgBars(el,labels,series,opts){
   const draw=()=>{const W=el.clientWidth,H=el.clientHeight;if(!W)return;
     const pad={l:8,r:52,t:14,b:28},iw=W-pad.l-pad.r,ih=H-pad.t-pad.b;
@@ -195,7 +195,7 @@ function render(e){cur=e;show('vEnt');
   const ch=(a,b,lab)=>{const c=pct(a,b);return c==null||!isFinite(c)?'':`<i class="${c>=0?'up':'dn'}">${c>=0?'▲':'▼'} ${fmtN(Math.abs(c),1)}% ${lab}</i>`;};
   const vg=pct(x+m,x0+m0);
   // lead sentence (as in the country sheet)
-  const ld=$('#lead');if(isC&&(x+m)>0){ld.classList.remove('hide');ld.innerHTML=`بلغ حجم التبادل التجاري بين دولة الكويت و${esc(e.ar)} خلال عام 2025 نحو <b>${f(x+m)}</b> ${U.lab}${vg!=null&&isFinite(vg)?`، بنسبة ${vg>=0?'ارتفاع':'انخفاض'} قدرها ${fmtN(Math.abs(vg),1)}% مقارنة بعام 2024`:''}، وسجّل الميزان التجاري ${x-m>=0?'فائضاً':'عجزاً'} قدره <b>${f(Math.abs(x-m))}</b> ${U.lab}.`;}else ld.classList.add('hide');
+  const ld=$('#lead');if(isC&&(x+m)>0){ld.classList.remove('hide');ld.innerHTML=`بلغ حجم التبادل التجاري بين دولة الكويت و${esc(e.ar)} خلال عام 2025 نحو <b>${f(x+m)}</b> ${U.lab}${vg!=null&&isFinite(vg)?`، بنسبة ${vg>=0?'ارتفاع':'انخفاض'} قدرها ${fmtN(Math.abs(vg),1)}% مقارنة بعام 2024`:''}، وسجّل الميزان التجاري ${x-m>=0?'فائضاً':'عجزاً'} قدره <b>${f(Math.abs(x-m))}</b> ${U.lab}.`;}else if(e.kw){const T=TOT[L];ld.classList.remove('hide');ld.innerHTML=`الأرقام في هذه الصفحة <b>بدون النفط ومشتقاته</b>. بلغت الصادرات غير النفطية في 2025 نحو <b>${f(x)}</b> ${U.lab}، منها صادرات وطنية <b>${f(T.nonoil)}</b> وسلع معاد تصديرها <b>${f(T.rex)}</b>، مقابل واردات <b>${f(m)}</b> ${U.lab}. (صادرات النفط ومشتقاته المستبعدة: ${f(T.oil)} ${U.lab}).`;}else ld.classList.add('hide');
   const ag=$('#agr');if(isC){ag.classList.remove('hide');ag.innerHTML=e.rep&&e.rep.agr?'<b>الاتفاقيات:</b> '+esc(e.rep.agr):e.agr?'<b>الاتفاقيات:</b> توجد اتفاقية ثنائية مع دولة الكويت ضمن ملفات الاتفاقيات (الدليل الاقتصادي).':'<b>الاتفاقيات:</b> لا توجد اتفاقيات ثنائية مسجّلة ضمن ملفات الاتفاقيات.';}else ag.classList.add('hide');
   const t4=e.top4||{},main=k=>t4[k]&&t4[k][0]?`<small class="mp">أهم سلعة: ${esc(H4N[t4[k][0].hs]||t4[k][0].hs)}</small>`:'';
   $('#kpis').innerHTML=`<div class="k"><small>الصادرات 2025</small><b>${f(x)}</b>${ch(x,x0,'عن 2024')}${main('x')}</div>
