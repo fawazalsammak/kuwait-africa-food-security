@@ -89,6 +89,10 @@ tr.hl td{background:var(--panel);font-weight:700}
 tr.fr{cursor:pointer}tr.fr:hover td{background:var(--panel)}tr.fx>td{padding:8px 0;white-space:normal}.fi{margin:6px 0}a.row{text-decoration:none}.k a,td a{color:var(--navy);font-weight:700}
 .fsug{display:none;border:1px solid var(--line);border-radius:10px;margin-top:-8px;margin-bottom:12px;max-height:300px;overflow:auto;box-shadow:0 6px 18px #0002;background:var(--bg)}.fsug button{display:flex;gap:8px;width:100%;text-align:start;padding:10px 14px;border:0;border-bottom:1px solid var(--line);background:none;color:inherit;font:15px Almarai,sans-serif;cursor:pointer;min-height:44px;align-items:center}.fsug button b{color:var(--navy)}.fsug button span{margin-inline-start:auto;color:var(--mut);font-size:13px}
 tr.sep td{background:var(--navy);color:var(--bg);font-weight:800;font-size:13px;padding:6px 8px;border-top:3px solid var(--mint)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.chip{font:700 13px Almarai,sans-serif;border:1px solid var(--navy);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 12px;min-height:36px;cursor:pointer}.chip.clr{border-color:var(--line);color:var(--mut)}
+.fsug button.all{font-weight:800;color:var(--sage)}.fsug button.on{background:var(--panel)}
+table.fct td{padding:10px 8px}tr.fc{cursor:pointer}tr.fc:hover td,tr.fc.open td{background:var(--panel)}tr.fc td:first-child b{color:var(--navy)}.cnt{color:var(--mut);font-size:12px;font-weight:400}
+tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px;background:var(--bg)}table.sub th{font-size:12px}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
@@ -144,11 +148,12 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
   </section>
   <section id="vFd" class="hide">
     <div class="head"><div><h2>الأمن الغذائي: من أين تستورد الكويت غذاءها؟</h2><div class="en">Food imports by HS code and supplier · 2025</div></div><div class="unit"><span class="cur" role="group" aria-label="العملة"><button id="fKd" aria-pressed="true">د.ك</button><button id="fUsd" aria-pressed="false">دولار</button></span></div></div>
-    <div class="ctl" style="position:relative"><input id="fq" type="search" placeholder="ابحث برمز HS (مثل 1006 أو 10) أو باسم السلعة (أرز، قمح، تفاح…)" autocomplete="off" aria-label="بحث السلع الغذائية" list="" style="flex:1 1 260px;font:16px Almarai,sans-serif;padding:10px 14px;border-radius:10px;border:1px solid var(--line);min-height:44px;background:var(--bg);color:var(--ink)"></div>
+    <div class="ctl" style="position:relative"><input id="fq" type="search" placeholder="ابحث برمز HS أو اسم السلعة واختر بنداً أو أكثر (قمح، أرز، 1006…)" autocomplete="off" aria-label="بحث السلع الغذائية" list="" style="flex:1 1 260px;font:16px Almarai,sans-serif;padding:10px 14px;border-radius:10px;border:1px solid var(--line);min-height:44px;background:var(--bg);color:var(--ink)"></div>
     <div id="fSug" class="fsug" role="listbox"></div>
+    <div id="fChips" class="chips"></div>
     <div id="fSum"></div>
     <div id="fOut" style="margin-top:14px"></div>
-    <div class="note">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (UN Comtrade)، واردات الكويت المُبلّغة لسنة 2025 على مستوى البند الرباعي (HS4)، الفصول 01–24. القيم بالمليون (التحويل 1 دولار = 0.3075 د.ك). اضغط على أي بند لعرض جميع الدول المورّدة.</div>
+    <div class="note">المصدر: قاعدة بيانات الأمم المتحدة لإحصاءات تجارة السلع (UN Comtrade)، واردات الكويت المُبلّغة لسنة 2025 على مستوى البند الرباعي (HS4)، الفصول 01–24. القيم بالمليون (التحويل 1 دولار = 0.3075 د.ك). يمكن اختيار أكثر من بند لعرض مجموع الموردين.</div>
   </section>
   <section id="vPr" class="hide">
     <div class="head"><h2>صادرات وواردات دولة الكويت حسب السلع</h2><div class="unit">القيم بالمليون دينار كويتي · فصول النظام المنسق (HS)</div></div>
@@ -270,25 +275,30 @@ const fv=u=>{const v=CUR==='usd'?u/1e6:u*UK/1e6;return v!==0&&Math.abs(v)<0.005?
 const FMU=()=>CUR==='usd'?'مليون دولار':'مليون د.ك';
 const chName=c=>{const h=HS.find(z=>z.id===c);return h?h.ar:c;};
 function foodSup(r){return Object.entries(r.p).map(([id,v])=>({id,v,c:BY[id]})).filter(z=>z.c).sort((a,b)=>b.v-a.v);}
+const CHS={'01':'حيوانات حية','02':'لحوم','03':'أسماك ومأكولات بحرية','04':'ألبان وبيض وعسل','07':'خضروات','08':'فواكه ومكسرات','09':'بن وشاي وبهارات','10':'حبوب','11':'منتجات المطاحن (دقيق ونشا)','12':'بذور زيتية وأعلاف خضراء','13':'صموغ وخلاصات نباتية','14':'مواد نباتية أخرى','15':'زيوت ودهون','16':'لحوم وأسماك محضرة','17':'سكر وحلويات','18':'كاكاو وشوكولاتة','19':'محضرات الحبوب والمخبوزات','20':'خضر وفواكه محضرة وعصائر','21':'محضرات غذائية متنوعة','22':'مياه ومشروبات','23':'أعلاف وبقايا صناعة الأغذية'};
+let FSEL=[];
+function supTable(L,T){return `<div class="scroll"><table><thead><tr><th>#</th><th>الدولة المورّدة</th><th class="n">القيمة</th><th class="n">الحصة</th><th style="width:28%"></th></tr></thead><tbody>${L.map((z,i)=>`<tr><td>${i+1}</td><td><a href="#c${esc(z.id)}">${esc(z.c.ar)}</a></td><td class="n">${fv(z.v)}</td><td class="n">${fmtN(z.v/T*100,1)}%</td><td><span class="trk" style="display:flex"><i style="width:${z.v/L[0].v*100}%;background:var(--mint)"></i></span></td></tr>`).join('')}</tbody></table></div>`;}
 function foodItem(h){const r=FBY[h];if(!r)return '';const L=foodSup(r),T=r.w||L.reduce((a,z)=>a+z.v,0);
-  return `<div class="card fi" id="fi${h}"><h3>${esc(h)} – ${esc(H4N[h]||h)}</h3><div class="note" style="margin-top:0">إجمالي واردات الكويت 2025: <b>${fv(T)}</b> ${FMU()} · عدد الموردين: ${L.length}</div>
-  <div class="scroll"><table><thead><tr><th>#</th><th>الدولة المورّدة</th><th class="n">القيمة</th><th class="n">الحصة</th><th style="width:30%"></th></tr></thead><tbody>${L.map((z,i)=>`<tr><td>${i+1}</td><td><a href="#c${esc(z.id)}">${esc(z.c.ar)}</a></td><td class="n">${fv(z.v)}</td><td class="n">${fmtN(z.v/T*100,1)}%</td><td><span class="trk" style="display:flex"><i style="width:${z.v/L[0].v*100}%;background:var(--mint)"></i></span></td></tr>`).join('')}</tbody></table></div></div>`;}
-function food(){show('vFd');const q=$('#fq').value.trim().toLowerCase(),out=$('#fOut');
-  const tot=FOOD.reduce((a,r)=>a+(r.w||0),0);
-  // overall top suppliers
-  const sup={};FOOD.forEach(r=>Object.entries(r.p).forEach(([id,v])=>{sup[id]=(sup[id]||0)+v;}));
+  return `<div class="card fi"><h3>${esc(h)} – ${esc(H4N[h]||h)}</h3><div class="note" style="margin-top:0">إجمالي واردات الكويت 2025: <b>${fv(T)}</b> ${FMU()} · عدد الموردين: ${L.length}</div>${supTable(L,T)}</div>`;}
+function foodSel(){const rs=FSEL.map(h=>FBY[h]).filter(Boolean),T=rs.reduce((a,r)=>a+(r.w||0),0),sup={};
+  rs.forEach(r=>Object.entries(r.p).forEach(([id,v])=>{sup[id]=(sup[id]||0)+v;}));
+  const L=Object.entries(sup).map(([id,v])=>({id,v,c:BY[id]})).filter(z=>z.c).sort((a,b)=>b.v-a.v);
+  let h='';if(rs.length>1)h+=`<div class="card fi"><h3>المجموع للبنود المختارة (${rs.length})</h3><div class="note" style="margin-top:0">${rs.map(r=>r.h+' '+esc(H4N[r.h]||'')).join(' + ')}<br>إجمالي واردات الكويت 2025: <b>${fv(T)}</b> ${FMU()} · عدد الموردين: ${L.length}</div>${supTable(L,T)}</div>`;
+  return h+rs.map(r=>foodItem(r.h)).join('');}
+function food(){show('vFd');const out=$('#fOut');
+  const tot=FOOD.reduce((a,r)=>a+(r.w||0),0),sup={};FOOD.forEach(r=>Object.entries(r.p).forEach(([id,v])=>{sup[id]=(sup[id]||0)+v;}));
   const ts=Object.entries(sup).filter(([id])=>BY[id]).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  $('#fSum').innerHTML=`<div class="kpis"><div class="k"><small>واردات الكويت الغذائية 2025 (الفصول 01–24)</small><b>${fv(tot)}</b><small>${FMU()}</small></div><div class="k"><small>عدد البنود الغذائية (HS4)</small><b>${FOOD.length}</b></div><div class="k"><small>عدد الدول المورّدة</small><b>${Object.keys(sup).filter(id=>BY[id]).length}</b></div></div>
-   <div class="card"><h3>أكبر 10 دول مورّدة للغذاء</h3><div class="rank">${ts.map(([id,v],i)=>`<a class="row" href="#c${esc(id)}"><span class="v">${i+1}</span><span class="nm">${esc(BY[id].ar)}</span><span class="trk"><i style="width:${v/ts[0][1]*100}%;background:var(--mint)"></i></span><span class="v">${fv(v)} · ${fmtN(v/tot*100,1)}%</span></a>`).join('')}</div></div>`;
-  let list=FOOD;
-  if(q){list=FOOD.filter(r=>r.h.startsWith(q.replace(/\D/g,''))&&/\d/.test(q)||(H4N[r.h]||'').includes(q)||(r.en||'').toLowerCase().includes(q));}
-  if(q&&list.length<=3){out.innerHTML=list.length?list.map(r=>foodItem(r.h)).join(''):'<div class="note">لا توجد نتائج.</div>';return;}
-  // group by chapter
-  const ch={};list.forEach(r=>{(ch[r.h.slice(0,2)]=ch[r.h.slice(0,2)]||[]).push(r);});
-  out.innerHTML=Object.keys(ch).sort().map(c=>{const rs=ch[c].sort((a,b)=>(b.w||0)-(a.w||0)),ct=rs.reduce((a,r)=>a+(r.w||0),0);
-    return `<details class="fch"${q?' open':''}><summary><b>${c}</b> ${esc(chName(c))}<span class="v">${fv(ct)}</span></summary><div class="scroll"><table><thead><tr><th>HS</th><th>السلعة</th><th class="n">واردات 2025</th><th>أكبر مورّد</th><th class="n">حصته</th></tr></thead><tbody>${rs.map(r=>{const L=foodSup(r),t=L[0];return `<tr class="fr" data-h="${r.h}"><td><b>${r.h}</b></td><td style="white-space:normal;min-width:10em">${esc(H4N[r.h]||r.h)}</td><td class="n">${fv(r.w||0)}</td><td>${t?esc(t.c.ar):'–'}</td><td class="n">${t&&r.w?fmtN(t.v/r.w*100,1)+'%':'–'}</td></tr>`;}).join('')}</tbody></table></div></details>`;}).join('')||'<div class="note">لا توجد نتائج.</div>';
+  $('#fSum').innerHTML=`<div class="kpis"><div class="k"><small>واردات الكويت الغذائية 2025</small><b>${fv(tot)}</b><small>${FMU()}</small></div><div class="k"><small>عدد البنود الغذائية (HS4)</small><b>${FOOD.length}</b></div><div class="k"><small>عدد الدول المورّدة</small><b>${Object.keys(sup).filter(id=>BY[id]).length}</b></div></div>`;
+  $('#fChips').innerHTML=FSEL.length?FSEL.map(h=>`<button class="chip" data-x="${h}">${h} ${esc(H4N[h]||'')} ✕</button>`).join('')+'<button class="chip clr" data-x="*">مسح الكل</button>':'';
+  if(FSEL.length){out.innerHTML=foodSel();try{history.replaceState(null,'','#food:'+FSEL.join(','));}catch(_){}return;}
+  const byc={};FOOD.forEach(r=>{(byc[r.h.slice(0,2)]=byc[r.h.slice(0,2)]||[]).push(r);});
+  out.innerHTML=`<div class="card"><h3>الواردات الغذائية حسب الفصل – 2025 · ${FMU()}</h3><div class="note" style="margin-top:0">اضغط على الفصل لعرض بنوده، ثم على البند لعرض الدول المورّدة.</div><div class="scroll"><table class="fct"><thead><tr><th>HS</th><th>الفصل</th><th class="n">القيمة</th><th class="n">الحصة</th><th>أكبر مورّد</th></tr></thead><tbody>${Object.keys(byc).sort().map(c=>{const rs=byc[c],ct=rs.reduce((a,r)=>a+(r.w||0),0),s={};rs.forEach(r=>Object.entries(r.p).forEach(([id,v])=>{s[id]=(s[id]||0)+v;}));const t=Object.entries(s).filter(([id])=>BY[id]).sort((a,b)=>b[1]-a[1])[0];
+    return `<tr class="fc" data-c="${c}"><td><b>${c}</b></td><td>${esc(CHS[c]||chName(c))} <span class="cnt">(${rs.length})</span></td><td class="n">${fv(ct)}</td><td class="n">${fmtN(ct/tot*100,1)}%</td><td>${t?esc(BY[t[0]].ar)+' <span class="cnt">'+fmtN(t[1]/ct*100,0)+'%</span>':'–'}</td></tr>`;}).join('')}</tbody></table></div></div>
+  <div class="card" style="margin-top:16px"><h3>أكبر 10 دول مورّدة للغذاء</h3><div class="scroll"><table><thead><tr><th>#</th><th>الدولة</th><th class="n">القيمة</th><th class="n">الحصة</th></tr></thead><tbody>${ts.map(([id,v],i)=>`<tr><td>${i+1}</td><td><a href="#c${esc(id)}">${esc(BY[id].ar)}</a></td><td class="n">${fv(v)}</td><td class="n">${fmtN(v/tot*100,1)}%</td></tr>`).join('')}</tbody></table></div></div>`;
   try{history.replaceState(null,'','#food');}catch(_){}
 }
+function chRows(c){const rs=FOOD.filter(r=>r.h.startsWith(c)).sort((a,b)=>(b.w||0)-(a.w||0));
+  return `<tr class="fx"><td colspan="5"><table class="sub"><thead><tr><th>HS</th><th>السلعة</th><th class="n">القيمة</th><th>أكبر مورّد</th><th class="n">حصته</th></tr></thead><tbody>${rs.map(r=>{const t=foodSup(r)[0];return `<tr class="fr" data-h="${r.h}"><td><b>${r.h}</b></td><td style="white-space:normal">${esc(H4N[r.h]||r.h)}</td><td class="n">${fv(r.w||0)}</td><td>${t?esc(t.c.ar):'–'}</td><td class="n">${t&&r.w?fmtN(t.v/r.w*100,1)+'%':'–'}</td></tr>`;}).join('')}</tbody></table></td></tr>`;}
 function foodCountry(e){const el=$('#cfood');if(!e||e.kw||e.id.startsWith('g')||!FOOD.length){el.classList.add('hide');return;}
   const L=FOOD.filter(r=>r.p[e.id]).map(r=>({h:r.h,v:r.p[e.id],w:r.w||0})).sort((a,b)=>b.v-a.v);
   if(!L.length){el.classList.add('hide');return;}
@@ -315,7 +325,7 @@ function prods(){const fl=$('#pF').value,p=$('#pP').value,n=+$('#pN').value;
 function search(t){t=t.trim().toLowerCase();const box=$('#sugg');if(!t){box.style.display='none';return;}
   const hits=[...C,...G].filter(c=>c.ar.includes(t)||c.en.toLowerCase().includes(t)).slice(0,12);
   box.innerHTML=hits.length?hits.map(c=>`<button data-k="${esc(c.id)}"><b>${esc(c.ar)}</b><span>${esc(c.en)}</span></button>`).join(''):'<div style="padding:12px">لا توجد نتائج</div>';box.style.display='block';}
-function route(){const h=location.hash.slice(1);if(h.startsWith('c')&&BY[h.slice(1)])render(BY[h.slice(1)]);else if(h.startsWith('g')&&BY[h])render(BY[h]);else if(h==='top'){show('vTop');rank();}else if(h==='groups'){show('vGr');groups();}else if(h==='products'){show('vPr');prods();}else if(h==='food')food();else if(h.startsWith('food:')){$('#fq').value=h.slice(5);food();}else render(entKw());}
+function route(){const h=location.hash.slice(1);if(h.startsWith('c')&&BY[h.slice(1)])render(BY[h.slice(1)]);else if(h.startsWith('g')&&BY[h])render(BY[h]);else if(h==='top'){show('vTop');rank();}else if(h==='groups'){show('vGr');groups();}else if(h==='products'){show('vPr');prods();}else if(h==='food')food();else if(h.startsWith('food:')){FSEL=h.slice(5).split(',').filter(x=>FBY[x]);food();}else render(entKw());}
 $('#q').addEventListener('input',e=>search(e.target.value));
 $('#sugg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;render(BY[b.dataset.k]);$('#sugg').style.display='none';$('#q').value='';window.scrollTo(0,0);});
 $('#tKw').onclick=()=>render(entKw());
@@ -329,13 +339,15 @@ $('#gr').addEventListener('click',e=>{const b=e.target.closest('.row');if(b){ren
 $('#cp').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summary(cur));$('#cpMsg').textContent='تم النسخ';}catch(_){$('#cpMsg').textContent='تعذّر النسخ في هذا العرض';}});
 window.addEventListener('hashchange',route);
 $('#tFd').onclick=()=>food();
-const fSug=()=>{const t=$('#fq').value.trim().toLowerCase(),box=$('#fSug');if(!t||/^\d{4}$/.test(t)&&FBY[t]){box.style.display='none';return;}
-  const d=t.replace(/\D/g,''),hits=FOOD.filter(r=>(d&&r.h.startsWith(d))||(H4N[r.h]||'').includes(t)).sort((a,b)=>(b.w||0)-(a.w||0)).slice(0,10);
-  box.innerHTML=hits.map(r=>`<button data-h="${r.h}"><b>${r.h}</b> ${esc(H4N[r.h]||'')}<span>${fv(r.w||0)}</span></button>`).join('');box.style.display=hits.length?'block':'none';};
-$('#fq').addEventListener('input',()=>{food();fSug();});
-$('#fSug').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('#fq').value=b.dataset.h;$('#fSug').style.display='none';food();});
-$('#fKd').onclick=()=>{CUR='kd';$('#fKd').setAttribute('aria-pressed','true');$('#fUsd').setAttribute('aria-pressed','false');food();};$('#fUsd').onclick=()=>{CUR='usd';$('#fUsd').setAttribute('aria-pressed','true');$('#fKd').setAttribute('aria-pressed','false');food();};
-$('#fOut').addEventListener('click',e=>{const tr=e.target.closest('.fr');if(!tr)return;const h=tr.dataset.h,nx=tr.nextElementSibling;if(nx&&nx.classList.contains('fx')){nx.remove();return;}const r=document.createElement('tr');r.className='fx';r.innerHTML=`<td colspan="5">${foodItem(h)}</td>`;tr.after(r);});
+const fSug=()=>{const t=$('#fq').value.trim().toLowerCase(),box=$('#fSug');if(!t){box.style.display='none';return;}
+  const d=t.replace(/\D/g,''),hits=FOOD.filter(r=>(d&&r.h.startsWith(d))||(H4N[r.h]||'').includes(t)).sort((a,b)=>(b.w||0)-(a.w||0)).slice(0,15);
+  box.innerHTML=hits.length?`<button class="all" data-h="${hits.map(r=>r.h).join(',')}">＋ اختيار الكل (${hits.length})</button>`+hits.map(r=>`<button data-h="${r.h}" class="${FSEL.includes(r.h)?'on':''}"><b>${r.h}</b> ${esc(H4N[r.h]||'')}<span>${fv(r.w||0)}</span></button>`).join(''):'<div style="padding:12px">لا توجد نتائج</div>';box.style.display='block';};
+$('#fq').addEventListener('input',fSug);
+$('#fq').addEventListener('keydown',e=>{if(e.key==='Enter'){const b=$('#fSug button.all');if(b)b.click();}});
+$('#fSug').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;b.dataset.h.split(',').forEach(h=>{if(!FSEL.includes(h))FSEL.push(h);});$('#fq').value='';$('#fSug').style.display='none';food();});
+$('#fChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;FSEL=b.dataset.x==='*'?[]:FSEL.filter(h=>h!==b.dataset.x);food();});
+$('#fOut').addEventListener('click',e=>{const fr=e.target.closest('.fr');if(fr){const nx=fr.nextElementSibling;if(nx&&nx.classList.contains('fy')){nx.remove();return;}const r=document.createElement('tr');r.className='fy';r.innerHTML=`<td colspan="5">${foodItem(fr.dataset.h)}</td>`;fr.after(r);return;}
+  const fc=e.target.closest('.fc');if(fc){const nx=fc.nextElementSibling;if(nx&&nx.classList.contains('fx')){nx.remove();fc.classList.remove('open');return;}fc.insertAdjacentHTML('afterend',chRows(fc.dataset.c));fc.classList.add('open');}});
 $('#cKd').onclick=()=>{CUR='kd';render(cur);};$('#cUsd').onclick=()=>{CUR='usd';render(cur);};$('#uM').onclick=()=>{UNIT='m';render(cur);};$('#uK').onclick=()=>{UNIT='k';render(cur);};
 fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;else if(r.t==='hs4n')H4N=r.n;else if(r.t==='food'){FOOD.push(r);FBY[r.h]=r;}});
   $('#pP').innerHTML=$('#sP').innerHTML;
