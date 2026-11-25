@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0B193A">
+<meta name="theme-color" content="#22095E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="تجارة الكويت">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,19 +19,19 @@
    COLOUR white ground, near-black navy ink, mint and sage teal working colours, greys for context
    TYPE Almarai 800 for figures and titles, Almarai 400 for text
    LAYOUT search bar on top; partner title + four figures; chart full width; tables; ITC card; on phones everything stacks */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1620);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e2e6ea,#253141);--panel:light-dark(#ECEFF5,#16212d);--mint:#D4B85A;--sage:#B39020;--navy:light-dark(#0B193A,#9fb3d9);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#120d2c);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e4e0f2,#2c2552);--panel:light-dark(#F1EEFB,#1d1640);--mint:#2EC4DC;--sage:#7B4FD6;--navy:light-dark(#2A1478,#b7a8f0);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.55 Almarai,Tahoma,sans-serif;overflow-x:clip}
-.top{background:#0B193A;border-bottom:5px solid #D4B85A;color:#fff;padding:18px max(4vw,16px) 16px}
+.top{background:linear-gradient(120deg,#22095E 0%,#3A2A96 55%,#4F7FC0 100%);border-bottom:5px solid;border-image:linear-gradient(90deg,#2EC4DC,#7B4FD6,#B05BE0) 1;color:#fff;padding:18px max(4vw,16px) 16px}
 .top h1{margin:0;font-size:clamp(24px,4vw,34px);font-weight:800;line-height:1.1}
 .top p{margin:4px 0 12px;color:#c9d2e3;font-size:14px}
 .bar{display:flex;gap:8px;flex-wrap:wrap}
 .bar input{flex:1 1 220px;font:16px Almarai,sans-serif;padding:11px 14px;border-radius:10px;border:0;min-height:44px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #244176;background:transparent;color:#e6ebf3;cursor:pointer}
-.tabs button[aria-pressed=true]{background:var(--mint);color:#0B193A;border-color:var(--mint)}
+.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #8C86D8;background:#ffffff14;color:#fff;cursor:pointer}
+.tabs button[aria-pressed=true]{background:#fff;color:#2A1478;border-color:#fff}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
 #sugg{background:var(--bg);color:var(--ink);border-radius:10px;margin-top:6px;max-height:280px;overflow:auto;display:none;box-shadow:0 6px 18px #0003}
 #sugg button{display:flex;justify-content:space-between;width:100%;text-align:start;padding:10px 14px;border:0;border-bottom:1px solid var(--line);background:none;color:inherit;font:15px Almarai,sans-serif;cursor:pointer;min-height:44px}
@@ -97,7 +97,7 @@ tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px
 .ctry{cursor:pointer;transition:opacity .15s}.ctry:hover{opacity:.75;stroke:var(--ink);stroke-width:.8}
 .mtip{position:absolute;display:none;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 4px 14px #0003;white-space:nowrap;z-index:2}
 .flowg{display:grid;grid-template-columns:minmax(0,2fr) minmax(12em,1fr);gap:12px;align-items:center}@media(max-width:640px){.flowg{grid-template-columns:1fr}}
-.flowg svg{width:100%;height:auto;display:block;border-radius:10px;background:light-dark(#f7f9fc,#121c27)}
+.flowg svg{width:100%;height:auto;display:block;border-radius:10px;background:light-dark(#f6f4fd,#171034)}
 .arc{fill:none;stroke-linecap:round;stroke-dasharray:6 5;animation:flow 1.6s linear infinite}.ax{stroke:var(--mint)}.am{stroke:var(--navy)}@keyframes flow{to{stroke-dashoffset:-22}}
 @media(prefers-reduced-motion:reduce){.arc{animation:none}}
 .ml{font-family:Almarai,sans-serif;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:.25em}
@@ -324,7 +324,7 @@ function foodCountry(e){const el=$('#cfood');if(!e||e.kw||e.id.startsWith('g')||
 // ---------- maps ----------
 let WORLD=null,ISO={},CSB2ISO={};const MAPM={v:'التبادل',x:'الصادرات',m:'الواردات',b:'الميزان'};let MAPK='v';
 function loadWorld(){return WORLD?Promise.resolve(WORLD):fetch('world.json').then(r=>r.json()).then(w=>(WORLD=w));}
-const GOLD=['#f5ecd2','#e8d59c','#d9bd6a','#c4a03f','#9c7c22'],BLUE=['#dde4f2','#b3c3e3','#7d96c8','#4a6aa8','#244176'];
+const GOLD=['#d9f5fa','#a6e7f2','#62d2e6','#2EB5D0','#1A86A8'],BLUE=['#e8e0fa','#c9b6f2','#a083e6','#7B4FD6','#4A23A6'];
 function mapCard(){const el=$('#mapc');el.classList.remove('hide');
   el.innerHTML=`<div class="mh"><h3>خريطة شركاء الكويت التجاريين – 2025</h3><div class="cur" role="group" aria-label="المؤشر">${Object.entries(MAPM).map(([k,l])=>`<button data-k="${k}" aria-pressed="${k===MAPK}">${l}</button>`).join('')}</div></div>
   <div class="mapw"><svg id="wsvg" viewBox="0 0 1000 520" role="img" aria-label="خريطة العالم"></svg><div id="mtip" class="mtip"></div></div><div class="lg" id="mlg"></div><div class="note">اضغط على أي دولة لفتح ملفها التجاري. الصادرات غير نفطية. المصدر: الإدارة المركزية للإحصاء.</div>`;
@@ -343,7 +343,7 @@ function mapCard(){const el=$('#mapc');el.classList.remove('hide');
       tip.innerHTML=`<b>${esc(c.ar)}</b><br>الصادرات ${f(x)} · الواردات ${f(m)}<br>الميزان <span class="${x-m>=0?'up':'dn'}">${f(x-m)}</span> ${U.lab}`;tip.style.display='block';const r=sv.getBoundingClientRect();tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px';};
     sv.onmouseleave=()=>{tip.style.display='none';};
     sv.onclick=e=>{const t=e.target.closest('.ctry');if(!t)return;const c=BY[ISO[t.dataset.iso]];if(c){render(c);window.scrollTo(0,0);}};
-    const pal=MAPK==='m'?BLUE:GOLD;$('#mlg').innerHTML=(MAPK==='b'?'<span style="--c:#c4a03f">فائض</span><span style="--c:#4a6aa8">عجز</span>':pal.map((c,i)=>`<span style="--c:${c}">${i===0?'أقل':i===4?'أعلى':''}</span>`).join(''))+'<span style="--c:var(--navy)">الكويت</span>';});}
+    const pal=MAPK==='m'?BLUE:GOLD;$('#mlg').innerHTML=(MAPK==='b'?'<span style="--c:#2EB5D0">فائض</span><span style="--c:#7B4FD6">عجز</span>':pal.map((c,i)=>`<span style="--c:${c}">${i===0?'أقل':i===4?'أعلى':''}</span>`).join(''))+'<span style="--c:var(--navy)">الكويت</span>';});}
 function flowCard(e){const el=$('#flow');if(!e||e.kw||e.id.startsWith('g')||!CSB2ISO[e.id]){el.classList.add('hide');return;}
   loadWorld().then(w=>{const iso=CSB2ISO[e.id],c=w.c[iso]||w.dots[iso];if(!c){el.classList.add('hide');return;}
     el.classList.remove('hide');const L='2025',x=g(e.x,L),m=g(e.m,L),k=w.kw;
