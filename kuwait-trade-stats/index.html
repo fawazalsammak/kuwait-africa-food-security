@@ -93,6 +93,16 @@ tr.sep td{background:var(--navy);color:var(--bg);font-weight:800;font-size:13px;
 .fsug button.all{font-weight:800;color:var(--sage)}.fsug button.on{background:var(--panel)}
 table.fct td{padding:10px 8px}tr.fc{cursor:pointer}tr.fc:hover td,tr.fc.open td{background:var(--panel)}tr.fc td:first-child b{color:var(--navy)}.cnt{color:var(--mut);font-size:12px;font-weight:400}
 tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px;background:var(--bg)}table.sub th{font-size:12px}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.mh h3{margin:0}.mapw{position:relative;margin-top:8px}.mapw svg{width:100%;height:auto;display:block}
+.ctry{cursor:pointer;transition:opacity .15s}.ctry:hover{opacity:.75;stroke:var(--ink);stroke-width:.8}
+.mtip{position:absolute;display:none;pointer-events:none;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 4px 14px #0003;white-space:nowrap;z-index:2}
+.flowg{display:grid;grid-template-columns:minmax(0,2fr) minmax(12em,1fr);gap:12px;align-items:center}@media(max-width:640px){.flowg{grid-template-columns:1fr}}
+.flowg svg{width:100%;height:auto;display:block;border-radius:10px;background:light-dark(#f7f9fc,#121c27)}
+.arc{fill:none;stroke-linecap:round;stroke-dasharray:6 5;animation:flow 1.6s linear infinite}.ax{stroke:var(--mint)}.am{stroke:var(--navy)}@keyframes flow{to{stroke-dashoffset:-22}}
+@media(prefers-reduced-motion:reduce){.arc{animation:none}}
+.ml{font-family:Almarai,sans-serif;font-weight:800;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:.25em}
+.fh{margin:0 0 8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.fh .dk,.fh .dc{width:12px;height:12px;border-radius:50%;display:inline-block}.fh .dk{background:var(--navy)}.fh .dc{background:var(--sage)}.fh .ar{color:var(--mint)}
+.fleg{display:grid;gap:8px}.fleg div{display:flex;align-items:center;gap:8px;font-size:14px;background:var(--panel);border-radius:8px;padding:8px 10px}.fleg i{width:14px;height:14px;border-radius:3px;flex:none}.fleg b{margin-inline-start:auto;font-size:18px}.fleg small{color:var(--mut)}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
@@ -116,9 +126,11 @@ footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-
 <main>
   <section id="vEnt">
     <div class="head"><div><h2 id="nm">…</h2><div class="en" id="nmEn"></div></div><div class="unit"><span id="unit"></span> <span class="cur" role="group" aria-label="العملة"><button id="cKd" aria-pressed="true">د.ك</button><button id="cUsd" aria-pressed="false">دولار</button></span> <span class="cur" role="group" aria-label="الوحدة"><button id="uM" aria-pressed="true">مليون</button><button id="uK" aria-pressed="false">ألف</button></span></div></div>
+    <div class="card hide" id="flow" style="margin-top:12px"></div>
     <p class="lead hide" id="lead"></p>
     <div class="agr hide" id="agr"></div>
     <div class="kpis" id="kpis"></div>
+    <div class="card hide" id="mapc" style="margin-bottom:16px"></div>
     <div class="card hide" id="ind"></div>
     <div class="card itc hide" id="itc" style="margin-top:16px"></div>
     <div class="card hide" id="ctp" style="margin-top:16px"></div>
@@ -261,7 +273,7 @@ function render(e){cur=e;show('vEnt');
   const sep=t=>`<tr class="sep"><td colspan="5">${t}</td></tr>`;
   const hp=q26.length?`<tr class="hl"><td>${Q.lab} 2026 (المجموع)</td><td class="n">${f(sx)}</td><td class="n">${f(sm)}</td><td class="n ${sx-sm>=0?'up':'dn'}">${f(sx-sm)}</td><td class="n">${f(sx+sm)}</td></tr>`:'';
   $('#tbl').innerHTML=`<thead><tr><th>الفترة</th><th class="n">الصادرات</th><th class="n">الواردات</th><th class="n">الميزان</th><th class="n">التبادل</th></tr></thead><tbody>${sep('البيانات الفصلية 2025')}${row('2025 (السنة كاملة)','2025','hl')}${q25.map(p=>row(ql(p),p)).join('')}${q26.length?sep('البيانات الفصلية 2026'):''}${q26.map(p=>row(ql(p),p)).join('')}${hp}${sep('البيانات السنوية')}${[...Y].reverse().map(p=>row(p,p)).join('')}</tbody>`;
-  foodCountry(e);
+  foodCountry(e);flowCard(e);if(e.kw)mapCard();else $('#mapc').classList.add('hide');
   try{history.replaceState(null,'','#'+(e.kw?'kw':e.id.startsWith('g')?e.id:'c'+e.id));}catch(_){}
 }
 function summary(e){const Q=ytd(),Lx=[],u=U.lab;Lx.push(e.ar+' ('+e.en+') – '+u);Y.forEach(p=>Lx.push(`${p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))} | ميزان ${f(g(e.x,p)-g(e.m,p))}`));quarters().forEach(p=>Lx.push(`${QL[p]||p}: صادرات ${f(g(e.x,p))} | واردات ${f(g(e.m,p))}`));
@@ -309,6 +321,45 @@ function foodCountry(e){const el=$('#cfood');if(!e||e.kw||e.id.startsWith('g')||
   ${L.length>12&&n<L.length?`<button class="copy" id="cfAll" style="margin-top:8px">عرض جميع البنود (${L.length})</button>`:''}<div class="note">المصدر: UN Comtrade، واردات الكويت المُبلّغة لسنة 2025، الفصول 01–24 (الأغذية والأعلاف).</div>`;
   const b=$('#cfAll');if(b)b.onclick=()=>{el.dataset.all=e.id;foodCountry(e);};}
 
+// ---------- maps ----------
+let WORLD=null,ISO={},CSB2ISO={};const MAPM={v:'التبادل',x:'الصادرات',m:'الواردات',b:'الميزان'};let MAPK='v';
+function loadWorld(){return WORLD?Promise.resolve(WORLD):fetch('world.json').then(r=>r.json()).then(w=>(WORLD=w));}
+const GOLD=['#f5ecd2','#e8d59c','#d9bd6a','#c4a03f','#9c7c22'],BLUE=['#dde4f2','#b3c3e3','#7d96c8','#4a6aa8','#244176'];
+function mapCard(){const el=$('#mapc');el.classList.remove('hide');
+  el.innerHTML=`<div class="mh"><h3>خريطة شركاء الكويت التجاريين – 2025</h3><div class="cur" role="group" aria-label="المؤشر">${Object.entries(MAPM).map(([k,l])=>`<button data-k="${k}" aria-pressed="${k===MAPK}">${l}</button>`).join('')}</div></div>
+  <div class="mapw"><svg id="wsvg" viewBox="0 0 1000 520" role="img" aria-label="خريطة العالم"></svg><div id="mtip" class="mtip"></div></div><div class="lg" id="mlg"></div><div class="note">اضغط على أي دولة لفتح ملفها التجاري. الصادرات غير نفطية. المصدر: الإدارة المركزية للإحصاء.</div>`;
+  el.querySelectorAll('.mh button').forEach(b=>b.onclick=()=>{MAPK=b.dataset.k;mapCard();});
+  loadWorld().then(w=>{const L='2025',val=id=>{const c=BY[id];if(!c)return null;const x=g(c.x,L),m=g(c.m,L);return MAPK==='v'?x+m:MAPK==='x'?x:MAPK==='m'?m:x-m;};
+    const vals=Object.values(ISO).map(val).filter(v=>v);const abs=vals.map(Math.abs).sort((a,b)=>a-b);
+    const q=[.2,.4,.6,.8].map(p=>abs[Math.floor(p*(abs.length-1))]||0);
+    const col=v=>{if(!v)return 'var(--line)';const i=q.filter(t=>Math.abs(v)>t).length;return MAPK==='b'&&v<0?BLUE[i]:MAPK==='m'?BLUE[i]:GOLD[i];};
+    let o=`<path d="${w.sphere}" fill="var(--panel)"/>`;
+    for(const [iso,c] of Object.entries(w.c)){const id=ISO[iso],v=id?val(id):null;o+=`<path d="${c.d}" fill="${iso==='414'?'var(--navy)':col(v)}" stroke="var(--bg)" stroke-width=".5" data-iso="${iso}" class="${id?'ctry':''}"/>`;}
+    for(const [iso,c] of Object.entries(w.dots)){const id=ISO[iso],v=id?val(id):null;if(!v)continue;o+=`<circle cx="${c.x}" cy="${c.y}" r="3.2" fill="${col(v)}" stroke="var(--ink)" stroke-width=".4" data-iso="${iso}" class="ctry"/>`;}
+    o+=`<circle cx="${w.kw.x}" cy="${w.kw.y}" r="5" fill="var(--mint)" stroke="var(--navy)" stroke-width="1.5"><animate attributeName="r" values="4;8;4" dur="2.4s" repeatCount="indefinite"/></circle>`;
+    const sv=$('#wsvg');sv.innerHTML=o;
+    const tip=$('#mtip');
+    sv.onmousemove=e=>{const t=e.target.closest('.ctry');if(!t){tip.style.display='none';return;}const c=BY[ISO[t.dataset.iso]];if(!c)return;const x=g(c.x,L),m=g(c.m,L);
+      tip.innerHTML=`<b>${esc(c.ar)}</b><br>الصادرات ${f(x)} · الواردات ${f(m)}<br>الميزان <span class="${x-m>=0?'up':'dn'}">${f(x-m)}</span> ${U.lab}`;tip.style.display='block';const r=sv.getBoundingClientRect();tip.style.left=(e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px';};
+    sv.onmouseleave=()=>{tip.style.display='none';};
+    sv.onclick=e=>{const t=e.target.closest('.ctry');if(!t)return;const c=BY[ISO[t.dataset.iso]];if(c){render(c);window.scrollTo(0,0);}};
+    const pal=MAPK==='m'?BLUE:GOLD;$('#mlg').innerHTML=(MAPK==='b'?'<span style="--c:#c4a03f">فائض</span><span style="--c:#4a6aa8">عجز</span>':pal.map((c,i)=>`<span style="--c:${c}">${i===0?'أقل':i===4?'أعلى':''}</span>`).join(''))+'<span style="--c:var(--navy)">الكويت</span>';});}
+function flowCard(e){const el=$('#flow');if(!e||e.kw||e.id.startsWith('g')||!CSB2ISO[e.id]){el.classList.add('hide');return;}
+  loadWorld().then(w=>{const iso=CSB2ISO[e.id],c=w.c[iso]||w.dots[iso];if(!c){el.classList.add('hide');return;}
+    el.classList.remove('hide');const L='2025',x=g(e.x,L),m=g(e.m,L),k=w.kw;
+    const x0=Math.min(k.x,c.x),x1=Math.max(k.x,c.x),y0=Math.min(k.y,c.y),y1=Math.max(k.y,c.y);let bw=Math.max(x1-x0,20)+Math.max(70,(x1-x0)*0.45),bh=Math.max(y1-y0,20)+60;if(bw<120)bw=120;
+    if(bw/bh<1.6)bw=bh*1.6;else bh=bw/1.6;const vx=(x0+x1)/2-bw/2,vy=(y0+y1)/2-bh/2;
+    const dx=c.x-k.x,dy=c.y-k.y,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len,off=Math.max(len*0.28,bw*0.06);
+    const mx=(k.x+c.x)/2,my=(k.y+c.y)/2,mx2=Math.max(x,m)||1,sw=v=>(0.6+3.2*Math.sqrt(v/mx2))*bw/400;
+    const a1=`M${k.x},${k.y} Q${mx+nx*off},${my+ny*off} ${c.x},${c.y}`,a2=`M${c.x},${c.y} Q${mx-nx*off},${my-ny*off} ${k.x},${k.y}`;
+    let o='';for(const [iso2,p] of Object.entries(w.c))o+=`<path d="${p.d}" fill="${iso2===iso?'var(--mint)':iso2==='414'?'var(--navy)':'var(--panel)'}" stroke="var(--line)" stroke-width="${bw/1000}"/>`;
+    const r=bw/110;
+    o+=(x>0?`<path d="${a1}" class="arc ax" stroke-width="${sw(x)}"/>`:'')+(m>0?`<path d="${a2}" class="arc am" stroke-width="${sw(m)}"/>`:'');
+    o+=`<circle cx="${k.x}" cy="${k.y}" r="${r}" fill="var(--navy)" stroke="var(--bg)" stroke-width="${r/3}"/><circle cx="${c.x}" cy="${c.y}" r="${r}" fill="var(--sage)" stroke="var(--bg)" stroke-width="${r/3}"/>`;
+    
+    el.innerHTML=`<h3 class="fh"><span class="dk"></span>دولة الكويت <span class="ar">⇄</span> <span class="dc"></span>${esc(e.ar)}</h3><div class="flowg"><svg viewBox="${vx} ${vy} ${bw} ${bh}" style="direction:ltr" role="img" aria-label="تدفق التجارة بين الكويت و${esc(e.ar)}">${o}</svg>
+      <div class="fleg"><div><i style="background:var(--mint)"></i>صادرات الكويت إلى ${esc(e.ar)}<b>${f(x)}</b></div><div><i style="background:var(--navy)"></i>واردات الكويت من ${esc(e.ar)}<b>${f(m)}</b></div><div><i style="background:${x-m>=0?'var(--pos)':'var(--neg)'}"></i>الميزان التجاري<b class="${x-m>=0?'up':'dn'}">${f(x-m)}</b></div><small>2025 · ${U.lab}</small></div></div>`;});}
+
 function rank(){const p=$('#sP').value,mk=$('#sM').value,n=+$('#sN').value;
   const val=c=>{const x=g(c.x,p),m=g(c.m,p);return mk==='v'?x+m:mk==='x'?x:mk==='m'?m:mk==='b'?x-m:m-x;};
   const list=C.filter(c=>c.id!=='603').map(c=>({c,v:val(c),x:g(c.x,p),m:g(c.m,p)})).filter(r=>r.v>0).sort((a,b)=>b.v-a.v).slice(0,n);const mx=list.length?list[0].v:1;
@@ -349,7 +400,7 @@ $('#fChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!
 $('#fOut').addEventListener('click',e=>{const fr=e.target.closest('.fr');if(fr){const nx=fr.nextElementSibling;if(nx&&nx.classList.contains('fy')){nx.remove();return;}const r=document.createElement('tr');r.className='fy';r.innerHTML=`<td colspan="5">${foodItem(fr.dataset.h)}</td>`;fr.after(r);return;}
   const fc=e.target.closest('.fc');if(fc){const nx=fc.nextElementSibling;if(nx&&nx.classList.contains('fx')){nx.remove();fc.classList.remove('open');return;}fc.insertAdjacentHTML('afterend',chRows(fc.dataset.c));fc.classList.add('open');}});
 $('#cKd').onclick=()=>{CUR='kd';render(cur);};$('#cUsd').onclick=()=>{CUR='usd';render(cur);};$('#uM').onclick=()=>{UNIT='m';render(cur);};$('#uK').onclick=()=>{UNIT='k';render(cur);};
-fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;else if(r.t==='hs4n')H4N=r.n;else if(r.t==='food'){FOOD.push(r);FBY[r.h]=r;}});
+fetch('data.json').then(r=>r.json()).then(arr=>{D=arr;arr.forEach(r=>{if(r.t==='meta')META=r;else if(r.t==='total')TOT[r.p]=r;else if(r.t==='c'){C.push(r);BY[r.id]=r;}else if(r.t==='g'){G.push(r);BY[r.id]=r;}else if(r.t==='hs')HS.push(r);else if(r.t==='sitc')SITC=r;else if(r.t==='hs4n')H4N=r.n;else if(r.t==='iso'){ISO=r.m;Object.entries(r.m).forEach(([i,c])=>CSB2ISO[c]=i);}else if(r.t==='food'){FOOD.push(r);FBY[r.h]=r;}});
   $('#pP').innerHTML=$('#sP').innerHTML;
   $('#sub').textContent='آخر بيانات: '+(QL[META.latest]||META.latest)+' · '+C.length+' دولة · '+G.length+' مجموعة';
   $('#sP').innerHTML=[...Y].reverse().concat(quarters().reverse()).map(p=>`<option value="${p}">${QL[p]||p}</option>`).join('');
