@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1b2a3a">
+<meta name="theme-color" content="#0B193A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="تجارة الكويت">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,19 +19,19 @@
    COLOUR white ground, near-black navy ink, mint and sage teal working colours, greys for context
    TYPE Almarai 800 for figures and titles, Almarai 400 for text
    LAYOUT search bar on top; partner title + four figures; chart full width; tables; ITC card; on phones everything stacks */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1620);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e2e6ea,#253141);--panel:light-dark(#f4f7f8,#16212d);--mint:#7fcdb9;--sage:#3d7d70;--navy:light-dark(#1b2a3a,#c9d6e2);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1620);--ink:light-dark(#131c27,#e8edf2);--mut:light-dark(#5f6874,#9aa6b2);--line:light-dark(#e2e6ea,#253141);--panel:light-dark(#ECEFF5,#16212d);--mint:#D4B85A;--sage:#B39020;--navy:light-dark(#0B193A,#9fb3d9);--grey:light-dark(#9aa1a9,#6d7883);--neg:light-dark(#b23a3a,#ef8d8d);--pos:light-dark(#2f7a52,#7fd3a5)}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.55 Almarai,Tahoma,sans-serif;overflow-x:clip}
-.top{background:#1b2a3a;color:#fff;padding:18px max(4vw,16px) 16px}
+.top{background:#0B193A;border-bottom:5px solid #D4B85A;color:#fff;padding:18px max(4vw,16px) 16px}
 .top h1{margin:0;font-size:clamp(24px,4vw,34px);font-weight:800;line-height:1.1}
-.top p{margin:4px 0 12px;color:#b9c7d3;font-size:14px}
+.top p{margin:4px 0 12px;color:#c9d2e3;font-size:14px}
 .bar{display:flex;gap:8px;flex-wrap:wrap}
 .bar input{flex:1 1 220px;font:16px Almarai,sans-serif;padding:11px 14px;border-radius:10px;border:0;min-height:44px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #3a4b5e;background:transparent;color:#dfe8ef;cursor:pointer}
-.tabs button[aria-pressed=true]{background:var(--mint);color:#10201c;border-color:var(--mint)}
+.tabs button{font:700 14px Almarai,sans-serif;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #244176;background:transparent;color:#e6ebf3;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--mint);color:#0B193A;border-color:var(--mint)}
 button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
 #sugg{background:var(--bg);color:var(--ink);border-radius:10px;margin-top:6px;max-height:280px;overflow:auto;display:none;box-shadow:0 6px 18px #0003}
 #sugg button{display:flex;justify-content:space-between;width:100%;text-align:start;padding:10px 14px;border:0;border-bottom:1px solid var(--line);background:none;color:inherit;font:15px Almarai,sans-serif;cursor:pointer;min-height:44px}
