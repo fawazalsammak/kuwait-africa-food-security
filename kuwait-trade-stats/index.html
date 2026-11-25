@@ -141,13 +141,15 @@ tr.fx>td,tr.fy>td{padding:4px 0 10px;white-space:normal}table.sub{font-size:13px
 .mapw svg,.flowg svg{background:#0B193A!important;border-radius:16px}.mapw svg{padding:6px}
 .ctry.hit{fill:transparent;stroke:none;cursor:pointer}.ctry.hit:hover{fill:#ffffff22;stroke:#D4B85A;stroke-width:.6}
 .flowg .am{stroke:#9fb3d9}.flowg .ax{stroke:#D4B85A}
+.brand{display:flex;align-items:center;gap:12px}.brand img{width:54px;height:auto;flex:none;filter:drop-shadow(0 2px 6px #0006)}.brand .min{color:#D4B85A;font-weight:800;font-size:14px;letter-spacing:.2px;border-bottom:1.5px solid #D4B85A55;display:inline-block;padding-bottom:2px;margin-bottom:4px}
+@media(max-width:520px){.brand img{width:44px}.brand .min{font-size:12.5px}}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
 </style>
 </head>
 <body>
 <header class="top">
-  <h1>إحصاءات التجارة الخارجية الكويتية</h1>
+  <div class="brand"><img src="emblem.png" alt="شعار دولة الكويت" width="54" height="56"><div><div class="min">وزارة التجارة والصناعة</div><h1>إحصاءات التجارة الخارجية الكويتية</h1></div></div>
   <p id="sub">إحصاءات التجارة الخارجية حسب الدولة والمجموعة</p>
   <div class="bar">
     <input id="q" type="search" placeholder="ابحث عن دولة أو مجموعة… (عربي أو English)" autocomplete="off" aria-label="بحث">
