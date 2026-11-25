@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0B193A">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -171,6 +172,39 @@ body.noscroll{overflow:hidden}
 .top>*{position:relative}
 .hide{display:none!important}
 footer{font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:12px;margin-top:24px}
+
+/* ===== full navy theme (as Kuwait–Africa presentation) ===== */
+:root{color-scheme:dark;--bg:#0B193A;--ink:#f1f4fa;--mut:#a9b6cf;--line:#ffffff1c;--panel:#ffffff0c;--navy:#9fb3d9;--mint:#D4B85A;--sage:#E3C873;--pos:#7fd3a5;--neg:#ff8f8f;--grey:#7d8aa3}
+html{background:#0B193A}
+body{background:radial-gradient(80% 50% at 50% 0%,#24438a 0%,#14285a 40%,#0B193A 75%) fixed,#0B193A;color:var(--ink)}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(#ffffff38 1px,transparent 1.5px),radial-gradient(#ffffff22 1px,transparent 1.5px);background-size:140px 140px,90px 90px;background-position:0 0,45px 60px;opacity:.45;pointer-events:none;z-index:0}
+main,footer,header.top{position:relative;z-index:1}
+.top{background:transparent!important;border-bottom:1px solid #D4B85A66!important}
+.top::before{display:none}
+.card,.k,.inds div,.ib,.fleg div,.bento .t,.lead{background:#ffffff0b!important;border:1px solid #ffffff1a!important;backdrop-filter:blur(6px)}
+.bento .dark,#vEnt .kpis .k.oilk{background:linear-gradient(135deg,#1d3a7a,#13285a)!important;border-color:#D4B85A55!important}
+.bento .gold{background:#D4B85A!important;color:#0B193A!important}.bento .gold small{color:#4b3d12!important}.bento .gold b{color:#0B193A}
+.bento .food{background:#ffffff0b!important}
+.bento .w4{background:#ffffff08!important}
+#vEnt.isC .head{background:linear-gradient(135deg,#1d3a7a,#13285a 70%,#1b3366)!important;border:1px solid #D4B85A55}
+#vEnt.isC .kpis .k{background:#13285a!important;box-shadow:0 8px 24px #0006}
+.secnav{background:#0B193Aee!important}.secnav button{background:#ffffff10;color:var(--ink)}.secnav button.on{background:#D4B85A;color:#0B193A}
+.cur button{background:#ffffff0d;color:var(--ink);border-color:#ffffff2a}.cur button[aria-pressed=true]{background:#D4B85A!important;color:#0B193A!important;border-color:#D4B85A!important}
+select,#fq,.bar input{background:#ffffff12!important;color:var(--ink)!important;border:1px solid #ffffff2a!important}
+.bar input::placeholder,#fq::placeholder{color:#a9b6cf}
+select option{background:#0B193A;color:#fff}
+#sugg,.fsug,.mtip{background:#13285a!important;color:var(--ink)}
+th{color:var(--mut)}tr.hl td{background:#D4B85A1f!important}tr.sep td{background:#D4B85A!important;color:#0B193A!important;border-top:0}
+.lr .tr,.trk{background:#ffffff12}.lr .tr i{background:var(--navy)}
+.bnav{background:#0B193Af0!important;border-top:1px solid #D4B85A44!important}.bnav button.on{color:#fff}.bnav button.on i{color:#D4B85A}
+.copy{background:#D4B85A;color:#0B193A}
+.chip{background:#ffffff10;color:var(--ink);border-color:#ffffff33}
+td a,.k a{color:#E3C873}
+.mapw svg,.flowg svg{background:#071230!important}
+.k.oilk b,#vEnt .k.oilk b{color:#E3C873}
+.agr b{color:#fff}
+svg text{stroke:#0B193A}
+.ctry.hit:hover{fill:#ffffff22}
 </style>
 </head>
 <body>
